@@ -1,0 +1,13 @@
+.ui-talxGrid.ui-widget-content { width: auto;border: none;}
+.ui-talxGrid table { border-collapse: collapse; width: 100%; clear: both; }
+.ui-talxGrid th { padding: 3px;}
+.ui-talxGrid th span { float: right; height: 16px; width: 16px; margin-right: 5px; margin-left: -5px;  }
+.ui-talxGrid th.ui-talxGrid-sort { cursor: pointer; }
+.ui-talxGrid .ui-talxGrid-pageSizer, .ui-talxGrid .ui-talxGrid-pager { display: block; float: right; margin: 5px; }
+.ui-talxGrid .ui-talxGrid-filter, .ui-talxGrid .ui-talxGrid-rowCounter { display: block; float: left; margin: 5px; }
+.ui-talxGrid-desc { background-position: -64px -16px; }
+.ui-talxGrid-asc { background-position: 0 -16px; }
+td.ui-talxGrid-int, td.ui-talxGrid-float { text-align: right; }
+td.ui-talxGrid-date { text-align: center; }
+.ui-talxGrid td span.ui-talxGrid-width {display: block; overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+.ui-talxGrid tr.ui-state-selected td { background-color: yellow; background-image: none;}

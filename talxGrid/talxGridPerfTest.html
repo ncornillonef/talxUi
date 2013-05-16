@@ -1,0 +1,61 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+		<title>talxGrid Performance Test</title>
+        <link type="text/css" rel="stylesheet" href="http://jqueryui.com/themes/base/jquery.ui.all.css" />
+        <link type="text/css" rel="stylesheet" href="talx-ui.css" />
+	    <script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery/jquery-1.4.2.js"></script>
+		<script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery.ui/1.8.5/jquery-ui.js"></script>
+		<script type="text/javascript" src="talxGrid.js"></script>
+		<script type="text/javascript">
+			var status = null;
+			function msg(text){
+				//status.append("<p>"+text+"</p>");
+				$('#status').append("<p>"+text+" </p>");
+			}
+			$(function(){
+				status = $('#status');
+				var maxItems = 50000;
+				msg("generating "+maxItems+" items");
+				var myData = new Array();
+				for(var i=0; i<maxItems; i++){
+					var x = {
+						name: "item"+i,
+						value: i,
+						col3: "w"+i+"ee",
+						col4: "w"+i+"ee",
+						col5: "w"+i+"ee",
+						col6: "w"+i+"ee"
+					};
+					myData.push(x);
+				}
+				msg(''+myData.length +' items generated');
+				
+				var myCols = [
+					{ header: 'Name', displayField: 'name' },
+					{ header: 'Value', displayField: 'value', dataType: 'int'},
+					{ header: 'col3', displayField: 'col3'},
+					{ header: 'col4', displayField: 'col4'},
+					{ header: 'col5', displayField: 'col5'},
+					{ header: 'col6', displayField: 'col6'}
+				];
+				
+				msg('generate grid');
+				$('#grd').talxGrid({
+					columns: myCols,
+					data: myData
+				});
+				msg('grid generated');
+			});
+		</script>
+	</head>
+	<body>
+		<h1>talxGrid Performance Test</h1>
+		<div id="status">
+			<h2>Status Messages</h2>
+		</div>
+		
+		<div id="grd">table</div>
+	</body>
+</html>

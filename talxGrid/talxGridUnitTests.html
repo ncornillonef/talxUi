@@ -1,0 +1,141 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>talxGrid Tests</title>
+
+    <link rel="stylesheet" href="qunit-1.11.0.css">
+    <script src="qunit-1.11.0.js"></script>
+    <script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery/jquery-1.8.0.js"></script>
+    <script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery.ui/1.8.5/jquery-ui.js"></script>
+    <script src="talxGrid.js"></script>
+
+    <script>
+        var defaultOptions = {
+            columns: [
+                { header: "Name", displayField: "fullName", displayMask: "<a href='#editUser' rel='{1}'>{0}</a>", linkField: "awesome", linkMask: "<span class='demo-awesome-{0}'>{1}</span>" },
+                { header: "E-Mail Address", displayField: "email", allowFilter: false },
+                { header: "Sex", displayField: "sex", allowSort: false, allowFilterSelect: false },
+                { header: "Rating", displayField: "rating", dataType: "int" },
+                { header: "Joined", displayField: "joined", dataType: "date" },
+                { header: "Awesome?", displayField: "awesome", displayMask: "Am I awesome? {0}" }
+            ],
+            data: [
+                { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: 1, joined: "01/01/2012", awesome: true },
+                { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: 10, joined: "01/01/2011", awesome: true },
+                { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: 1.5, joined: "01/31/2012", awesome: true },
+                { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: -1, joined: "02/01/2012", awesome: true },
+                { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: 32, joined: "12/01/2010", awesome: true },
+                { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: 2, joined: "11/01/2012", awesome: true },
+                { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: 7, joined: "10/01/2012", awesome: true },
+                { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: 41, joined: "2/29/2012", awesome: true },
+                { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: 14, joined: "2/28/2012", awesome: true },
+                { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: 4, joined: "01/02/2012", awesome: true },
+                { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: .4, joined: "01/04/2012", awesome: false },
+                { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: 2, joined: "01/03/2012", awesome: true },
+                { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: 1, joined: "01/01/2012", awesome: true },
+                { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: 10, joined: "01/01/2011", awesome: true },
+                { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: 1.5, joined: "01/31/2012", awesome: true },
+                { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: -1, joined: "02/01/2012", awesome: true },
+                { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: 32, joined: "12/01/2010", awesome: true },
+                { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: 2, joined: "11/01/2012", awesome: true },
+                { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: 7, joined: "10/01/2012", awesome: true },
+                { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: 41, joined: "2/29/2012", awesome: true },
+                { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: 14, joined: "2/28/2012", awesome: true },
+                { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: 4, joined: "01/02/2012", awesome: true },
+                { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: .4, joined: "01/04/2012", awesome: false },
+                { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: 2, joined: "01/03/2012", awesome: true },
+                { fullName: "Ellen Cornillon", email: "ecornillon@mac.com", sex: "female", rating: 2, joined: "01/01/2012", awesome: true }
+            ],
+            noDataMessage: 'User not found'
+        };
+        QUnit.testStart(function(){
+            ; // Nothing
+        });
+        QUnit.testDone(function(){
+            ; // Nothing
+        });
+        test("Create Grid",2, function() {
+            equal($("#grid div.ui-talxGrid").length, 0, "Not Yet Created");
+
+            $("#grid").talxGrid(defaultOptions);
+
+            equal($("#grid div.ui-talxGrid").length, 1, "Created");
+        });
+        test("method: destroy", 4, function(){
+            equal($("#grid div.ui-talxGrid").length, 0, "Not Yet Created");
+
+            $("#grid").talxGrid(defaultOptions);
+
+            equal($("#grid div.ui-talxGrid").length, 1, "Created");
+
+            $("#grid").talxGrid("destroy");
+
+            equal($("#grid div.ui-talxGrid").length, 0, "Destroyed");
+            equal($("#grid").html().length, 0, "Empty")
+        });
+        test("method: select", 2, function(){
+            var grd = $("#grid");
+            grd.talxGrid(defaultOptions);
+            grd.talxGrid("select", {field: "fullName", value: "Ellen Cornillon"});
+            equal($("#grid tr.ui-state-selected").length, 1, "Marked with ui-state-selected");
+            equal($("#grid .ui-talxGrid-pager .ui-talxGrid-pagerPage-disabled").html(), "3", "Correct page displayed");
+        });
+        test("method: pageIndex - in range (page 2)", 2, function(){
+            var grd = $("#grid");
+            grd.talxGrid(defaultOptions);
+            equal($("#grid .ui-talxGrid-pager .ui-talxGrid-pagerPage-disabled").html(), "1", "Initially page 1");
+            grd.talxGrid("pageIndex", 1);
+            equal($("#grid .ui-talxGrid-pager .ui-talxGrid-pagerPage-disabled").html(), "2", "Set to page 2");
+        });
+        test("method: pageIndex - too large (page 1111)", 2, function(){
+            var grd = $("#grid");
+            grd.talxGrid(defaultOptions);
+            equal($("#grid .ui-talxGrid-pager .ui-talxGrid-pagerPage-disabled").html(), "1", "Initially page 1");
+            grd.talxGrid("pageIndex", 1111);
+            equal($("#grid .ui-talxGrid-pager .ui-talxGrid-pagerPage-disabled").html(), "3", "Goes to page 3 (last page)");
+        });
+        test("method: pageIndex - too small (page -31)", 3, function(){
+            var grd = $("#grid");
+            grd.talxGrid(defaultOptions);
+            equal($("#grid .ui-talxGrid-pager .ui-talxGrid-pagerPage-disabled").html(), "1", "Initially page 1");
+            grd.talxGrid("pageIndex", 1);
+            equal($("#grid .ui-talxGrid-pager .ui-talxGrid-pagerPage-disabled").html(), "2", "Set to page 2");
+            grd.talxGrid("pageIndex", -31);
+            equal($("#grid .ui-talxGrid-pager .ui-talxGrid-pagerPage-disabled").html(), "1", "Goes to page 1 (first page)");
+        });
+        test("_onColumnSearchChange: text search enabled", function(){
+            $("#grid").talxGrid(defaultOptions);
+            var tSearch = $("#grid input[name=txtSearch]");
+            var sSearch = $("#grid select[name=ddlSearch]");
+            equal(tSearch.attr("disabled"), "disabled", "txtSearch initially disabled");
+            equal(sSearch.attr("disabled"), "disabled", "ddlSearch initially disabled");
+            $("#grid select[name=colSelect]").val("3");
+            $("#grid select[name=colSelect]").trigger("change");
+            equal(tSearch.attr("disabled"), undefined, "txtSearch now enabled");
+            equal(sSearch.attr("disabled"), "disabled", "ddlSearch still disabled");
+        });
+        test("_onColumnSearchChange: select search enabled", function(){
+            $("#grid").talxGrid(defaultOptions);
+            var tSearch = $("#grid input[name=txtSearch]");
+            var sSearch = $("#grid select[name=ddlSearch]");
+            equal(tSearch.attr("disabled"), "disabled", "txtSearch initially disabled");
+            equal(sSearch.attr("disabled"), "disabled", "ddlSearch initially disabled");
+            $("#grid select[name=colSelect]").val("5");
+            $("#grid select[name=colSelect]").trigger("change");
+            equal(tSearch.attr("disabled"), "disabled", "txtSearch still disabled");
+            equal(sSearch.attr("disabled"), undefined, "ddlSearch now enabled");
+        });
+    </script>
+</head>
+<body>
+
+<div id="qunit"></div>
+<div id="qunit-fixture">
+    <div id="grid"></div>
+<script type="text/javascript">
+
+</script>
+</div>
+</body>
+</html>

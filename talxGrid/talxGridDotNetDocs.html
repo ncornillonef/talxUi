@@ -1,0 +1,1342 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>talxGrid Documentation for .Net use</title>
+    <link rel="stylesheet" type="text/css" href="http://i3.msdn.microsoft.com/Combined.css?resources=0:Topic,0:CodeSnippet,0:ProgrammingSelector,0:ExpandableCollapsibleArea,0:CommunityContent,0:TopicNotInScope,0:FeedViewerBasic,0:ImageSprite,1:Header.1,1:Header.1.ie6,2:Toc,2:NavigationResize,3:FeedbackCounter,0:VersionSelector,3:Feedback,1:Footer.1,4:LinkList,0:SiteFeedbackLink,4:Base,1:Msdn;/Areas/Epx/Content/Css:0,/Areas/Epx/Themes/Msdn/Content:1,/Areas/Epx/Library/Content:2,/Areas/Epx/Shared/Content:3,/Areas/Epx/Themes/Base/Content:4&amp;amp;hashKey=30B6F2CAF9BAD08C9A8FE739248FF5A5" />
+    <link type="text/css" rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery.ui.all.css" />
+    <link type="text/css" rel="stylesheet" href="talx-ui.css" />
+    <script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery/jquery-1.8.0.js"></script>
+    <script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery.ui/1.8.5/jquery-ui.js"></script>
+    <script type="text/javascript" src="talxGrid.js"></script>
+    <style type="text/css">
+
+        #syntaxTabs { border: 0; }
+        .ui-tabs { position: relative; padding: 0; zoom: 1; } /* position: relative prevents IE scroll bug (element with position: relative inside container with overflow: auto appear as "fixed") */
+        .ui-tabs .ui-tabs-nav { margin: 0; padding: 0; background: none; border: 0; border-bottom: solid 1px; border-radius: 0;}
+        .ui-tabs .ui-tabs-nav li { list-style: none; float: left; position: relative; top: 1px; margin: 0;
+            padding: 0; white-space: nowrap; background-color: #eff5ff; background-image: none; border: 0;
+            border-top: solid 1px #939393; border-left: solid 1px #939393; border-bottom: 0 !important; border-radius: 0;}
+        .ui-tabs .ui-tabs-nav li:first-child { border-left: 1px solid #939393; border-radius: 0; border-top-left-radius: 4px; }
+        .ui-tabs .ui-tabs-nav li:last-child { border-right: 1px solid #939393; border-radius: 0; border-top-right-radius: 4px; }
+        .ui-tabs .ui-tabs-nav li a { float: left; padding: 3px 15px 3px 15px; text-decoration: none; }
+        .ui-tabs .ui-tabs-nav li.ui-tabs-selected { margin-bottom: 0; padding-bottom: 1px; background-color: #f8f8f8;
+            background-image: none;}
+        .ui-tabs .ui-tabs-nav li.ui-tabs-selected a,
+        .ui-tabs .ui-tabs-nav li.ui-state-disabled a,
+        .ui-tabs .ui-tabs-nav li.ui-state-processing a { cursor: text;  font-weight: bold; }
+        .ui-tabs .ui-tabs-nav li a,
+        .ui-tabs.ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-selected a { cursor: pointer; } /* first selector in group seems obsolete, but required to overcome bug in Opera applying cursor: text overall if defined elsewhere... */
+        .ui-tabs .ui-tabs-panel { display: block; border-width: 0; padding: 1em 1.4em; background: none;
+            border: solid 1px #939393; border-top: none; }
+        .ui-tabs .ui-tabs-hide { display: none !important; }
+        .ui-tabs .ui-tabs-nav li a {color: #1364c4;}
+        .ui-tabs .ui-tabs-nav li.ui-tabs-selected a {color: #000000;}
+        .iconColumn { width: 20px; }
+
+        .codeSnippetContainerTabs>div:first-child {
+            border-left: 1px solid #939393;
+            border-top-left-radius: 4px;
+        }
+
+        .codeSnippetContainerTabActive {
+            border-left: none;
+            background-color: #fff;
+            border-bottom: 1px solid #fff;
+            font-size: 1em;
+        }
+
+        .codeSnippetContainerTabActive {
+            font-family: 'Segoe UI','Lucida Grande',Verdana,Arial,Helvetica,sans-serif!important;
+            font-size: 12px;
+            font-style: normal!important;
+            height: 22px;
+            float: left;
+            width: auto;
+            padding: 0 15px 0 15px;
+            vertical-align: baseline;
+            color: #707070;
+            background: #f8f8f8;
+            border-top: solid 1px #939393;
+            border-left: solid 1px #939393;
+            border-right: solid 1px #939393;
+        }
+
+        .codeSnippetContainerTab {
+            border: 1px solid #939393;
+            border-left: none;
+            background-color: #eff5ff;
+            font-size: 1em;
+        }
+
+        .codeSnippetContainerTab {
+            font-family: 'Segoe UI','Lucida Grande',Verdana,Arial,Helvetica,sans-serif!important;
+            font-size: 12px;
+            font-style: normal!important;
+            height: 22px;
+            float: left;
+            width: auto;
+            padding: 0 15px 0 15px;
+            vertical-align: baseline;
+            color: #2a2a2a;
+        }
+
+        .codeSnippetContainerTabs>div:last-child {
+            border-right: 1px solid #939393;
+            border-top-right-radius: 4px;
+        }
+
+    </style>
+</head>
+<body class="library">
+    <div id="page">
+        <div id="body">
+            <div id="content" class="content">
+                <div id="ratingCounterSeperator" class="cl_lw_vs_seperator" style="display: none;"></div>
+
+                <div xmlns="http://www.w3.org/1999/xhtml">
+                    <div class="topic" xmlns="http://www.w3.org/1999/xhtml" xmlns:mtps="http://msdn2.microsoft.com/mtps" xmlns:msxsl="urn:schemas-microsoft-com:xslt" xmlns:cs="http://msdn.microsoft.com/en-us/">
+                        <h1 class="title">talxGrid jQuery UI style widget</h1>
+
+                        <div class="lw_vs">
+                            <div id="curversion">
+                                <strong>jQuery UI 1.8.2</strong> - <strong>jQuery 1.6.3</strong>
+                            </div>
+                        </div>
+                        <div style="clear:both;"></div>
+
+                        <div id="mainSection">
+                            <div id="mainBody">
+                                <p></p>
+                                <div>
+                                    <div class="summary">
+                                        <p>Easy, quick, powerful data grid. Supports sorting, searching, and paging. Handles
+                                            over 50K rows. Simply give a target element, and options with a column definition
+                                            and the data to display.</p>
+                                    </div>
+                                </div>
+                                <p></p>
+                                <strong>javascript file:</strong> <a href="talxGrid.js">talxGrid.js</a><br />
+                                <strong>CSS file:</strong> <a href="talx-ui.css">ui-talx.css</a><br />
+                                <strong>Assembly:</strong> <a href="talx-ui.css">talxWidgetHelper.dll</a>
+                                <div rel="Syntax">
+                                    <div class="LW_CollapsibleArea_TitleDiv">
+                                        <div>
+                                            <a href="javascript:void(0)" class="LW_CollapsibleArea_TitleAhref" title="Collapse"><span class="cl_CollapsibleArea_expanding LW_CollapsibleArea_Img"></span><span class="LW_CollapsibleArea_Title">Syntax</span></a>
+                                            <div class="LW_CollapsibleArea_HrDiv">
+                                                <hr class="LW_CollapsibleArea_Hr" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="sectionblock">
+                                        <a id="syntaxToggle"></a>
+                                        <div id="code-snippet-1" class="codeSnippetContainer" xmlns="">
+                                            <div id="syntaxTabs" class="tabs">
+                                                <ul>
+                                                    <li><a href="#dExample">Example</a></li>
+                                                    <li><a href="#dHtml">HTML</a></li>
+                                                    <li><a href="#dJavascript">javascript</a></li>
+                                                    <li><a href="#dCss">CSS</a></li>
+                                                </ul>
+                                                <div id="dExample">
+                                                    <div class="codeSnippetContainerCodeContainer">
+                                                        <div class="codeSnippetContainerCode">
+                                                            <div id='grid2'></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="dHtml">
+                                                    <div class="codeSnippetContainerCodeContainer">
+                                                        <div class="codeSnippetContainerCode">
+                                                            &lt;div id='grid'&gt;&lt;/div&gt;
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="dJavascript">
+                                                    <div class="codeSnippetContainerCodeContainer">
+                                                        <div class="codeSnippetContainerCode">
+<pre>
+&lt;script type="text/javascript"&gt;
+    $(function(){
+        var defaultOptions = ;
+        $("#grid").talxGrid({
+            columns: [
+                { header: "Name", displayField: "fullName", displayMask: "&lt;a href='#editUser' rel='{1}'&gt;{0}&lt;/a&gt;", linkField: "awesome", linkMask: "&lt;span class='demo-awesome-{0}'&gt;{1}&lt;/span&gt;" },
+                { header: "E-Mail Address", displayField: "email", allowFilter: false },
+                { header: "Sex", displayField: "sex", allowSort: false, allowFilterSelect: false },
+                { header: "Rating", displayField: "rating", dataType: "int" },
+                { header: "Joined", displayField: "joined", dataType: "date" },
+                { header: "Awesome?", displayField: "awesome", displayMask: "Am I awesome? {0}" }
+            ],
+            data: [
+                { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: 1, joined: "01/01/2012", awesome: true },
+                { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: 10, joined: "01/01/2011", awesome: true },
+                { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: 1.5, joined: "01/31/2012", awesome: true },
+                { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: -1, joined: "02/01/2012", awesome: true },
+                { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: 32, joined: "12/01/2010", awesome: true },
+                { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: 2, joined: "11/01/2012", awesome: true },
+                { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: 7, joined: "10/01/2012", awesome: true },
+                { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: 41, joined: "2/29/2012", awesome: true },
+                { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: 14, joined: "2/28/2012", awesome: true },
+                { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: 4, joined: "01/02/2012", awesome: true },
+                { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: .4, joined: "01/04/2012", awesome: false },
+                { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: 2, joined: "01/03/2012", awesome: true },
+                { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: 1, joined: "01/01/2012", awesome: true },
+                { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: 10, joined: "01/01/2011", awesome: true },
+                { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: 1.5, joined: "01/31/2012", awesome: true },
+                { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: -1, joined: "02/01/2012", awesome: true },
+                { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: 32, joined: "12/01/2010", awesome: true },
+                { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: 2, joined: "11/01/2012", awesome: true },
+                { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: 7, joined: "10/01/2012", awesome: true },
+                { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: 41, joined: "2/29/2012", awesome: true },
+                { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: 14, joined: "2/28/2012", awesome: true },
+                { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: 4, joined: "01/02/2012", awesome: true },
+                { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: .4, joined: "01/04/2012", awesome: false },
+                { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: 2, joined: "01/03/2012", awesome: true },
+                { fullName: "Ellen Cornillon", email: "ecornillon@mac.com", sex: "female", rating: 2, joined: "01/01/2012", awesome: true }
+            ],
+            noDataMessage: 'User not found'
+            });
+    });
+&lt;/script&gt;
+                                                            </pre>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="dCss">
+                                                    <div class="codeSnippetContainerCodeContainer">
+                                                        <div class="codeSnippetContainerCode">
+                                                            <pre>
+.ui-talxGrid.ui-widget-content { width: auto;border: none;}
+.ui-talxGrid table { border-collapse: collapse; width: 100%; clear: both; }
+.ui-talxGrid th { padding: 3px;}
+.ui-talxGrid th span { float: right; height: 16px; width: 16px; margin-right: 5px; margin-left: -5px;  }
+.ui-talxGrid th.ui-talxGrid-sort { cursor: pointer; }
+.ui-talxGrid .ui-talxGrid-pageSizer, .ui-talxGrid .ui-talxGrid-pager { display: block; float: right; margin: 5px; }
+.ui-talxGrid .ui-talxGrid-filter, .ui-talxGrid .ui-talxGrid-rowCounter { display: block; float: left; margin: 5px; }
+.ui-talxGrid-desc { background-position: -64px -16px; }
+.ui-talxGrid-asc { background-position: 0 -16px; }
+td.ui-talxGrid-int, td.ui-talxGrid-float { text-align: right; }
+td.ui-talxGrid-date { text-align: center; }
+.ui-talxGrid td span.ui-talxGrid-width {display: block; overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+.ui-talxGrid tr.ui-state-selected td { background-color: yellow; background-image: none;}
+                                                            </pre>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p>The <span class="selflink">JavaScriptSerializer</span> type exposes the following members.</p>
+                                <div rel="Options">
+                                    <div class="LW_CollapsibleArea_TitleDiv">
+                                        <div>
+                                            <a href="javascript:void(0)" class="LW_CollapsibleArea_TitleAhref" title="Collapse"><span class="cl_CollapsibleArea_expanding LW_CollapsibleArea_Img"></span><span class="LW_CollapsibleArea_Title">Options</span></a>
+                                            <div class="LW_CollapsibleArea_HrDiv">
+                                                <hr class="LW_CollapsibleArea_Hr" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="sectionblock"><a id="constructorTableToggle"></a>
+                                        <table id="memberList" class="members">
+                                            <tr>
+                                                <th class="iconColumn"></th>
+                                                <th class="nameColumn">Name</th>
+                                                <th class="descriptionColumn">Type</th>
+                                                <th class="descriptionColumn">Default</th>
+                                            </tr>
+                                            <tr data="public;declared;">
+                                                <td><img alt="Public property" src="http://i.msdn.microsoft.com/areas/global/content/clear.gif" title="Public property" class="cl_IC74937" /></td>
+                                                <td><a href="#columns"><b>columns</b></a></td>
+                                                <td>array[column object] (required)</td>
+                                                <td>[]</td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="4">
+                                                    <div class="option-description">
+                                                    <p>"columns" is a required option to initialize correctly.
+                                                       It is a JSON array of column definitions.</p>
+                                                    <div>
+                                                        <h3>column object's fields</h3>
+                                                        <table>
+                                                            <thead><tr><th></th><th>Name</th><th>Type</th><th>Default / Values</th><th>Comments</th></tr></thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td><img alt="Public property" src="http://i.msdn.microsoft.com/areas/global/content/clear.gif" title="Public property" class="cl_IC74937" /></td>
+                                                                    <td>header</td>
+                                                                    <td>string</td>
+                                                                    <td><b>null</b></td>
+                                                                    <td>The column header text</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><img alt="Public property" src="http://i.msdn.microsoft.com/areas/global/content/clear.gif" title="Public property" class="cl_IC74937" /></td>
+                                                                    <td>allowSort</td>
+                                                                    <td>bool</td>
+                                                                    <td><b>true</b> | false</td>
+                                                                    <td></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><img alt="Public property" src="http://i.msdn.microsoft.com/areas/global/content/clear.gif" title="Public property" class="cl_IC74937" /></td>
+                                                                    <td>allowFilter</td>
+                                                                    <td>bool</td>
+                                                                    <td><b>true</b> | false</td>
+                                                                    <td></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><img alt="Public property" src="http://i.msdn.microsoft.com/areas/global/content/clear.gif" title="Public property" class="cl_IC74937" /></td>
+                                                                    <td>allowFilterSelect</td>
+                                                                    <td>bool</td>
+                                                                    <td><b>true</b> | false</td>
+                                                                    <td>Force use of input (textbox) for searching instead of optional select (dropdownlist).</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><img alt="Public property" src="http://i.msdn.microsoft.com/areas/global/content/clear.gif" title="Public property" class="cl_IC74937" /></td>
+                                                                    <td>dataType</td>
+                                                                    <td>string</td>
+                                                                    <td><b>"string"</b> | "int" | "float" | "date" | "boolean"</td>
+                                                                    <td>dataType is used for sorting, filtering, and display masks.</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><img alt="Public property" src="http://i.msdn.microsoft.com/areas/global/content/clear.gif" title="Public property" class="cl_IC74937" /></td>
+                                                                    <td>displayField</td>
+                                                                    <td>string</td>
+                                                                    <td><b>null</b></td>
+                                                                    <td>The field name matching one of the fields from the data object.</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><img alt="Public property" src="http://i.msdn.microsoft.com/areas/global/content/clear.gif" title="Public property" class="cl_IC74937" /></td>
+                                                                    <td>displayMask</td>
+                                                                    <td>string</td>
+                                                                    <td><b>"{0}"</b></td>
+                                                                    <td>Used to format the display field. Supports {0} for the value of the displayField, or {1} for the row index.</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><img alt="Public property" src="http://i.msdn.microsoft.com/areas/global/content/clear.gif" title="Public property" class="cl_IC74937" /></td>
+                                                                    <td>linkField</td>
+                                                                    <td>string</td>
+                                                                    <td><b>null</b></td>
+                                                                    <td>If a link is desired, the field can be used in the linkMask.  A null value indicates no link is shown.</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><img alt="Public property" src="http://i.msdn.microsoft.com/areas/global/content/clear.gif" title="Public property" class="cl_IC74937" /></td>
+                                                                    <td>linkMask</td>
+                                                                    <td>string</td>
+                                                                    <td><b>"{1}"</b></td>
+                                                                    <td>If a link is desired, the linkMask is used to format the link.
+                                                                        It supports {0} for the linkField value, {1} for the result of
+                                                                        displayMask, and {2} for the row index.</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><img alt="Public property" src="http://i.msdn.microsoft.com/areas/global/content/clear.gif" title="Public property" class="cl_IC74937" /></td>
+                                                                    <td>tdClass</td>
+                                                                    <td>string</td>
+                                                                    <td><b>null</b></td>
+                                                                    <td>An additional CSS class to add to the td and th cells in this column.</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><img alt="Public property" src="http://i.msdn.microsoft.com/areas/global/content/clear.gif" title="Public property" class="cl_IC74937" /></td>
+                                                                    <td>width</td>
+                                                                    <td>string</td>
+                                                                    <td><b>"*"</b></td>
+                                                                    <td>This is the width of the column.  The default (null) does auto width.</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                    <div class="option-examples">
+                                                        <h3>Code examples</h3>
+                                                        <dl class="option-examples-list">
+                                                            <dt>Initialize a talxGrid with the <code>columns</code> option specified.</dt>
+                                                            <dd>
+<pre><code>$( ".selector" ).talxGrid({ columns: [
+    { header: "Name", displayField": "userName" },
+    { header: "E-Mail Address", displayField: "email"}
+]});</code></pre>
+                                                            </dd>
+
+                                                            <dt>Get the <code>columns</code> option, after init.</dt>
+                                                            <dd>
+<pre><code>//getter
+var columns = $( ".selector" ).talxGrid( "option", "columns" );</code></pre>
+                                                            </dd>
+                                                        </dl>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr data="public;declared;">
+                                                <td><img alt="Public property" src="http://i.msdn.microsoft.com/areas/global/content/clear.gif" title="Public property" class="cl_IC74937" /></td>
+                                                <td><a href="#data"><b>data</b></a></td>
+                                                <td>array[object] (required)</td>
+                                                <td>[]</td>
+                                            </tr>
+                                            <tr>
+                                                <td><img alt="Public property" src="http://i.msdn.microsoft.com/areas/global/content/clear.gif" title="Public property" class="cl_IC74937" /></td>
+                                                <td><a href="#advancedSearchAsButton">advancedSearchAsButton</a></td>
+                                                <td>bool</td>
+                                                <td>false</td>
+                                            </tr>
+                                            <tr>
+                                                <td><img alt="Public property" src="http://i.msdn.microsoft.com/areas/global/content/clear.gif" title="Public property" class="cl_IC74937" /></td>
+                                                <td><a href="#advancedSearchCriteria">advancedSearchCriteria</a></td>
+                                                <td>criteria object</td>
+                                                <td>null</td>
+                                            </tr>
+                                            <tr>
+                                                <td><img alt="Public property" src="http://i.msdn.microsoft.com/areas/global/content/clear.gif" title="Public property" class="cl_IC74937" /></td>
+                                                <td><a href="#advancedSearchHelper">advancedSearchHelper</a></td>
+                                                <td>function(data, criteria) data</td>
+                                                <td>null</td>
+                                            </tr>
+                                            <tr>
+                                                <td><img alt="Public property" src="http://i.msdn.microsoft.com/areas/global/content/clear.gif" title="Public property" class="cl_IC74937" /></td>
+                                                <td><a href="#disabled">disabled</a></td>
+                                                <td>bool</td>
+                                                <td>false</td>
+                                            </tr>
+                                            <tr>
+                                                <td><img alt="Public property" src="http://i.msdn.microsoft.com/areas/global/content/clear.gif" title="Public property" class="cl_IC74937" /></td>
+                                                <td><a href="#firstText">firstText</a></td>
+                                                <td>string</td>
+                                                <td>"&amp;lt;&amp;lt;"</td>
+                                            </tr>
+                                            <tr>
+                                                <td><img alt="Public property" src="http://i.msdn.microsoft.com/areas/global/content/clear.gif" title="Public property" class="cl_IC74937" /></td>
+                                                <td><a href="#lastText">lastText</a></td>
+                                                <td>string</td>
+                                                <td>"&amp;gt;&amp;gt;"</td>
+                                            </tr>
+                                            <tr>
+                                                <td><img alt="Public property" src="http://i.msdn.microsoft.com/areas/global/content/clear.gif" title="Public property" class="cl_IC74937" /></td>
+                                                <td><a href="#maxPagesOnPager">maxPagesOnPager</a></td>
+                                                <td>int</td>
+                                                <td>10</td>
+                                            </tr>
+                                            <tr>
+                                                <td><img alt="Public property" src="http://i.msdn.microsoft.com/areas/global/content/clear.gif" title="Public property" class="cl_IC74937" /></td>
+                                                <td><a href="#maxSearchItems">maxSearchItems</a></td>
+                                                <td>int</td>
+                                                <td>5</td>
+                                            </tr>
+                                            <tr>
+                                                <td><img alt="Public property" src="http://i.msdn.microsoft.com/areas/global/content/clear.gif" title="Public property" class="cl_IC74937" /></td>
+                                                <td><a href="#nextText">nextText</a></td>
+                                                <td>string</td>
+                                                <td>"&amp;gt;"</td>
+                                            </tr>
+                                            <tr>
+                                                <td><img alt="Public property" src="http://i.msdn.microsoft.com/areas/global/content/clear.gif" title="Public property" class="cl_IC74937" /></td>
+                                                <td><a href="#noDataMessage">noDataMessage</a></td>
+                                                <td>string</td>
+                                                <td>""</td>
+                                            </tr>
+                                            <tr>
+                                                <td><img alt="Public property" src="http://i.msdn.microsoft.com/areas/global/content/clear.gif" title="Public property" class="cl_IC74937" /></td>
+                                                <td><a href="#pageSize">pageSize</a></td>
+                                                <td>int</td>
+                                                <td>10</td>
+                                            </tr>
+                                            <tr>
+                                                <td><img alt="Public property" src="http://i.msdn.microsoft.com/areas/global/content/clear.gif" title="Public property" class="cl_IC74937" /></td>
+                                                <td><a href="#pageSizeOptions">pageSizeOptions</a></td>
+                                                <td>array[int]</td>
+                                                <td>[10,25,50,100]</td>
+                                            </tr>
+                                            <tr>
+                                                <td><img alt="Public property" src="http://i.msdn.microsoft.com/areas/global/content/clear.gif" title="Public property" class="cl_IC74937" /></td>
+                                                <td><a href="#prevText">prevText</a></td>
+                                                <td>string</td>
+                                                <td>"&amp;lt;"</td>
+                                            </tr>
+                                            <tr>
+                                                <td><img alt="Public property" src="http://i.msdn.microsoft.com/areas/global/content/clear.gif" title="Public property" class="cl_IC74937" /></td>
+                                                <td><a href="#showFilter">showFilter</a></td>
+                                                <td>bool</td>
+                                                <td>true</td>
+                                            </tr>
+                                            <tr>
+                                                <td><img alt="Public property" src="http://i.msdn.microsoft.com/areas/global/content/clear.gif" title="Public property" class="cl_IC74937" /></td>
+                                                <td><a href="#showFirstLast">showFirstLast</a></td>
+                                                <td>bool</td>
+                                                <td>false</td>
+                                            </tr>
+                                            <tr>
+                                                <td><img alt="Public property" src="http://i.msdn.microsoft.com/areas/global/content/clear.gif" title="Public property" class="cl_IC74937" /></td>
+                                                <td><a href="#showPageNumbers">showPageNumbers</a></td>
+                                                <td>bool</td>
+                                                <td>true</td>
+                                            </tr>
+                                            <tr>
+                                                <td><img alt="Public property" src="http://i.msdn.microsoft.com/areas/global/content/clear.gif" title="Public property" class="cl_IC74937" /></td>
+                                                <td><a href="#showPagerAsButtons">showPagerAsButtons</a></td>
+                                                <td>bool</td>
+                                                <td>false</td>
+                                            </tr>
+                                            <tr>
+                                                <td><img alt="Public property" src="http://i.msdn.microsoft.com/areas/global/content/clear.gif" title="Public property" class="cl_IC74937" /></td>
+                                                <td><a href="#showPagerEllipsis">showPagerEllipsis</a></td>
+                                                <td>bool</td>
+                                                <td>false</td>
+                                            </tr>
+                                            <tr>
+                                                <td><img alt="Public property" src="http://i.msdn.microsoft.com/areas/global/content/clear.gif" title="Public property" class="cl_IC74937" /></td>
+                                                <td><a href="#showPagerSize">showPagerSize</a></td>
+                                                <td>bool</td>
+                                                <td>true</td>
+                                            </tr>
+                                            <tr>
+                                                <td><img alt="Public property" src="http://i.msdn.microsoft.com/areas/global/content/clear.gif" title="Public property" class="cl_IC74937" /></td>
+                                                <td><a href="#showPrevNext">showPrevNext</a></td>
+                                                <td>bool</td>
+                                                <td>true</td>
+                                            </tr>
+                                            <tr>
+                                                <td><img alt="Public property" src="http://i.msdn.microsoft.com/areas/global/content/clear.gif" title="Public property" class="cl_IC74937" /></td>
+                                                <td><a href="#showResetAsButton">showResetAsButton</a></td>
+                                                <td>bool</td>
+                                                <td>false</td>
+                                            </tr>
+                                            <tr>
+                                                <td><img alt="Public property" src="http://i.msdn.microsoft.com/areas/global/content/clear.gif" title="Public property" class="cl_IC74937" /></td>
+                                                <td><a href="#showRowCounter">showRowCounter</a></td>
+                                                <td>bool</td>
+                                                <td>true</td>
+                                            </tr>
+                                        </table>
+                                        <a href="#mainBody">Top</a>
+                                    </div>
+                                </div>
+                                <div rel="Events">
+                                    <div class="LW_CollapsibleArea_TitleDiv">
+                                        <div>
+                                            <a href="javascript:void(0)" class="LW_CollapsibleArea_TitleAhref" title="Collapse"><span class="cl_CollapsibleArea_expanding LW_CollapsibleArea_Img"></span><span class="LW_CollapsibleArea_Title">Events</span></a>
+                                            <div class="LW_CollapsibleArea_HrDiv">
+                                                <hr class="LW_CollapsibleArea_Hr" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="sectionblock">
+                                        <a id="propertyTableToggle"></a>
+                                        <table id="memberList1" class="members">
+                                            <tr>
+                                                <th class="iconColumn"></th>
+                                                <th class="nameColumn">Name</th>
+                                                <th class="descriptionColumn">Type</th>
+                                            </tr>
+                                            <tr data="public;declared;">
+                                                <td><img alt="Public event" src="http://i.msdn.microsoft.com/areas/global/content/clear.gif" title="Public event" class="cl_IC90369"></td>
+                                                <td><a href="#advancedSearch">advancedSearch</a></td>
+                                                <td>talxgridadvancedsearch</td>
+                                            </tr>
+                                        </table>
+                                        <a href="#mainBody">Top</a>
+                                    </div>
+                                </div>
+                                <div rel="Methods">
+                                    <div class="LW_CollapsibleArea_TitleDiv">
+                                        <div>
+                                            <a href="javascript:void(0)" class="LW_CollapsibleArea_TitleAhref" title="Collapse"><span class="cl_CollapsibleArea_expanding LW_CollapsibleArea_Img"></span><span class="LW_CollapsibleArea_Title">Methods</span></a>
+                                            <div class="LW_CollapsibleArea_HrDiv"><hr class="LW_CollapsibleArea_Hr" /></div>
+                                        </div>
+                                    </div>
+                                    <div class="sectionblock">
+                                        <a id="methodTableToggle"></a>
+                                        <table id="memberList2" class="members">
+                                            <tr>
+                                                <th class="iconColumn"></th>
+                                                <th class="nameColumn">Name</th>
+                                                <th class="descriptionColumn">Description</th>
+                                            </tr>
+                                            <tr data="public;declared;">
+                                                <td><img id="pubmethod" alt="Public method" src="http://i.msdn.microsoft.com/areas/global/content/clear.gif" title="Public method" xmlns="" class="cl_IC91302" /></td>
+                                                <td><a href="http://msdn.microsoft.com/en-us/library/ee191831.aspx">ConvertToType(Object, Type)</a></td>
+                                                <td><span>Converts the specified object to the specified type.</span></td>
+                                            </tr>
+                                            <tr data="public;declared;">
+                                                <td><img id="pubmethod" alt="Public method" src="http://i.msdn.microsoft.com/areas/global/content/clear.gif" title="Public method" xmlns="" class="cl_IC91302" /></td>
+                                                <td><a href="http://msdn.microsoft.com/en-us/library/bb356489.aspx">ConvertToType<span xmlns="">&lt;</span>T<span xmlns="">&gt;</span>(Object)</a></td>
+                                                <td><span>Converts the given object to the specified type.</span></td>
+                                            </tr>
+                                            <tr data="public;declared;">
+                                                <td><img id="pubmethod" alt="Public method" src="http://i.msdn.microsoft.com/areas/global/content/clear.gif" title="Public method" xmlns="" class="cl_IC91302" /></td>
+                                                <td><a href="http://msdn.microsoft.com/en-us/library/ee191864.aspx">Deserialize(String, Type)</a></td>
+                                                <td><span>Converts a JSON-formatted string to an object of the specified type.</span></td>
+                                            </tr>
+                                            <tr data="public;declared;">
+                                                <td><img id="pubmethod" alt="Public method" src="http://i.msdn.microsoft.com/areas/global/content/clear.gif" title="Public method" xmlns="" class="cl_IC91302" /></td>
+                                                <td><a href="http://msdn.microsoft.com/en-us/library/bb355316.aspx">Deserialize<span xmlns="">&lt;</span>T<span xmlns="">&gt;</span>(String)</a></td>
+                                                <td><span>Converts the specified JSON string to an object of type <span class="parameter">T</span>.</span></td>
+                                            </tr>
+                                            <tr data="public;declared;">
+                                                <td><img id="pubmethod" alt="Public method" src="http://i.msdn.microsoft.com/areas/global/content/clear.gif" title="Public method" xmlns="" class="cl_IC91302" /></td>
+                                                <td><a href="http://msdn.microsoft.com/en-us/library/system.web.script.serialization.javascriptserializer.deserializeobject.aspx">DeserializeObject</a></td>
+                                                <td><span>Converts the specified JSON string to an object graph.</span></td>
+                                            </tr>
+                                            <tr data="public;inherited;">
+                                                <td><img id="pubmethod" alt="Public method" src="http://i.msdn.microsoft.com/areas/global/content/clear.gif" title="Public method" xmlns="" class="cl_IC91302" /></td>
+                                                <td><a href="http://msdn.microsoft.com/en-us/library/bsc2ak47.aspx">Equals(Object)</a></td>
+                                                <td><span>Determines whether the specified object is equal to the current object.</span> (Inherited from <a href="http://msdn.microsoft.com/en-us/library/system.object.aspx">Object</a>.)</td>
+                                            </tr>
+                                            <tr data="protected;inherited;">
+                                                <td><img id="protmethod" alt="Protected method" src="http://i.msdn.microsoft.com/areas/global/content/clear.gif" title="Protected method" xmlns="" class="cl_IC155188" /></td>
+                                                <td><a href="http://msdn.microsoft.com/en-us/library/system.object.finalize.aspx">Finalize</a></td>
+                                                <td><span>Allows an object to try to free resources and perform other cleanup operations before it is reclaimed by garbage collection.</span> (Inherited from <a href="http://msdn.microsoft.com/en-us/library/system.object.aspx">Object</a>.)</td>
+                                            </tr>
+                                            <tr data="public;inherited;">
+                                                <td><img id="pubmethod" alt="Public method" src="http://i.msdn.microsoft.com/areas/global/content/clear.gif" title="Public method" xmlns="" class="cl_IC91302" /></td>
+                                                <td><a href="http://msdn.microsoft.com/en-us/library/system.object.gethashcode.aspx">GetHashCode</a></td>
+                                                <td><span>Serves as a hash function for a particular type. </span> (Inherited from <a href="http://msdn.microsoft.com/en-us/library/system.object.aspx">Object</a>.)</td>
+                                            </tr>
+                                            <tr data="public;inherited;">
+                                                <td><img id="pubmethod" alt="Public method" src="http://i.msdn.microsoft.com/areas/global/content/clear.gif" title="Public method" xmlns="" class="cl_IC91302" /></td>
+                                                <td><a href="http://msdn.microsoft.com/en-us/library/system.object.gettype.aspx">GetType</a></td>
+                                                <td><span>Gets the <span><a href="http://msdn.microsoft.com/en-us/library/system.type.aspx">Type</a></span> of the current instance.</span> (Inherited from <a href="http://msdn.microsoft.com/en-us/library/system.object.aspx">Object</a>.)</td>
+                                            </tr>
+                                            <tr data="protected;inherited;">
+                                                <td><img id="protmethod" alt="Protected method" src="http://i.msdn.microsoft.com/areas/global/content/clear.gif" title="Protected method" xmlns="" class="cl_IC155188" /></td>
+                                                <td><a href="http://msdn.microsoft.com/en-us/library/system.object.memberwiseclone.aspx">MemberwiseClone</a></td>
+                                                <td><span>Creates a shallow copy of the current <span><a href="http://msdn.microsoft.com/en-us/library/system.object.aspx">Object</a></span>.</span> (Inherited from <a href="http://msdn.microsoft.com/en-us/library/system.object.aspx">Object</a>.)</td>
+                                            </tr>
+                                            <tr data="public;declared;">
+                                                <td><img id="pubmethod" alt="Public method" src="http://i.msdn.microsoft.com/areas/global/content/clear.gif" title="Public method" xmlns="" class="cl_IC91302" /></td>
+                                                <td><a href="http://msdn.microsoft.com/en-us/library/system.web.script.serialization.javascriptserializer.registerconverters.aspx">RegisterConverters</a></td>
+                                                <td><span>Registers a custom converter with the <span><span class="selflink">JavaScriptSerializer</span></span> instance. </span></td>
+                                            </tr>
+                                            <tr data="public;declared;"><td><img id="pubmethod" alt="Public method" src="http://i.msdn.microsoft.com/areas/global/content/clear.gif" title="Public method" xmlns="" class="cl_IC91302" /></td><td><a href="http://msdn.microsoft.com/en-us/library/bb292287.aspx">Serialize(Object)</a></td><td><span>Converts an object to a JSON string.</span></td></tr><tr data="public;declared;"><td><img id="pubmethod" alt="Public method" src="http://i.msdn.microsoft.com/areas/global/content/clear.gif" title="Public method" xmlns="" class="cl_IC91302" /></td><td><a href="http://msdn.microsoft.com/en-us/library/bb340417.aspx">Serialize(Object, StringBuilder)</a></td><td><span>Serializes an object and writes the resulting JSON string to the specified <span><a href="http://msdn.microsoft.com/en-us/library/system.text.stringbuilder.aspx">StringBuilder</a></span> object.</span></td></tr><tr data="public;inherited;"><td><img id="pubmethod" alt="Public method" src="http://i.msdn.microsoft.com/areas/global/content/clear.gif" title="Public method" xmlns="" class="cl_IC91302" /></td><td><a href="http://msdn.microsoft.com/en-us/library/system.object.tostring.aspx">ToString</a></td><td><span>Returns a string that represents the current object.</span> (Inherited from <a href="http://msdn.microsoft.com/en-us/library/system.object.aspx">Object</a>.)</td></tr></table><a href="#mainBody">Top</a></div></div>
+                                <div rel="Remarks">
+                                    <div class="LW_CollapsibleArea_TitleDiv">
+                                        <div>
+                                            <a href="javascript:void(0)" class="LW_CollapsibleArea_TitleAhref" title="Collapse"><span class="cl_CollapsibleArea_expanding LW_CollapsibleArea_Img"></span><span class="LW_CollapsibleArea_Title">Remarks</span></a>
+                                            <div class="LW_CollapsibleArea_HrDiv"><hr class="LW_CollapsibleArea_Hr" /></div>
+                                        </div>
+                                    </div>
+                                    <div class="sectionblock">
+                                        <a id="remarksToggle"></a>
+                                        <p>The <span><span class="selflink">JavaScriptSerializer</span></span> class is
+                                            used internally by the asynchronous communication layer to serialize and
+                                            deserialize the data that is passed between the browser and the Web server.
+                                            You cannot access that instance of the serializer. However, this class
+                                            exposes a public API. Therefore, you can use the class when you want to work
+                                            with JavaScript Object Notation (JSON) in managed code.</p><p>To serialize
+                                            an object, use the <span><a href="http://msdn.microsoft.com/en-us/library/system.web.script.serialization.javascriptserializer.serialize.aspx">Serialize</a></span>
+                                            method. To deserialize a JSON string, use the <span><a href="http://msdn.microsoft.com/en-us/library/system.web.script.serialization.javascriptserializer.deserialize.aspx">Deserialize</a></span>
+                                            or <span><a href="http://msdn.microsoft.com/en-us/library/system.web.script.serialization.javascriptserializer.deserializeobject.aspx">DeserializeObject</a></span>
+                                            methods. To serialize and deserialize types that are not natively supported
+                                            by <span><span class="selflink">JavaScriptSerializer</span></span>,
+                                            implement custom converters by using the <span><a href="http://msdn.microsoft.com/en-us/library/system.web.script.serialization.javascriptconverter.aspx">JavaScriptConverter</a></span>
+                                            class. Then register the converters by using the <span><a href="http://msdn.microsoft.com/en-us/library/system.web.script.serialization.javascriptserializer.registerconverters.aspx">RegisterConverters</a></span>
+                                            method.</p>
+                                        <h3 class="subHeading">Mapping Between Managed Types and JSON</h3>
+                                        <div class="subsection">
+                                            <p>The following table shows the mapping between managed types and JSON for
+                                                the serialization process. These managed types are natively supported
+                                                by <span><span class="selflink">JavaScriptSerializer</span></span>. When
+                                                you are deserializing from a JSON string to a managed type, the same
+                                                mapping applies. However, deserialization can be asymmetric; not all
+                                                serializable managed types can be deserialized from JSON.</p>
+                                            <div class="alert">
+                                                <table>
+                                                    <tr>
+                                                        <th align="left"><img id="alert_note" alt="Note" src="http://i.msdn.microsoft.com/areas/global/content/clear.gif" title="Note" xmlns="" class="cl_IC101471" /><strong>Note</strong></th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <p>A multidimensional array is serialized as a one-dimensional
+                                                                array, and you should use it as a flat array.</p>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                            <div class="caption"></div>
+                                            <div class="tableSection">
+                                                <table>
+                                                    <tr>
+                                                        <th><p>Managed type</p></th>
+                                                        <th><p>JSON equivalent</p></th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><p><span><a href="http://msdn.microsoft.com/en-us/library/system.string.aspx">String</a></span> (UTF-8 encoding only).</p></td>
+                                                        <td><p>String</p></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><p><span><a href="http://msdn.microsoft.com/en-us/library/system.char.aspx">Char</a></span> </p></td>
+                                                        <td><p>String</p></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><p>Single null char (such as, \0 )</p></td>
+                                                        <td><p>Null</p></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><p><span><a href="http://msdn.microsoft.com/en-us/library/system.boolean.aspx">Boolean</a></span> </p></td>
+                                                        <td><p>Boolean. Represented in JSON as <span><span class="input">true</span></span> or <span><span class="input">false</span></span> </p></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><p><span><span class="input"><span xmlns="">null</span></span><span xmlns=""></span></span> (<span><span class="input"><span xmlns="">null</span></span><span xmlns=""></span></span> object references and <span><a href="http://msdn.microsoft.com/en-us/library/system.nullable.aspx">Nullable</a></span> value types).</p></td>
+                                                        <td><p>A string value of null</p></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><p><span><a href="http://msdn.microsoft.com/en-us/library/system.dbnull.aspx">DBNull</a></span></p></td>
+                                                        <td><p>A string value of null</p></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><p>Primitive numeric (or numeric-compatible) types: <span><a href="http://msdn.microsoft.com/en-us/library/system.byte.aspx">Byte</a></span>, <span><a href="http://msdn.microsoft.com/en-us/library/system.sbyte.aspx">SByte</a></span>, <span><a href="http://msdn.microsoft.com/en-us/library/system.int16.aspx">Int16</a></span>, <span><a href="http://msdn.microsoft.com/en-us/library/system.int32.aspx">Int32</a></span>, <span><a href="http://msdn.microsoft.com/en-us/library/system.int64.aspx">Int64</a></span>, <span><a href="http://msdn.microsoft.com/en-us/library/system.uint16.aspx">UInt16</a></span>, <span><a href="http://msdn.microsoft.com/en-us/library/system.uint32.aspx">UInt32</a></span>, <span><a href="http://msdn.microsoft.com/en-us/library/system.uint64.aspx">UInt64</a></span>, <span><a href="http://msdn.microsoft.com/en-us/library/system.double.aspx">Double</a></span>, and <span><a href="http://msdn.microsoft.com/en-us/library/system.single.aspx">Single</a></span>. The culture-invariant string representation is used.</p></td>
+                                                        <td><p>Number </p></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><p><span><a href="http://msdn.microsoft.com/en-us/library/system.datetime.aspx">DateTime</a></span></p></td>
+                                                        <td><p>Date object, represented in JSON as "\/Date(number of ticks)\/". The number of ticks is a positive or negative long value that indicates the number of ticks (milliseconds) that have elapsed since midnight 01 January, 1970 UTC.</p><p>The maximum supported date value is <span><a href="http://msdn.microsoft.com/en-us/library/system.datetime.maxvalue.aspx">MaxValue</a></span> (12/31/9999 11:59:59 PM) and the minimum supported date value is <span><a href="http://msdn.microsoft.com/en-us/library/system.datetime.minvalue.aspx">MinValue</a></span> (1/1/0001 12:00:00 AM). </p></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><p>Enumerations of integer type</p></td>
+                                                        <td><p>Integer equivalent of the enumeration value</p></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><p>Types that implement <span><a href="http://msdn.microsoft.com/en-us/library/system.collections.ienumerable.aspx">IEnumerable</a></span> or <span><a href="http://msdn.microsoft.com/en-us/library/9eekhta0.aspx">System.Collections.Generic<span xmlns="">.</span>IEnumerable<span xmlns="">&lt;</span>T<span xmlns="">&gt;</span></a></span> that are not also implementations of <span><a href="http://msdn.microsoft.com/en-us/library/system.collections.idictionary.aspx">IDictionary</a></span> or <span><a href="http://msdn.microsoft.com/en-us/library/s4ys34ea.aspx">System.Collections.Generic<span xmlns="">.</span>IDictionary<span xmlns="">&lt;</span>TKey, TValue<span xmlns="">&gt;</span></a></span>. This includes types such as <span><a href="http://msdn.microsoft.com/en-us/library/system.array.aspx">Array</a></span>, <span><a href="http://msdn.microsoft.com/en-us/library/system.collections.arraylist.aspx">ArrayList</a></span>, and <span><a href="http://msdn.microsoft.com/en-us/library/6sh2ey19.aspx">List<span xmlns="">&lt;</span>T<span xmlns="">&gt;</span></a></span>.</p></td>
+                                                        <td><p>Array that uses JSON array syntax</p></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><p>Types that implement <span><a href="http://msdn.microsoft.com/en-us/library/system.collections.idictionary.aspx">IDictionary</a></span> or <span><a href="http://msdn.microsoft.com/en-us/library/s4ys34ea.aspx">System.Collections.Generic<span xmlns="">.</span>IDictionary<span xmlns="">&lt;</span>TKey, TValue<span xmlns="">&gt;</span></a></span>. This includes types such as <span><a href="http://msdn.microsoft.com/en-us/library/xfhwa508.aspx">Dictionary<span xmlns="">&lt;</span>TKey, TValue<span xmlns="">&gt;</span></a></span> and <span><a href="http://msdn.microsoft.com/en-us/library/system.collections.hashtable.aspx">Hashtable</a></span>. </p></td>
+                                                        <td><p>JavaScript object that uses JSON dictionary syntax</p></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><p>Custom concrete (non-abstract) types that have public instance properties that have get accessors or public instance fields.</p><p>Note that public write-only properties, public property or public field attributes marked with <span><a href="http://msdn.microsoft.com/en-us/library/system.web.script.serialization.scriptignoreattribute.aspx">ScriptIgnoreAttribute</a></span>, and public indexed properties in these types are ignored.</p></td>
+                                                        <td><p>JavaScript object that uses JSON dictionary syntax. A special metadata property named "__type" is included to ensure correct deserialization. Make sure that public instance properties have get and set accessors to ensure correct deserialization.</p></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><p><span><a href="http://msdn.microsoft.com/en-us/library/system.guid.aspx">Guid</a></span></p></td>
+                                                        <td><p>String representation of a GUID</p></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><p><span><a href="http://msdn.microsoft.com/en-us/library/system.uri.aspx">Uri</a></span></p></td>
+                                                        <td><p>String representation of the return value of <span><a href="http://msdn.microsoft.com/en-us/library/system.uri.getcomponents.aspx">GetComponents</a></span> </p></td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div rel="Examples">
+                                    <div class="LW_CollapsibleArea_TitleDiv">
+                                        <div>
+                                            <a href="javascript:void(0)" class="LW_CollapsibleArea_TitleAhref" title="Collapse"><span class="cl_CollapsibleArea_expanding LW_CollapsibleArea_Img"></span><span class="LW_CollapsibleArea_Title">Examples</span></a>
+                                            <div class="LW_CollapsibleArea_HrDiv">
+                                                <hr class="LW_CollapsibleArea_Hr" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="sectionblock">
+                                        <a id="exampleToggle"></a>
+                                        <p>The following example shows how to use the <span><span class="selflink">JavaScriptSerializer</span></span>
+                                            class to save and restore the state of an object by using JSON
+                                            serialization. This code uses a custom converter that is provided for
+                                            the <span><a href="http://msdn.microsoft.com/en-us/library/system.web.script.serialization.javascriptconverter.aspx">JavaScriptConverter</a></span>
+                                            class.</p>
+                                        <div>
+                                            <div id="code-snippet-2" class="codeSnippetContainer" xmlns="">
+                                                <div class="codeSnippetContainerTabs">
+                                                    <div class="codeSnippetContainerTabActive" dir="ltr"><a>C#</a></div><div class="codeSnippetContainerTab" dir="ltr"><a href="http://msdn.microsoft.com/en-us/library/system.web.script.serialization.javascriptserializer.aspx?cs-save-lang=1&amp;cs-lang=vb#code-snippet-2">VB</a></div>
+                                                </div>
+                                                <div class="codeSnippetContainerCodeContainer">
+                                                    <div class="codeSnippetToolBar">
+                                                        <div class="codeSnippetToolBarText">
+                                                            <a name="CodeSnippetCopyLink" style="display: none;" title="Copy to clipboard." href="javascript:if (window.epx.codeSnippet)window.epx.codeSnippet.copyCode('CodeSnippetContainerCode_6bf57c2a-fc81-41b4-8b81-293a2886658a');">Copy</a>
+                                                        </div>
+                                                    </div>
+                                                    <div id="CodeSnippetContainerCode_6bf57c2a-fc81-41b4-8b81-293a2886658a" class="codeSnippetContainerCode" dir="ltr">
+                                                        <div style="color:Black;"><pre>
+&lt;%@ Page Language=<span style="color:#A31515;">"C#"</span> %&gt;
+&lt;%@ Import Namespace=<span style="color:#A31515;">"System.Web.Script.Serialization"</span> %&gt;
+
+&lt;!DOCTYPE html PUBLIC <span style="color:#A31515;">"-//W3C//DTD XHTML 1.0 Transitional//EN"</span> <span style="color:#A31515;">"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"</span>&gt;
+
+&lt;script runat=<span style="color:#A31515;">"server"</span>&gt;
+
+    JavaScriptSerializer serializer;
+    <span style="color:Blue;">protected</span> <span style="color:Blue;">void</span> Page_Load(<span style="color:Blue;">object</span> sender, EventArgs e)
+    {
+        serializer = <span style="color:Blue;">new</span> JavaScriptSerializer();
+
+        <span style="color:Green;">// Register the custom converter.</span>
+        serializer.RegisterConverters(<span style="color:Blue;">new</span> JavaScriptConverter[] {
+            <span style="color:Blue;">new</span> System.Web.Script.Serialization.CS.ListItemCollectionConverter() });
+        <span style="color:Blue;">this</span>.SetFocus(TextBox1);
+    }
+
+    <span style="color:Blue;">protected</span> <span style="color:Blue;">void</span> saveButton_Click(<span style="color:Blue;">object</span> sender, EventArgs e)
+    {
+        <span style="color:Green;">// Save the current state of the ListBox control.</span>
+        SavedState.Text = serializer.Serialize(ListBox1.Items);
+        recoverButton.Enabled = <span style="color:Blue;">true</span>;
+        Message.Text = <span style="color:#A31515;">"State saved"</span>;
+    }
+
+    <span style="color:Blue;">protected</span> <span style="color:Blue;">void</span> recoverButton_Click(<span style="color:Blue;">object</span> sender, EventArgs e)
+    {
+        <span style="color:Green;">//Recover the saved items of the ListBox control.</span>
+        ListItemCollection recoveredList = serializer.Deserialize&lt;ListItemCollection&gt;(SavedState.Text);
+        ListItem[] newListItemArray = <span style="color:Blue;">new</span> ListItem[recoveredList.Count];
+        recoveredList.CopyTo(newListItemArray, 0);
+        ListBox1.Items.Clear();
+        ListBox1.Items.AddRange(newListItemArray);
+        Message.Text = <span style="color:#A31515;">"Last saved state recovered."</span>;
+    }
+
+    <span style="color:Blue;">protected</span> <span style="color:Blue;">void</span> clearButton_Click(<span style="color:Blue;">object</span> sender, EventArgs e)
+    {
+        <span style="color:Green;">// Remove all items from the ListBox control.</span>
+        ListBox1.Items.Clear();
+        Message.Text = <span style="color:#A31515;">"All items removed"</span>;
+    }
+
+    <span style="color:Blue;">protected</span> <span style="color:Blue;">void</span> ContactsGrid_SelectedIndexChanged(<span style="color:Blue;">object</span> sender, EventArgs e)
+    {
+        <span style="color:Green;">// Get the currently selected row using the SelectedRow property.</span>
+        GridViewRow row = ContactsGrid.SelectedRow;
+
+        <span style="color:Green;">// Get the ID of item selected.</span>
+        <span style="color:Blue;">string</span> itemId = ContactsGrid.DataKeys[row.RowIndex].Value.ToString();
+        ListItem newItem = <span style="color:Blue;">new</span> ListItem(row.Cells[4].Text, itemId);
+
+        <span style="color:Green;">// Check if the item already exists in the ListBox control.</span>
+        <span style="color:Blue;">if</span> (!ListBox1.Items.Contains(newItem))
+        {
+            <span style="color:Green;">// Add the item to the ListBox control.</span>
+            ListBox1.Items.Add(newItem);
+            Message.Text = <span style="color:#A31515;">"Item added"</span>;
+        }
+        <span style="color:Blue;">else</span>
+            Message.Text = <span style="color:#A31515;">"Item already exists"</span>;
+    }
+
+    <span style="color:Blue;">protected</span> <span style="color:Blue;">void</span> ContactsGrid_PageIndexChanged(<span style="color:Blue;">object</span> sender, EventArgs e)
+    {
+        <span style="color:Green;">//Reset the selected index.</span>
+        ContactsGrid.SelectedIndex = -1;
+    }
+
+    <span style="color:Blue;">protected</span> <span style="color:Blue;">void</span> searchButton_Click(<span style="color:Blue;">object</span> sender, EventArgs e)
+    {
+        <span style="color:Green;">//Reset indexes.</span>
+        ContactsGrid.SelectedIndex = -1;
+        ContactsGrid.PageIndex = 0;
+
+        <span style="color:Green;">//Set focus on the TextBox control.</span>
+        ScriptManager1.SetFocus(TextBox1);
+    }
+
+    <span style="color:Blue;">protected</span> <span style="color:Blue;">void</span> CheckBox1_CheckedChanged(<span style="color:Blue;">object</span> sender, EventArgs e)
+    {
+        <span style="color:Green;">// Show/hide the saved state string.        </span>
+        SavedState.Visible = CheckBox1.Checked;
+        StateLabel.Visible = CheckBox1.Checked;
+    }
+&lt;/script&gt;
+
+&lt;html xmlns=<span style="color:#A31515;">"http://www.w3.org/1999/xhtml"</span> &gt;
+&lt;head runat=<span style="color:#A31515;">"server"</span>&gt;
+    &lt;title&gt;Save/Recover state&lt;/title&gt;
+    &lt;style type=<span style="color:#A31515;">"text/css"</span>&gt;
+        body {  font: 11pt Trebuchet MS;
+                font-color: #000000;
+                padding-top: 72px;
+                text-align: center }
+
+        .text { font: 8pt Trebuchet MS }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;form id=<span style="color:#A31515;">"form1"</span> runat=<span style="color:#A31515;">"server"</span> defaultbutton=<span style="color:#A31515;">"searchButton"</span> defaultfocus=<span style="color:#A31515;">"TextBox1"</span>&gt;
+        &lt;h3&gt;
+            &lt;span style=<span style="color:#A31515;">"text-decoration: underline"</span>&gt;
+                                    Contacts Selection&lt;/span&gt;&lt;br /&gt;
+        &lt;/h3&gt;
+        &lt;asp:ScriptManager runat=<span style="color:#A31515;">"server"</span> ID=<span style="color:#A31515;">"ScriptManager1"</span> /&gt;
+        &lt;asp:UpdatePanel ID=<span style="color:#A31515;">"UpdatePanel1"</span> runat=<span style="color:#A31515;">"server"</span>&gt;
+            &lt;ContentTemplate&gt;
+                Type contact's first name:
+                &lt;asp:TextBox ID=<span style="color:#A31515;">"TextBox1"</span> runat=<span style="color:#A31515;">"server"</span> /&gt;
+                &lt;asp:Button ID=<span style="color:#A31515;">"searchButton"</span> runat=<span style="color:#A31515;">"server"</span> Text=<span style="color:#A31515;">"Search"</span> OnClick=<span style="color:#A31515;">"searchButton_Click"</span> /&gt;&amp;nbsp;
+                &lt;br /&gt;
+                &lt;br /&gt;
+                &lt;table border=<span style="color:#A31515;">"0"</span> width=<span style="color:#A31515;">"100%"</span>&gt;
+                    &lt;tr&gt;
+                        &lt;td style=<span style="color:#A31515;">"width:50%"</span> valign=<span style="color:#A31515;">"top"</span> align=<span style="color:#A31515;">"center"</span>&gt;
+                            &lt;b&gt;Search results:&lt;/b&gt;&lt;br /&gt;
+                            &lt;asp:GridView ID=<span style="color:#A31515;">"ContactsGrid"</span> runat=<span style="color:#A31515;">"server"</span> AutoGenerateColumns=<span style="color:#A31515;">"False"</span>
+                                CellPadding=<span style="color:#A31515;">"4"</span> DataKeyNames=<span style="color:#A31515;">"ContactID"</span> DataSourceID=<span style="color:#A31515;">"SqlDataSource1"</span>
+                                OnSelectedIndexChanged=<span style="color:#A31515;">"ContactsGrid_SelectedIndexChanged"</span> ForeColor=<span style="color:#A31515;">"#333333"</span> GridLines=<span style="color:#A31515;">"None"</span> AllowPaging=<span style="color:#A31515;">"True"</span> PageSize=<span style="color:#A31515;">"7"</span> OnPageIndexChanged=<span style="color:#A31515;">"ContactsGrid_PageIndexChanged"</span>&gt;
+                                &lt;Columns&gt;
+                                    &lt;asp:CommandField ShowSelectButton=<span style="color:#A31515;">"True"</span> ButtonType=<span style="color:#A31515;">"Button"</span> /&gt;
+                                    &lt;asp:BoundField DataField=<span style="color:#A31515;">"ContactID"</span> HeaderText=<span style="color:#A31515;">"ContactID"</span> SortExpression=<span style="color:#A31515;">"ContactID"</span> Visible=<span style="color:#A31515;">"False"</span> /&gt;
+                                    &lt;asp:BoundField DataField=<span style="color:#A31515;">"FirstName"</span> HeaderText=<span style="color:#A31515;">"FirstName"</span> SortExpression=<span style="color:#A31515;">"FirstName"</span> /&gt;
+                                    &lt;asp:BoundField DataField=<span style="color:#A31515;">"LastName"</span> HeaderText=<span style="color:#A31515;">"LastName"</span> SortExpression=<span style="color:#A31515;">"LastName"</span> /&gt;
+                                    &lt;asp:BoundField DataField=<span style="color:#A31515;">"EmailAddress"</span> HeaderText=<span style="color:#A31515;">"EmailAddress"</span> SortExpression=<span style="color:#A31515;">"EmailAddress"</span> /&gt;
+                                &lt;/Columns&gt;
+                                &lt;RowStyle BackColor=<span style="color:#A31515;">"#F7F6F3"</span> ForeColor=<span style="color:#A31515;">"#333333"</span> /&gt;
+                                &lt;HeaderStyle BackColor=<span style="color:#A31515;">"#5D7B9D"</span> Font-Bold=<span style="color:#A31515;">"True"</span> ForeColor=<span style="color:#A31515;">"White"</span> /&gt;
+                                &lt;AlternatingRowStyle BackColor=<span style="color:#A31515;">"White"</span> ForeColor=<span style="color:#A31515;">"#284775"</span> /&gt;
+                                &lt;FooterStyle BackColor=<span style="color:#A31515;">"#5D7B9D"</span> Font-Bold=<span style="color:#A31515;">"True"</span> ForeColor=<span style="color:#A31515;">"White"</span> /&gt;
+                                &lt;EditRowStyle BackColor=<span style="color:#A31515;">"#999999"</span> /&gt;
+                                &lt;SelectedRowStyle BackColor=<span style="color:#A31515;">"#E2DED6"</span> Font-Bold=<span style="color:#A31515;">"True"</span> ForeColor=<span style="color:#A31515;">"#333333"</span> /&gt;
+                                &lt;PagerStyle BackColor=<span style="color:#A31515;">"#284775"</span> ForeColor=<span style="color:#A31515;">"White"</span> HorizontalAlign=<span style="color:#A31515;">"Center"</span> /&gt;
+                                &lt;EmptyDataTemplate&gt;No data found.&lt;/EmptyDataTemplate&gt;
+                            &lt;/asp:GridView&gt;
+                            &lt;asp:SqlDataSource ID=<span style="color:#A31515;">"SqlDataSource1"</span> runat=<span style="color:#A31515;">"server"</span> ConnectionString=<span style="color:#A31515;">"&lt;%$ ConnectionStrings:AdventureWorksConnectionString %&gt;"</span>
+                                SelectCommand=<span style="color:#A31515;">"SELECT ContactID, FirstName, LastName, EmailAddress FROM Person.Contact WHERE (UPPER(FirstName) = UPPER(@FIRSTNAME))"</span> &gt;
+                                &lt;SelectParameters&gt;
+                                    &lt;asp:ControlParameter Name=<span style="color:#A31515;">"FIRSTNAME"</span> ControlId=<span style="color:#A31515;">"TextBox1"</span> Type=<span style="color:#A31515;">"String"</span> /&gt;
+                                &lt;/SelectParameters&gt;
+                            &lt;/asp:SqlDataSource&gt;
+                        &lt;/td&gt;
+                        &lt;td valign=<span style="color:#A31515;">"top"</span>&gt;
+                            &lt;b&gt;Contacts list:&lt;/b&gt;&lt;br /&gt;
+                        &lt;asp:ListBox ID=<span style="color:#A31515;">"ListBox1"</span> runat=<span style="color:#A31515;">"server"</span> Height=<span style="color:#A31515;">"200px"</span> Width=<span style="color:#A31515;">"214px"</span> /&gt;&lt;br /&gt;
+                        &lt;asp:Button ID=<span style="color:#A31515;">"saveButton"</span> runat=<span style="color:#A31515;">"server"</span> Text=<span style="color:#A31515;">"Save state"</span> OnClick=<span style="color:#A31515;">"saveButton_Click"</span> ToolTip=<span style="color:#A31515;">"Save the current state of the list"</span> /&gt;
+                        &lt;asp:Button ID=<span style="color:#A31515;">"recoverButton"</span> runat=<span style="color:#A31515;">"server"</span> Text=<span style="color:#A31515;">"Recover saved state"</span> OnClick=<span style="color:#A31515;">"recoverButton_Click"</span> Enabled=<span style="color:#A31515;">"false"</span> ToolTip=<span style="color:#A31515;">"Recover the last saved state"</span> /&gt;
+                        &lt;asp:Button ID=<span style="color:#A31515;">"clearButton"</span> runat=<span style="color:#A31515;">"server"</span> Text=<span style="color:#A31515;">"Clear"</span> OnClick=<span style="color:#A31515;">"clearButton_Click"</span> ToolTip=<span style="color:#A31515;">"Remove all items from the list"</span> /&gt;&lt;br /&gt;
+                            &lt;br /&gt;
+                            &lt;asp:CheckBox ID=<span style="color:#A31515;">"CheckBox1"</span> runat=<span style="color:#A31515;">"server"</span> Checked=<span style="color:#A31515;">"True"</span> OnCheckedChanged=<span style="color:#A31515;">"CheckBox1_CheckedChanged"</span>
+                                Text=<span style="color:#A31515;">"Show saved state"</span> AutoPostBack=<span style="color:#A31515;">"True"</span> /&gt;&lt;/td&gt;
+                    &lt;/tr&gt;
+                    &lt;tr&gt;
+                        &lt;td colspan=<span style="color:#A31515;">"2"</span>&gt;
+                            &lt;br /&gt;
+                            &lt;br /&gt;
+                            &amp;nbsp;&amp;nbsp;
+                            &lt;hr /&gt;
+                            Message: &lt;asp:Label ID=<span style="color:#A31515;">"Message"</span> runat=<span style="color:#A31515;">"server"</span> ForeColor=<span style="color:#A31515;">"SteelBlue"</span> /&gt;&amp;nbsp;&amp;nbsp;&lt;br /&gt;
+                            &lt;asp:Label ID=<span style="color:#A31515;">"StateLabel"</span> runat=<span style="color:#A31515;">"server"</span> Text=<span style="color:#A31515;">"State:"</span>&gt;&lt;/asp:Label&gt;
+                            &lt;asp:Label ID=<span style="color:#A31515;">"SavedState"</span> runat=<span style="color:#A31515;">"server"</span>/&gt;&lt;br /&gt;
+                        &lt;/td&gt;
+                    &lt;/tr&gt;
+                &lt;/table&gt;
+            &lt;/ContentTemplate&gt;
+        &lt;/asp:UpdatePanel&gt;
+        &lt;asp:UpdateProgress ID=<span style="color:#A31515;">"UpdateProgress1"</span> runat=<span style="color:#A31515;">"server"</span>&gt;
+            &lt;ProgressTemplate&gt;
+                &lt;asp:Image ID=<span style="color:#A31515;">"Image1"</span> runat=<span style="color:#A31515;">"server"</span> ImageUrl=<span style="color:#A31515;">"..\images\spinner.gif"</span> /&gt;&amp;nbsp;Processing...
+            &lt;/ProgressTemplate&gt;
+        &lt;/asp:UpdateProgress&gt;
+    &lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div rel="Version Information">
+                                    <div class="LW_CollapsibleArea_TitleDiv">
+                                        <div>
+                                            <a href="javascript:void(0)" class="LW_CollapsibleArea_TitleAhref" title="Collapse"><span class="cl_CollapsibleArea_expanding LW_CollapsibleArea_Img"></span><span class="LW_CollapsibleArea_Title">Version Information</span></a>
+                                            <div class="LW_CollapsibleArea_HrDiv">
+                                                <hr class="LW_CollapsibleArea_Hr" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="sectionblock">
+                                        <a id="versionsTitleToggle"></a>
+                                        <h4 class="subHeading">.NET Framework</h4>
+                                        Supported in: 4.5, 4, 3.5<br />
+                                    </div>
+                                </div>
+                                <div rel="Platforms">
+                                    <div class="LW_CollapsibleArea_TitleDiv">
+                                        <div>
+                                            <a href="javascript:void(0)" class="LW_CollapsibleArea_TitleAhref" title="Collapse"><span class="cl_CollapsibleArea_expanding LW_CollapsibleArea_Img"></span><span class="LW_CollapsibleArea_Title">Platforms</span></a>
+                                            <div class="LW_CollapsibleArea_HrDiv">
+                                                <hr class="LW_CollapsibleArea_Hr" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="sectionblock">
+                                        <a id="platformsTitleToggle"></a>
+                                        <p>Windows 8, Windows Server 2012, Windows 7, Windows Vista SP2, Windows Server
+                                            2008 (Server Core Role not supported), Windows Server 2008 R2 (Server Core
+                                            Role supported with SP1 or later; Itanium not supported)</p>
+                                        <p>  <span>The .NET Framework does not support all versions of every platform.
+                                            For a list of the supported versions, see <a href="http://msdn.microsoft.com/en-us/library/8z6watww.aspx">.NET
+                                            Framework System Requirements</a>.</span> </p>
+                                    </div>
+                                </div>
+                                <div rel="Thread Safety">
+                                    <div class="LW_CollapsibleArea_TitleDiv">
+                                        <div>
+                                            <a href="javascript:void(0)" class="LW_CollapsibleArea_TitleAhref" title="Collapse"><span class="cl_CollapsibleArea_expanding LW_CollapsibleArea_Img"></span><span class="LW_CollapsibleArea_Title">Thread Safety</span></a>
+                                            <div class="LW_CollapsibleArea_HrDiv">
+                                                <hr class="LW_CollapsibleArea_Hr" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="sectionblock">
+                                        <a id="threadSafetyToggle"></a>Any public <span class="input">static</span>
+                                            (<span class="input">Shared</span> in Visual Basic)  members of this type
+                                            are thread safe. Any instance members are not guaranteed to be thread safe.
+                                    </div>
+                                </div>
+                                <div rel="See Also">
+                                    <div class="LW_CollapsibleArea_TitleDiv">
+                                        <div>
+                                            <a href="javascript:void(0)" class="LW_CollapsibleArea_TitleAhref" title="Collapse"><span class="cl_CollapsibleArea_expanding LW_CollapsibleArea_Img"></span><span class="LW_CollapsibleArea_Title">See Also</span></a>
+                                            <div class="LW_CollapsibleArea_HrDiv">
+                                                <hr class="LW_CollapsibleArea_Hr" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="sectionblock">
+                                        <a id="seeAlsoToggle"></a>
+                                        <h4 class="subHeading">Reference</h4>
+                                        <div class="seeAlsoStyle">
+                                            <a href="http://msdn.microsoft.com/en-us/library/system.web.script.serialization.aspx">System.Web.Script.Serialization Namespace</a>
+                                        </div>
+                                        <h4 class="subHeading">Other Resources</h4>
+                                        <div class="seeAlsoStyle">
+                                            <span><a href="http://msdn.microsoft.com/en-us/library/bb515101.aspx">Using
+                                                Web Services in ASP.NET AJAX</a></span>
+                                        </div>
+                                        <div class="seeAlsoStyle">
+                                            <span><a href="http://msdn.microsoft.com/en-us/library/bb398995.aspx">Calling
+                                                Web Services from Client Script in ASP.NET AJAX</a></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="contentFeedback">
+                    <form method="post" action="/en-us/library/feedback/add/system.web.script.serialization.javascriptserializer.aspx">
+                        <input name="__RequestVerificationToken" type="hidden" value="3mn9TgxMWoFfHaptwjo7pz_l16-WFo0IuzBn_m9r_7F50RmKO94XR2nBtn4ykzXxh2VI6YSWVBWnNiS5YbwRcc9jXHHDBLqXdsS4gyDI1CEglfFwg7YrRgS_yLxtvorpYo4peg2" />
+                        <div id="contentFeedbackContainer">
+                            <div class="FeedbackTitleContainer">
+                                <a name="feedback"></a>
+                                Did you find this helpful?
+                                <input id="rdIsUsefulYes" name="rdIsUseful" type="radio" value="1" onclick="toggleContentFeedback('Yes');" /><label for="rdIsUsefulYes">Yes</label>
+                                <input id="rdIsUsefulNo" name="rdIsUseful" type="radio" value="0" onclick="toggleContentFeedback('No');" /><label for="rdIsUsefulNo">No</label>
+                            </div>
+                            <div id="contentFeedbackQAContainer">
+                                <div id="feedbackListNoContainer" class="FeedbackListContainer">
+                                    <div>
+                                        <input id="chkbxNo201" name="chkbxNo" type="checkbox" value="201" />
+                                        <label for="chkbxNo201">Not accurate</label>
+                                    </div>
+                                    <div>
+                                        <input id="chkbxNo202" name="chkbxNo" type="checkbox" value="202" />
+                                        <label for="chkbxNo202">Not enough depth</label>
+                                    </div>
+                                    <div>
+                                        <input id="chkbxNo203" name="chkbxNo" type="checkbox" value="203" />
+                                        <label for="chkbxNo203">Need more code examples</label>
+                                    </div>
+                                </div>
+                                <div class="FeedbackTellUsMoreContainer">
+                                    <textarea id="feedbackText" name="feedbackText" class="TellUsMoreTextBoxSearchLoaded" onfocus="WatermarkFocus(this, 'Tell us more...', 'TellUsMoreTextBoxSearch')" onblur="WatermarkBlur(this, 'Tell us more...', 'TellUsMoreTextBoxSearchLoaded')" onmouseover="TextBoxCharactersCounter(this, document.getElementById('feedbackTextCounter'), 1500)" onkeydown="TextBoxCharactersCounter(this, document.getElementById('feedbackTextCounter'), 1500)" onkeyup="TextBoxCharactersCounter(this, document.getElementById('feedbackTextCounter'), 1500)">Tell us more...</textarea>
+                                </div>
+                                <span class="counter">(<span id="feedbackTextCounter">1500</span> characters remaining)</span>
+                                <input type="hidden" id="returnUrl" name="returnUrl" value="http://msdn.microsoft.com/en-us/library/system.web.script.serialization.javascriptserializer.aspx" />
+                                <input type="submit" id="submit" value="Submit" title="Click to Submit Feedback" onclick="WatermarkOnSubmit(document.getElementById('feedbackText'), 'Tell us more...', 'TellUsMoreTextBoxSearch')" />
+                                <div style="clear: both;"></div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+            <div id="ux-footer" class="IE IE6 ltr">
+                <div id="ux-footer-cols">
+                    <div class="TocNavigation">
+                        <div class="linksContainer">
+                            <ul class="links" style="width: 19.99%;">
+                                <li class="linksTitle"><a href="http://msdn.microsoft.com/vstudio/default.aspx" title="Tools">Tools</a></li>
+                                <li><a href="http://msdn.microsoft.com/vstudio/default.aspx" title="Visual Studio">Visual Studio</a></li>
+                                <li><a href="http://expression.microsoft.com/default.aspx" title="Expression">Expression</a></li>
+                                <li><a href="http://www.asp.net/" title="ASP.NET">ASP.NET</a></li>
+                                <li><a href="http://msdn.microsoft.com/silverlight/" title="Silverlight">Silverlight</a></li>
+                            </ul>
+                            <ul class="links" style="width: 19.99%;">
+                                <li class="linksTitle"><a href="http://msdn.microsoft.com/vstudio/default.aspx" title="Platforms">Platforms</a></li>
+                                <li><a href="http://msdn.microsoft.com/vstudio/default.aspx" title="Visual Studio">Visual Studio</a></li>
+                                <li><a href="http://msdn.microsoft.com/windows/apps/default.aspx" title="Windows">Windows</a></li>
+                                <li><a href="https://dev.windowsphone.com/" title="Windows Phone">Windows Phone</a></li>
+                                <li><a href="http://www.windowsazure.com/en-us/develop/overview/" title="Windows Azure">Windows Azure</a></li>
+                                <li><a href="http://msdn.microsoft.com/office/default.aspx" title="Office">Office</a></li>
+                            </ul>
+                            <ul class="links" style="width: 19.99%;">
+                                <li class="linksTitle"><a href="http://msdn.microsoft.com/windowsserver/default.aspx" title="Servers">Servers</a></li>
+                                <li><a href="http://msdn.microsoft.com/windowsserver/default.aspx" title="Windows Server">Windows Server</a></li>
+                                <li><a href="http://msdn.microsoft.com/exchange/default.aspx" title="Exchange Server">Exchange Server</a></li>
+                                <li><a href="http://msdn.microsoft.com/sqlserver/default.aspx" title="SQL Server">SQL Server</a></li>
+                                <li><a href="http://msdn.microsoft.com/biztalk/default.aspx" title="Biz Talk Server">Biz Talk Server</a></li>
+                                <li><a href="http://msdn.microsoft.com/data/default.aspx" title="Data">Data</a></li>
+                            </ul>
+                            <ul class="links" style="width: 19.99%;">
+                                <li class="linksTitle"><a href="http://msdn.microsoft.com/subscriptions/default.aspx" title="Developer resources">Developer resources</a></li>
+                                <li><a href="http://msdn.microsoft.com/subscriptions/default.aspx" title="MSDN Subscriptions">MSDN Subscriptions</a></li>
+                                <li><a href="http://msdn.microsoft.com/magazine/default.aspx" title="MSDN Magazine">MSDN Magazine</a></li>
+                                <li><a href="http://msdn.microsoft.com/aa570311" title="MSDN Flash Newsletter">MSDN Flash Newsletter</a></li>
+                                <li><a href="http://code.msdn.microsoft.com/" title="Code Samples">Code Samples</a></li>
+                                <li><a href="http://social.msdn.microsoft.com/forums/en-us/categories" title="MSDN Forums">MSDN Forums</a></li>
+                            </ul>
+                            <ul class="links" style="width: 19.99%;">
+                                <li class="linksTitle"><a href="http://msdn.microsoft.com/evalcenter/default.aspx" title="Get started for free">Get started for free</a></li>
+                                <li><a href="http://msdn.microsoft.com/evalcenter/default.aspx" title="MSDN evaluation center">MSDN evaluation center</a></li>
+                                <li><a href="http://www.microsoft.com/bizspark/" title="BizSpark (for startups)">BizSpark (for startups)</a></li>
+                                <li><a href="https://www.dreamspark.com/" title="DreamSpark (for students)">DreamSpark (for students)</a></li>
+                                <li><a href="https://www.microsoft.com/faculty" title="School faculty">School faculty</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="ux-footer-clear"></div>
+                <div id="footerRight">
+                    <div id="FooterLogoContainer"><div id="FooterLogo"></div></div>
+                    <div id="FooterCopyright">© 2013 Microsoft. All rights reserved.</div>
+                </div>
+                <div id="footerLeft">
+                    <div id="footerGroup">
+                        <div id="LinkGroup">
+                            <div id="Links1">
+                                <div data-fragmentName="FooterLinks" id="Fragment_FooterLinks" xmlns="http://www.w3.org/1999/xhtml">
+                                    <div class="LinkList">
+                                        <div class="Links">
+                                            <ul class="LinkColumn horizontal">
+                                                <li>
+                                                    <a href="http://msdn.microsoft.com/en-us/newsletter.aspx" xmlns="http://www.w3.org/1999/xhtml">Newsletter</a>
+                                                </li>
+                                                <li>
+                                                    <div class="LinksDivider">|</div>
+                                                    <a href="http://msdn.microsoft.com/en-us/subscriptions/aa948875.aspx" xmlns="http://www.w3.org/1999/xhtml">Contact Us</a>
+                                                </li>
+                                                <li>
+                                                    <div class="LinksDivider">|</div>
+                                                    <a href="http://privacy.microsoft.com/en-us/default.mspx" xmlns="http://www.w3.org/1999/xhtml">Privacy Statement</a>
+                                                </li>
+                                                <li>
+                                                    <div class="LinksDivider">|</div>
+                                                    <a href="http://msdn.microsoft.com/en-US/cc300389.aspx" xmlns="http://www.w3.org/1999/xhtml">Terms of Use</a>
+                                                </li>
+                                                <li>
+                                                    <div class="LinksDivider">|</div>
+                                                    <a href="http://www.microsoft.com/About/Legal/EN/US/IntellectualProperty/Trademarks/EN-US.aspx" xmlns="http://www.w3.org/1999/xhtml">Trademarks</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="Feedback">
+                            <div class="feedbackListItem">
+                                <div class="LinksDivider">|</div>
+                                <div class="LinkColumn">
+                                    <div class="FooterSiteFeedBack">
+                                        <a id="SiteFeedbackLinkOpener" href="javascript:void(0)">
+                                            <span class="FeedbackButton clip20x21" id="FeedbackButton">
+                                                <img id="feedBackImg" class="cl_footer_feedback_icon" src="http://i3.msdn.microsoft.com/Areas/Epx/Content/Images/ImageSprite.png" alt="Site Feedback" />
+                                            </span>
+                                            Site Feedback
+                                        </a>
+                                        <div id="SiteFeedbackLinkContainer" class="SiteFeedbackLinkContainer" style="display: none;">
+                                            <form id="siteFeedbackForm" method="post" action="http://msdn.microsoft.com/en-us/library/feedback/add/system.web.script.serialization.javascriptserializer(v=msdn.10).aspx">
+                                                <div class="SiteFeedbackLinkTitleContainer">
+                                                    <div class="SiteFeedbackLinkTitle">
+                                                        Site Feedback
+                                                    </div>
+                                                    <div class="SiteFeedbackLinkCancel">
+                                                        <a id="SiteFeedbackLinkCloser" href="javascript:void(0)">x</a>
+                                                    </div>
+                                                </div>
+                                                <div class="SiteFeedbackLinkData">
+                                                    <div class="SiteFeedbackLinkInfoText">
+                                                        Tell us about your experience...
+                                                    </div>
+                                                    <div class="QuestionText">
+                                                        Did the page load quickly?
+                                                    </div>
+                                                    <div class="AnswerText">
+                                                        <span>
+                                                            Yes
+                                                            <span><input id="searchBox" name="searchBox" type="radio" value="1" /></span>
+                                                        </span>
+                                                        <span>
+                                                            No
+                                                            <span><input id="searchBox" name="searchBox" type="radio" value="0" /></span>
+                                                        </span>
+                                                    </div>
+                                                    <div class="QuestionText">
+                                                        Do you like the page design?
+                                                    </div>
+                                                    <div class="AnswerText">
+                                                        <span>
+                                                            Yes
+                                                            <span><input id="tabbedCode" name="tabbedCode" type="radio" value="1" /></span>
+                                                        </span>
+                                                        <span>
+                                                            No
+                                                            <span><input id="tabbedCode" name="tabbedCode" type="radio" value="0" /></span>
+                                                        </span>
+                                                    </div>
+                                        <div class="QuestionText">
+                                            Tell us more
+                                        </div>
+                                        <div class="SiteFeedbackLinkTextAreaContainer">
+                                            <textarea id="feedbackText" data-maxlength="4000" name="feedbackText" cols="25" rows="5" class="SiteFeedbackLinkTextArea"></textarea>
+
+                                            <textarea id="feedbackDescription" name="feedbackDescription" cols="25" rows="10" style="display: none;">Enter description here.</textarea>
+                                            <input type="hidden" id="feedbackPriority" name="feedbackPriority" value="" />
+                                            <input type="hidden" id="feedbackSourceUrl" name="feedbackSourceUrl" value="" />
+                                            <input type="hidden" id="ClientIP" name="ClientIP" value="" />
+                                            <input type="hidden" id="ClientOS" name="ClientOS" value="" />
+                                            <input type="hidden" id="ClientBrowser" name="ClientBrowser" value="" />
+                                            <input type="hidden" id="ClientTime" name="ClientTime" value="" />
+                                            <input type="hidden" id="ClientTimeZone" name="ClientTimeZone" value="" />
+
+                                        </div>
+                                        <div>
+                                            <input id="siteFeedbackSubmit" type="submit" value="Send" class="SiteFeedbackLinkSubmit" />
+                                        </div>
+                                    </div>
+                                    <input type="hidden" id="returnUrl" name="returnUrl" value="http://msdn.microsoft.com/en-us/library/system.web.script.serialization.javascriptserializer.aspx" />
+                                </form>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="clear:both"></div>
+        <div id="Links2"></div>
+    </div>
+</div>
+
+
+<div class="footerPrintView">
+    <div class="footerCopyrightPrintView">© 2013 Microsoft. All rights reserved.</div>
+</div>
+
+
+
+
+
+<input id="tocPaddingPerLevel" type="hidden" value="17" />
+
+
+
+<input id="MtpsDevice" type="hidden" value="Default" />
+
+
+<![CDATA[ Third party scripts and code linked to or referenced from this website are licensed to you by the parties that own such code, not by Microsoft.  See ASP.NET Ajax CDN Terms of Use – http://www.asp.net/ajaxlibrary/CDN.ashx. ]]>
+
+
+
+
+
+
+
+
+
+
+
+
+<noscript><div><img alt="DCSIMG" id="Img1" width="1" height="1" src="http://m.webtrends.com/dcsmgru7m99k7mqmgrhudo0k8_8c6m/njs.gif?dcsuri=/nojavascript&amp;WT.js=No" /></div></noscript>
+
+
+
+
+
+
+
+
+
+<noscript>
+    <a href="http://www.omniture.com" title="Web Analytics">
+        <img src="//msstonojsmsdn.112.2o7.net/b/ss/msstonojsmsdn/1/H.20.2--NS/0" height="1" width="1" border="0" alt="" />
+    </a>
+</noscript>
+
+
+
+
+<div id="globalRequestVerification">
+    <input name="__RequestVerificationToken" type="hidden" value="odyVhNeObfT5kssFIVZO-lioq52qN2HJyJqM0sR1lYzOVVyRpOyGd7Et0_EZcVo2_kW8ghlw6luE7RDBn8Rxb5j4iAdJJc5PWjmSNve8sIhO9dOHQ1n7_rNh_yqYCaB_gbgYhA2" />
+</div>
+
+
+</div>
+<!--
+<xscript type="text/javascript" class="mtps-injected">
+    /*<![CDATA[*/
+    (function(window,document){"use strict";function preload(scripts){for(var result=[],script,e,i=0;i<scripts.length;i++)script=scripts[i],script.hasOwnProperty("url")&&(e=document.createElement("script"),e.src=script.url,script.throwaway=e),result.push(script);return result}function inject(scripts,index){var script,elem;if(index>=scripts.length){delete mtps.injectScripts;return}script=scripts[index],elem=document.createElement("script"),elem.className="mtps-injected",elem.async=!1;var isLoaded=!1,timeoutId=0,injectNextFnName="",injectNext=elem.onerror=function(){isLoaded||(isLoaded=!0,inject(scripts,index+1),window.clearTimeout(timeoutId),elem.onload=elem.onerror=elem.onreadystatechange=null,injectNextFnName&&delete mtps[injectNextFnName],elem.removeEventListener&&elem.removeEventListener("load",injectNext,!1))};elem.addEventListener?elem.addEventListener("load",injectNext,!1):elem.readyState==="uninitialized"?elem.onreadystatechange=function(){(this.readyState==="loaded"||this.readyState==="complete")&&injectNext()}:elem.onload=injectNext,script.hasOwnProperty("url")?(timeoutId=window.setTimeout(injectNext,12e4),elem.src=script.url):(injectNextFnName="_injectNextScript_"+index,mtps[injectNextFnName]=injectNext,timeoutId=window.setTimeout(injectNext,2e3),elem.text="try {\n"+script.txt+"\n} finally { MTPS."+injectNextFnName+" && MTPS."+injectNextFnName+"(); }"),parent.appendChild(elem)}var mtps=window.MTPS||(window.MTPS={}),parent=document.getElementsByTagName("head")[0];mtps.injectScripts=function(scripts){inject(preload(scripts),0)}})(window,document);
+    MTPS.injectScripts([
+        { txt: "/**/\r\n(window.MTPS || (window.MTPS = {})).cdnDomains || (window.MTPS.cdnDomains = { \r\n\t\"image\": \"http://i.msdn.microsoft.com\", \r\n\t\"js\": \"http://i2.msdn.microsoft.com\", \r\n\t\"css\": \"http://i3.msdn.microsoft.com\"\r\n});\r\n/**/" },
+        { url: "http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js" },
+        { txt: "//\n  var literalNormalizedUrl = \u0027/en-us/library/bb337495(d=default,l=en-us,v=vs.110).aspx\u0027;\n  var wt_nvr_ru = \u0027WT_NVR_RU\u0027;\n  var wt_fpcdom = \u0027.microsoft.com\u0027;\n  var wt_domlist = \u0027msdn.microsoft.com\u0027;\n  var wt_pathlist = \u0027\u0027;\n  var wt_paramlist = \u0027DCSext.mtps_devcenter\u0027;\n  var wt_siteid = \u0027MSDN\u0027;\n  var gDomain = \u0027m.webtrends.com\u0027;\n  var gDcsId = \u0027dcsmgru7m99k7mqmgrhudo0k8_8c6m\u0027;\n  var gFpc = \u0027WT_FPC\u0027;\n\n\n\n  if (document.cookie.indexOf(gFpc + \"=\") == -1) {\n    var wtidJs = document.createElement(\"script\");\n    wtidJs.src = \"//\" + gDomain + \"/\" + gDcsId + \"/wtid.js\";\n    document.getElementsByTagName(\"head\")[0].appendChild(wtidJs);\n  }\n\n\n\n  var detectedLocale = \u0027en-us\u0027;\n  var wtsp = \u0027msdnlib_dotnet\u0027;\n  var gTrackEvents = \u00270\u0027;\n/**/" },
+        { txt: "/**/\n  var omni_guid = \"e7eea792-d8f9-4bf1-add3-72d00ebcd4ee\";\n/**/" },
+        { url: "http://i2.msdn.microsoft.com/Combined.js?resources=0:Utilities,0:Topic,1:webtrendsscript,2:omni_rsid_MSDN,3:SearchBox;/Areas/Epx/Content/Scripts:0,/Areas/Global/Content/Webtrends/resources:1,/Areas/Global/Content/Omniture/resources/MSDN:2,/Areas/Epx/Themes/Base/Content:3\u0026amp;hashKey=5982499A7F75BAC5491807268AEC2A90" },
+        { url: "http://i4.services.social.microsoft.com/search/Widgets/SearchBox.jss?boxid=HeaderSearchTextBox\u0026btnid=HeaderSearchButton\u0026brand=MSDN\u0026loc=en-us\u0026watermark=MSDN" },
+        { url: "http://i2.msdn.microsoft.com/Combined.js?resources=0:Toc,0:NavigationResize,1:FeedbackCounter;/Areas/Epx/Library/Content:0,/Areas/Epx/Shared/Content:1\u0026amp;hashKey=FDB93402CDFAD2D4B6081CC6F3443B00" },
+        { txt: "MTPS = window.MTPS || {}; MTPS.LocalizedStrings = window.MTPS.LocalizedStrings || {}; MTPS.LocalizedStrings.ExpandButtonTooltip = \u0027Expand\u0027; MTPS.LocalizedStrings.CollapseButtonTooltip = \u0027Collapse\u0027;" },
+        { url: "http://i2.msdn.microsoft.com/Combined.js?resources=0:Feedback,1:SiteFeedbackLink,1:CodeSnippet,1:TopicNotInScope,1:CollapsibleArea,1:VersionSelector,1:SurveyBroker;/Areas/Epx/Shared/Content:0,/Areas/Epx/Content/Scripts:1\u0026amp;hashKey=3FE4B697FEB162FA3B90C8FCC3EF171F" },
+        { txt: "$(document).ready(function() {\n        try {\n            var token = $(\"#globalRequestVerification input[name=\u0027__RequestVerificationToken\u0027]\").clone();\n            $(\"#siteFeedbackForm\").append(token);\n        } catch(err) {\n            \n        }\n    });" }
+    ]);
+
+    /*]]>*/
+</xscript>
+-->
+<script type="text/javascript">
+    $(function(){
+        var t = $("#syntaxTabs");
+        $("div.tabs").tabs();
+
+        var defaultOptions = {
+            columns: [
+                { header: "Name", displayField: "fullName", displayMask: "<a href='#editUser' rel='{1}'>{0}</a>", linkField: "awesome", linkMask: "<span class='demo-awesome-{0}'>{1}</span>" },
+                { header: "E-Mail Address", displayField: "email", allowFilter: false },
+                { header: "Sex", displayField: "sex", allowSort: false, allowFilterSelect: false },
+                { header: "Rating", displayField: "rating", dataType: "int" },
+                { header: "Joined", displayField: "joined", dataType: "date" },
+                { header: "Awesome?", displayField: "awesome", displayMask: "Am I awesome? {0}" }
+            ],
+            data: [
+                { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: 1, joined: "01/01/2012", awesome: true },
+                { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: 10, joined: "01/01/2011", awesome: true },
+                { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: 1.5, joined: "01/31/2012", awesome: true },
+                { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: -1, joined: "02/01/2012", awesome: true },
+                { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: 32, joined: "12/01/2010", awesome: true },
+                { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: 2, joined: "11/01/2012", awesome: true },
+                { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: 7, joined: "10/01/2012", awesome: true },
+                { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: 41, joined: "2/29/2012", awesome: true },
+                { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: 14, joined: "2/28/2012", awesome: true },
+                { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: 4, joined: "01/02/2012", awesome: true },
+                { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: .4, joined: "01/04/2012", awesome: false },
+                { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: 2, joined: "01/03/2012", awesome: true },
+                { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: 1, joined: "01/01/2012", awesome: true },
+                { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: 10, joined: "01/01/2011", awesome: true },
+                { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: 1.5, joined: "01/31/2012", awesome: true },
+                { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: -1, joined: "02/01/2012", awesome: true },
+                { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: 32, joined: "12/01/2010", awesome: true },
+                { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: 2, joined: "11/01/2012", awesome: true },
+                { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: 7, joined: "10/01/2012", awesome: true },
+                { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: 41, joined: "2/29/2012", awesome: true },
+                { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: 14, joined: "2/28/2012", awesome: true },
+                { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: 4, joined: "01/02/2012", awesome: true },
+                { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: .4, joined: "01/04/2012", awesome: false },
+                { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: 2, joined: "01/03/2012", awesome: true },
+                { fullName: "Ellen Cornillon", email: "ecornillon@mac.com", sex: "female", rating: 2, joined: "01/01/2012", awesome: true }
+            ],
+            noDataMessage: 'User not found'
+        };
+        $("#grid").talxGrid(defaultOptions);
+        $("#grid2").talxGrid(defaultOptions);
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,70 @@
+.clearfix:after {
+	content: ".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}
+
+.clearfix { display: inline-block; }
+
+/* Hides from IE-mac \*/
+* html .clearfix { height: 1%; }
+.clearfix { display: block; }
+/* End hide from IE-mac */
+
+body { font-family: "Trebuchet MS", "Helvetica", "Arial", "Verdana", "sans-serif"; font-size: 10px;}
+.normal { width: 856px; }
+#demo-header { float: left; width: 100%; border-bottom: 1px solid #eee; }
+#demo-header h2 { clear: left; font-size: 32px; padding: 0 0 5px; }
+#demo-header h2, #demo-header h4  { float: left; width: 50%; }
+h2,h3,h4 { margin: 0; font-weight: normal; }
+#demo-config { clear: left; padding: 20px 0 0; }
+#demo-frame-wrapper { float: left; width: 620px; }
+p#demo-link { float: right; padding: 0 0 5px; margin: 0;}
+#demo-frame-wrapper p { font-size: 11px; }
+#demo-frame-wrapper .ui-icon { width: 16px; height: 16px; background-image: url(themes/base/images/ui-icons_222222_256x240.png); }
+#demo-frame-wrapper p span { float: left; margin-right: 5px; }
+#demo-frame { clear: right; width: 620px; height: 300px; border: 1px solid #ddd; overflow: auto; position: relative; }            
+#demo-frame .demo { padding: 5px; }
+#demo-config-menu { float: right; width: 150px; }
+.demos-nav, .demos-nav dt, .demos-nav dd, .demos-nav ul, .demos-nav li { margin: 0; padding: 0; }
+#demo-config-menu h4 { font-size: 13px; color: #666; font-weight: normal; border: 0; padding-left: 18px; }
+h4 { padding-bottom: 21px; border-bottom: 1px dashed #999; }
+#demo-config-menu ul { list-style: none; padding: 0; margin: 0;}
+#demo-config-menu li.demo-config-on { background: url(images/demo-config-on-tile.gif) repeat-x left center;}
+#demo-config-menu li.demo-config-on a:link, #demo-config-menu li.demo-config-on a:visited, 
+#demo-config-menu li.demo-config-on a:hover, #demo-config-menu li.demo-config-on a:active
+    { background: url(images/demo-config-on.gif) no-repeat left; padding-left: 18px; color: #ffffff; border: 0; margin-left: -10px; margin-bottom: 0; }
+#demo-config-menu li { font-size: 11px; padding: 0 0 0 10px; margin: 3px 0; zoom: 1; }
+li { display: list-item; }
+#demo-config-menu li a:link,#demo-config-menu li a:visited { display: block; padding: 1px 9px 4px; border-bottom: 1px dotted #b3b3b3;}
+.demos-nav a:link, .demos-nav a:visited, #demo-notes a:link, #demo-notes a:visited, 
+#demo-source a:link, #demo-source a:visited { color: #1b75bb;  text-decoration: none;}
+#demo-notes { clear: both; width: 506px; color: #666; padding: 15px 0 10px 14px; }
+#demo-notes p { font-style: italic; margin: 0 0 1em; }
+p { font-size: 12px;  }
+#demo-source { clear: both; }
+ul.UIAPIPlugin-toc { display: none; }
+h2.top-header { display: none; }
+#overview-main { float: left; width: 400px;}
+#overview-example { display: none; }
+#overview-dependencies { float: right; width: 200px; }
+ul.options-list, ul.events-list, ul.methods-list { list-style-type: none; margin: 0; padding: 0 }
+ul.options-list li, ul.events-list li, ul.methods-list li { clear: left; float: left; width: 100%; 
+	background: url(http://ui-dev.jquery.com/images/bg-demo-docs-param.gif) repeat-x 0 0; }
+.option-header, .event-header, .method-header { float: left; width: 100%; padding: 10px 0 8px; border-top: 1px solid #e6e6e6; }
+.option-description, .event-description, .method-description, .option-examples, .event-examples { padding: 0 10px 0 25px; }
+.option-examples, .event-examples { padding-bottom: 15px; }
+.option-header h3, .event-header h3, .method-header h3 { float: left; width: 30%; margin: 0 0 0 10px; padding: 0 0 0 15px; 
+	line-height: 1; background: url(http://ui-dev.jquery.com/images/demo-spindown-closed.gif) no-repeat left; cursor: pointer; }
+.ui-widget-content a:link, .ui-widget-content a:visited { color: #1b75bb; text-decoration: none; }
+.option-header dl, .event-header dl, .method-header dl { float: right; width: 65%; }
+.option-header dt.option-type-label, .method-header dt.method-signature-label { display: none; }
+.option-header dt, .event-header dt { color: #888; padding-right: .5em; float: left; font-size: 1.1em; }
+.option-header dd, .event-header dd { width: 35%; margin: 0; padding-right: 15px; float: left; font-size: 1.1em; }
+.option-description, .event-description, .method-description, .option-examples, .event-examples { padding: 0 10px 0 25px; }
+.toggle-docs-links { float: right; margin: 0 0.4em 0.4em; }
+.header-open h3 { background: url(http://ui-dev.jquery.com/images/demo-spindown-open.gif) no-repeat left; }
+.demo-awesome-true { color: green;font-weight: bold; }
+.demo-awesome-false { color: red;font-weight: normal; }

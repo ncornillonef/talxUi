@@ -50,10 +50,11 @@
             noDataMessage: 'User not found'
         };
         QUnit.testStart(function(){
-            ; // Nothing
+            $("#grid").remove();
+            $("#qunit").after("<div id='grid'></div>");
         });
         QUnit.testDone(function(){
-            ; // Nothing
+            $("#grid").remove();
         });
         test("Create Grid",2, function() {
             equal($("#grid div.ui-talxGrid").length, 0, "Not Yet Created");
@@ -62,7 +63,7 @@
 
             equal($("#grid div.ui-talxGrid").length, 1, "Created");
         });
-        test("method: destroy", 4, function(){
+        test("method: destroy", 3, function(){
             equal($("#grid div.ui-talxGrid").length, 0, "Not Yet Created");
 
             $("#grid").talxGrid(defaultOptions);
@@ -72,7 +73,6 @@
             $("#grid").talxGrid("destroy");
 
             equal($("#grid div.ui-talxGrid").length, 0, "Destroyed");
-            equal($("#grid").html().length, 0, "Empty")
         });
         test("method: select", 2, function(){
             var grd = $("#grid");
@@ -104,7 +104,7 @@
             grd.talxGrid("pageIndex", -31);
             equal($("#grid .ui-talxGrid-pager .ui-talxGrid-pagerPage-disabled").html(), "1", "Goes to page 1 (first page)");
         });
-        test("_onColumnSearchChange: text search enabled", function(){
+        test("UX: _onColumnSearchChange: text search enabled", 4, function(){
             $("#grid").talxGrid(defaultOptions);
             var tSearch = $("#grid input[name=txtSearch]");
             var sSearch = $("#grid select[name=ddlSearch]");
@@ -115,7 +115,7 @@
             equal(tSearch.attr("disabled"), undefined, "txtSearch now enabled");
             equal(sSearch.attr("disabled"), "disabled", "ddlSearch still disabled");
         });
-        test("_onColumnSearchChange: select search enabled", function(){
+        test("UX: _onColumnSearchChange: select search enabled", 4, function () {
             $("#grid").talxGrid(defaultOptions);
             var tSearch = $("#grid input[name=txtSearch]");
             var sSearch = $("#grid select[name=ddlSearch]");
@@ -126,16 +126,64 @@
             equal(tSearch.attr("disabled"), "disabled", "txtSearch still disabled");
             equal(sSearch.attr("disabled"), undefined, "ddlSearch now enabled");
         });
+        test("UX: searchInput: enter handling", 3, function () {
+            $("#grid").talxGrid(defaultOptions);
+            var tSearch = $("#grid input[name=txtSearch]");
+            $("#grid select[name=colSelect]").val("4");
+            $("#grid select[name=colSelect]").trigger("change");
+            equal(tSearch.attr("disabled"), undefined, "txtSearch now enabled");
+            var currentPages = $("#grid span.ui-talxGrid-pager a").length;
+            equal(currentPages, 3, "all items showing");
+            tSearch.val("2010");
+            // hit enter in the field
+            var event = $.Event("keypress");
+            event.keyCode = 13;
+            tSearch.trigger(event);
+            currentPages = $("#grid span.ui-talxGrid-pager a").length;
+            equal(currentPages, 0, "search successfully triggered");
+        });
+        test("UX: _onColumnSearchChange: select column = reset", 4, function () {
+            $("#grid").talxGrid(defaultOptions);
+            var tSearch = $("#grid input[name=txtSearch]");
+            $("#grid select[name=colSelect]").val("4");
+            $("#grid select[name=colSelect]").trigger("change");
+            equal(tSearch.attr("disabled"), undefined, "txtSearch now enabled");
+            var currentPages = $("#grid span.ui-talxGrid-pager a").length;
+            equal(currentPages, 3, "all items showing");
+            tSearch.val("2010");
+            // hit enter in the field
+            var event = $.Event("keypress");
+            event.keyCode = 13;
+            tSearch.trigger(event);
+            currentPages = $("#grid span.ui-talxGrid-pager a").length;
+            equal(currentPages, 0, "search successfully triggered");
+            $("#grid select[name=colSelect]").val("");
+            $("#grid select[name=colSelect]").trigger("change");
+            currentPages = $("#grid span.ui-talxGrid-pager a").length;
+            equal(currentPages, 3, "all items shown again");
+        });
+        test("Option: version get", 1, function () {
+            $("#grid").talxGrid(defaultOptions);
+            var ver = $("#grid").talxGrid("option", "version");
+            equal(ver, "0.0.5", "Correct version");
+        });
+        test("Option: version no set", 2, function () {
+            var grd = $("#grid");
+            grd.talxGrid(defaultOptions);
+            var ver = grd.talxGrid("option", "version");
+            equal(ver, "0.0.5", "Correct version");
+            grd.talxGrid("option", "version", "5.0.0");
+            var ver = grd.talxGrid("option", "version");
+            equal(ver, "0.0.5", "Still correct version");
+        });
     </script>
 </head>
 <body>
 
-<div id="qunit"></div>
-<div id="qunit-fixture">
-    <div id="grid"></div>
-<script type="text/javascript">
+    <div id="qunit"></div>
 
-</script>
-</div>
+    <a href="talxGridDocumentation.html">talxGrid documentation</a> 
+    | <a href="talxGridPerfTest.html">talxGrid performance tests</a> 
+    <!--| <a href="talxGridDotNetDocs.html">MSDN Style Documentation</a>-->
 </body>
 </html>

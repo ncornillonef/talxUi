@@ -3,7 +3,8 @@
  */
 $.widget('namespace.talxGrid', {
     options: {
-        advancedSearchCriteria: null
+        advancedSearchCriteria: null,
+        version: "0.0.5",
     },
     _pageSize: 10,
     _maxSearchItems: 5,
@@ -125,6 +126,7 @@ $.widget('namespace.talxGrid', {
         this._maxPagesOnPager = (this.options.maxPagesOnPager == undefined ? 10 : parseInt(this.options.maxPagesOnPager, 10));
         this._showPagerEllipsis = (this.options.showPagerEllipsis == undefined ? false : this.options.showPagerEllipsis);
         this._showSearchLabel = (this.options.showSearchLabel == undefined ? true : this.options.showSearchLabel);
+        this._dateFormat = this.options.dateFormat || "m/d/yyyy";
         var advancedSearchHelper = this.options.advancedSearchHelper || null;
 
         var tmpDate = new Date();
@@ -191,6 +193,12 @@ $.widget('namespace.talxGrid', {
         $('th.ui-talxGrid-sort', this.element).live('mouseenter', function () { $(this).addClass('ui-state-hover'); })
         $('th.ui-talxGrid-sort', this.element).live('mouseleave', function () { $(this).removeClass('ui-state-hover'); })
         $('[name=btnAdvancedSearch]', this.element).live('click', function () { return _self._onAdvSearchClick(); });
+        this._txtSearch.live("keypress", function (e) {
+            if (e.keyCode == 13) {
+                _self._btnSearch.click();
+                return false;
+            }
+        });
 
         if (!this._showRowCounter) this._rowCounter.hide();
         if (!this._showFilter) this._filter.hide();
@@ -245,7 +253,7 @@ $.widget('namespace.talxGrid', {
             var allowFilterSelect = (this.options.columns[colNum].allowFilterSelect != undefined ? this.options.columns[colNum].allowFilterSelect : true);
             var fieldType = this.options.columns[colNum].dataType != undefined ? this.options.columns[colNum].dataType : "string";
             var uniqueCount = 0;
-           
+
             if (allowFilterSelect) {
                 for (var i = 0; i < data.length; i++) {
                     var colVal = data[i][fld];
@@ -254,9 +262,9 @@ $.widget('namespace.talxGrid', {
                             var dateVal = this._getDate(colVal);
                             colVal = (this._useDateFormat ? dateVal.format(this._dateFormat) : dateVal.toLocaleDateString());
                         }
-                    } 
+                    }
                     optionList.push(colVal);
-                    
+
                 }
                 optionList = optionList.unique();
                 optionList.sort();
@@ -283,6 +291,7 @@ $.widget('namespace.talxGrid', {
             ddlSrch.hide().html("");
             txtSrch.show().val("").addClass('ui-state-disabled').attr('disabled', 'disabled').hide();
             this._btnSearch.button('disable');
+            this._onSearch();
         }
     },
     _onPageChange: function (btn) {

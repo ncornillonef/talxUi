@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    &lt;script type="text/javascript"&gt;
+        $(function () {
+            $('#grdTest2').talxGrid({
+                columns: [
+                    { header: "Name", displayField: "fullName", displayMask: "<a href='#editUser' rel='{1}'>{0}</a>", linkField: "awesome", linkMask: "<span class='demo-awesome-{0}'>{1}</span>" },
+                    { header: "E-Mail Address", displayField: "email", allowFilter: false },
+                    { header: "Sex", displayField: "sex", allowSort: false, allowFilterSelect: false },
+                    { header: "Rating", displayField: "rating", dataType: "int" },
+                    { header: "Joined", displayField: "joined", dataType: "date" },
+                    { header: "Awesome?", displayField: "awesome", displayMask: "Am I awesome? {0}" }
+                ],
+                data: [
+                    { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: 1, joined: "01/01/2012", awesome: true },
+                    { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: 10, joined: "01/01/2011", awesome: true },
+                    { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: 1.5, joined: "01/31/2012", awesome: true },
+                    { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: -1, joined: "02/01/2012", awesome: true },
+                    { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: 32, joined: "12/01/2010", awesome: true },
+                    { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: 2, joined: "11/01/2012", awesome: true },
+                    { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: 7, joined: "10/01/2012", awesome: true },
+                    { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: 41, joined: "2/29/2012", awesome: true },
+                    { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: 14, joined: "2/28/2012", awesome: true },
+                    { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: 4, joined: "01/02/2012", awesome: true },
+                    { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: .4, joined: "01/04/2012", awesome: false },
+                    { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: 2, joined: "01/03/2012", awesome: true },
+                    { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: 1, joined: "01/01/2012", awesome: true },
+                    { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: 10, joined: "01/01/2011", awesome: true },
+                    { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: 1.5, joined: "01/31/2012", awesome: true },
+                    { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: -1, joined: "02/01/2012", awesome: true },
+                    { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: 32, joined: "12/01/2010", awesome: true },
+                    { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: 2, joined: "11/01/2012", awesome: true },
+                    { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: 7, joined: "10/01/2012", awesome: true },
+                    { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: 41, joined: "2/29/2012", awesome: true },
+                    { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: 14, joined: "2/28/2012", awesome: true },
+                    { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: 4, joined: "01/02/2012", awesome: true },
+                    { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: .4, joined: "01/04/2012", awesome: false },
+                    { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: 2, joined: "01/03/2012", awesome: true },
+                    { fullName: "Ellen Cornillon", email: "ecornillon@mac.com", sex: "female", rating: 2, joined: "01/01/2012", awesome: true }
+                ],
+                noDataMessage: 'User not found'
+            });
+
+            $('td a[href=#editUser]').live('click', function () {
+                var i = parseInt($(this).attr('rel'), 10);
+                var grd = $('#grdTest2');
+                var rowData = grd.talxGrid('rowData', i);
+                alert([rowData.fullName, rowData.rating, rowData.joined]);
+                return false;
+            });
+
+            $('#refresh').live('click', function () {
+                var grd = $('#grdTest2');
+                var data = grd.talxGrid('rowData', 0);
+                data.fullName = "Changed Data";
+                grd.talxGrid('refresh');
+            });
+            $('#reset').live('click', function () {
+                var grd = $('#grdTest2');
+                grd.talxGrid('reset');
+            });
+            $("#showEllen").click(function(){
+                $("#grdTest2").talxGrid("select", {field: "fullName", value: "Ellen Cornillon"});
+            });
+        });
+    &lt;/script&gt;
+
+
+    <p>List of all CSS classes used:</p>
+    <ul>
+        <li>ui-talxGrid</li>
+        <li>ui-talxGrid-filter</li>
+        <li>ui-talxGrid-pageSizer</li>
+        <li>ui-talxGrid-sort</li>
+        <li>ui-talxGrid-nosort</li>
+        <li>ui-talxGrid-reset</li>
+        <li>ui-talxGrid-rowcounter</li>
+        <li>ui-talxGrid-pager</li>
+        <li>ui-talxGrid-advSearch</li>
+        <li>ui-talxGrid-asc</li>
+        <li>ui-talxGrid-desc</li>
+        <li>ui-talxGrid-pagerPage-disabled</li>
+        <li>ui-talxGrid-ellipsis</li>
+        <li>ui-talxGrid-altRow</li>
+        <li>ui-talxGrid-width</li>
+        <li>ui-talxGrid-date</li>
+        <li>ui-talxGrid-string</li>
+        <li>ui-talxGrid-int</li>
+        <li>ui-talxGrid-bool</li>
+        <li>ui-talxGrid-float</li>
+        <li>ui-talxGrid-nodata</li>
+        <li>ui-state-selected (should be ui-state-highlight)</li>
+
+
+        <li>ui-widget (jQuery UI)</li>
+        <li>ui-widget-content (jQuery UI)</li>
+        <li>ui-state-default (jQuery UI)</li>
+        <li>ui-state-disabled (jQuery UI)</li>
+        <li>ui-state-hover (jQuery UI)</li>
+        <li>ui-state-highlight (jQuery UI)</li>
+    </ul>
+
+</body>
+</html>

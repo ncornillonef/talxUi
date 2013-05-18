@@ -5,9 +5,9 @@ $.widget('namespace.talxGrid', {
     options: {
         advancedSearchCriteria: null,
         version: "0.0.5",
-        dateFormat: "m/d/yyyy"
+        dateFormat: "m/d/yyyy",
+        pageSize: 10
     },
-    _pageSize: 10,
     _maxSearchItems: 5,
     _pageSizeOptions: [10, 25, 50, 100],
     _noDataMessage: "",
@@ -106,7 +106,6 @@ $.widget('namespace.talxGrid', {
     _init: function () {
         this.options.data = this.options.data || [];
         this._maxSearchItems = parseInt(this.options.maxSearchItems || 5, 10);
-        this._pageSize = parseInt(this.options.pageSize || 10, 10);
         var tmp = this.options.pageSizeOptions || [10, 25, 50, 100];
         this._pageSizeOptions = tmp;
         this._noDataMessage = this.options.noDataMessage || '';
@@ -137,7 +136,7 @@ $.widget('namespace.talxGrid', {
         colOptions += "<select name='colSelect'><option value=''>Select Column</option>";
         var tbl = "<span class='ui-talxGrid-pageSizer'><label for='itemsPerPage'>View:</label> <select name='itemsPerPage'>";
         for (var i = 0; i < this._pageSizeOptions.length; i++) {
-            tbl += "<option value='" + this._pageSizeOptions[i] + "'" + (this._pageSize == this._pageSizeOptions[i] ? "selected='selected'" : "") + ">" + this._pageSizeOptions[i] + " at a time</option>";
+            tbl += "<option value='" + this._pageSizeOptions[i] + "'" + (this.options.pageSize == this._pageSizeOptions[i] ? "selected='selected'" : "") + ">" + this._pageSizeOptions[i] + " at a time</option>";
         }
         tbl += "</select></span>";
         tbl += "<table class='ui-widget-content'><thead><tr>";
@@ -299,7 +298,7 @@ $.widget('namespace.talxGrid', {
         }
     },
     _onPageSizeChange: function (ddl) {
-        this._pageSize = parseInt(ddl.val(), 10);
+        this.options.pageSize = parseInt(ddl.val(), 10);
         this._updatePager();
         this._getPage();
     },
@@ -319,7 +318,7 @@ $.widget('namespace.talxGrid', {
         var pages = "";
         var data = this._data();
         var rows = data.length;
-        var maxPages = Math.floor(rows / this._pageSize) + (rows % this._pageSize == 0 ? 0 : 1) - 1;
+        var maxPages = Math.floor(rows / this.options.pageSize) + (rows % this.options.pageSize == 0 ? 0 : 1) - 1;
         maxPages = (maxPages < 0 ? 0 : maxPages);
         this._currentPage = (this._currentPage > maxPages ? maxPages : (this._currentPage < 0 ? 0 : this._currentPage));
         var start = 0;
@@ -372,9 +371,9 @@ $.widget('namespace.talxGrid', {
     },
     _updateRowCounter: function () {
         var rowCounter = this._rowCounter;
-        var start = (this._currentPage * this._pageSize) + 1;
+        var start = (this._currentPage * this.options.pageSize) + 1;
         if (start > this._totalRows()) start = this._totalRows();
-        var end = Math.min(start + this._pageSize - 1, this._totalRows());
+        var end = Math.min(start + this.options.pageSize - 1, this._totalRows());
         rowCounter.html('Showing ' + start + '-' + end + ' of ' + this._totalRows());
     },
     _getPage: function () {
@@ -382,15 +381,15 @@ $.widget('namespace.talxGrid', {
         var cols = headers.length;
         var data = this._data();
         var rows = this._totalRows();
-        var maxPages = Math.floor(rows / this._pageSize) + (rows % this._pageSize == 0 ? 0 : 1) - 1;
+        var maxPages = Math.floor(rows / this.options.pageSize) + (rows % this.options.pageSize == 0 ? 0 : 1) - 1;
         maxPages = (maxPages < 0 ? 0 : maxPages);
         this._currentPage = (this._currentPage > maxPages ? maxPages : this._currentPage);
         var rr = "";
         var begin = 0;
         var end = rows;
 
-        begin = this._pageSize * this._currentPage;
-        end = begin + this._pageSize;
+        begin = this.options.pageSize * this._currentPage;
+        end = begin + this.options.pageSize;
         begin = (begin < 0 ? 0 : begin);
         end = (end > rows ? rows : end);
         var _self = this;
@@ -507,6 +506,14 @@ $.widget('namespace.talxGrid', {
                 this.options.dateFormat = value;
                 this.refresh();
                 break;
+            case 'pageSize':
+                var nSize = parseInt(value, 10);
+                if (nSize > 0){
+                    this.options.pageSize = nSize;
+                    $("[name=itemsPerPage]", this.element).val(this.options.pageSize);
+                    this.refresh();
+                }
+                break;
             case 'advancedSearchCriteria':
                 this.options.advancedSearchCriteria = value;
                 this.search();
@@ -541,8 +548,8 @@ $.widget('namespace.talxGrid', {
                 if (d[i][criteria.field] == criteria.value) break;
             }
             if (i < d.length) {
-                var p = Math.floor(i / this._pageSize);
-                var r = (i % this._pageSize) + 1;
+                var p = Math.floor(i / this.options.pageSize);
+                var r = (i % this.options.pageSize) + 1;
                 this.pageIndex(p);
                 $('tbody tr:nth-child(' + r + ')', this.element).addClass('ui-state-selected');
             }

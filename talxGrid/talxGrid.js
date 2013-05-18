@@ -5,6 +5,7 @@ $.widget('namespace.talxGrid', {
     options: {
         advancedSearchCriteria: null,
         version: "0.0.5",
+        dateFormat: "m/d/yyyy"
     },
     _pageSize: 10,
     _maxSearchItems: 5,
@@ -24,7 +25,6 @@ $.widget('namespace.talxGrid', {
     _showPagerAsButtons: false,
     _maxPagesOnPager: 10,
     _showPagerEllipsis: false,
-    _dateFormat: "m/d/yyyy", // TODO: Add to options
     _showSearchLabel: true, // TODO: Add to options
 
     _self: this,
@@ -74,8 +74,7 @@ $.widget('namespace.talxGrid', {
                 var val = '' + item[fld];
                 var ret = false;
                 if (val.length > 5 && val.substr(0, 5) == '/Date') {
-                    var dateVal = _self._getDate(val);
-                    val = (_self._useDateFormat ? dateVal.format(_self._dateFormat) : dateVal.toLocaleDateString());
+                    val = _self._getDate(val, true);
                 }
                 val = val.toLowerCase();
                 if (match != undefined && match != null) {
@@ -126,7 +125,6 @@ $.widget('namespace.talxGrid', {
         this._maxPagesOnPager = (this.options.maxPagesOnPager == undefined ? 10 : parseInt(this.options.maxPagesOnPager, 10));
         this._showPagerEllipsis = (this.options.showPagerEllipsis == undefined ? false : this.options.showPagerEllipsis);
         this._showSearchLabel = (this.options.showSearchLabel == undefined ? true : this.options.showSearchLabel);
-        this._dateFormat = this.options.dateFormat || "m/d/yyyy";
         var advancedSearchHelper = this.options.advancedSearchHelper || null;
 
         var tmpDate = new Date();
@@ -259,8 +257,7 @@ $.widget('namespace.talxGrid', {
                     var colVal = data[i][fld];
                     if (fieldType == "date") {
                         if (colVal.length > 5 && colVal.substr(0, 5) == '/Date') {
-                            var dateVal = this._getDate(colVal);
-                            colVal = (this._useDateFormat ? dateVal.format(this._dateFormat) : dateVal.toLocaleDateString());
+                            colVal = this._getDate(colVal, true);
                         }
                     }
                     optionList.push(colVal);
@@ -409,8 +406,7 @@ $.widget('namespace.talxGrid', {
                     colVal = colVal[dField[i]];
                 }
                 if (dataType == "date") {
-                    var colDate = this._getDate(colVal);
-                    colVal = this._useDateFormat ? colDate.format(this._dateFormat) : colDate.toLocaleDateString();
+                    colVal = this._getDate(colVal, true);
                 } else {
                     colVal = colVal || "";
                     colVal = ($.isFunction(colVal.htmlEncode) ? colVal.htmlEncode() : colVal);
@@ -446,7 +442,7 @@ $.widget('namespace.talxGrid', {
         this._updateRowCounter();
         $('tbody', this.element).html(rr);
     },
-    _getDate: function (dateString) {
+    _getDate: function (dateString, formatIt) {
         var ret = null;
         if ((dateString.length > 5) && (dateString.substr(0, 5) == '/Date')) {
             var start = dateString.indexOf('(');
@@ -457,6 +453,9 @@ $.widget('namespace.talxGrid', {
         }
         if (ret == null) {
             ret = new Date(dateString);
+        }
+        if (formatIt == true){
+            ret = this._useDateFormat ? ret.format(this.options.dateFormat) : ret.toLocaleDateString();
         }
 
         return ret;
@@ -504,6 +503,10 @@ $.widget('namespace.talxGrid', {
     _setOption: function (key, value) {
         // TODO: Add support for the other options that you can set, and code for a response    
         switch (key) {
+            case 'dateFormat':
+                this.options.dateFormat = value;
+                this.refresh();
+                break;
             case 'advancedSearchCriteria':
                 this.options.advancedSearchCriteria = value;
                 this.search();

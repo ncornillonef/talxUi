@@ -8,53 +8,51 @@
     <script src="qunit-1.11.0.js"></script>
     <script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery/jquery-1.8.0.js"></script>
     <script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery.ui/1.8.5/jquery-ui.js"></script>
-    <script src="talxGrid.js"></script>
+    <script type="text/javascript" src="dateFormat.js"></script>
+    <script type="text/javascript" src="talxGrid.js"></script>
 
     <script>
-        var defaultOptions = {
-            columns: [
-                { header: "Name", displayField: "fullName", displayMask: "<a href='#editUser' rel='{1}'>{0}</a>", linkField: "awesome", linkMask: "<span class='demo-awesome-{0}'>{1}</span>" },
-                { header: "E-Mail Address", displayField: "email", allowFilter: false },
-                { header: "Sex", displayField: "sex", allowSort: false, allowFilterSelect: false },
-                { header: "Rating", displayField: "rating", dataType: "int" },
-                { header: "Joined", displayField: "joined", dataType: "date" },
-                { header: "Awesome?", displayField: "awesome", displayMask: "Am I awesome? {0}" }
-            ],
-            data: [
-                { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: 1, joined: "01/01/2012", awesome: true },
-                { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: 10, joined: "01/01/2011", awesome: true },
-                { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: 1.5, joined: "01/31/2012", awesome: true },
-                { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: -1, joined: "02/01/2012", awesome: true },
-                { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: 32, joined: "12/01/2010", awesome: true },
-                { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: 2, joined: "11/01/2012", awesome: true },
-                { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: 7, joined: "10/01/2012", awesome: true },
-                { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: 41, joined: "2/29/2012", awesome: true },
-                { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: 14, joined: "2/28/2012", awesome: true },
-                { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: 4, joined: "01/02/2012", awesome: true },
-                { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: .4, joined: "01/04/2012", awesome: false },
-                { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: 2, joined: "01/03/2012", awesome: true },
-                { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: 1, joined: "01/01/2012", awesome: true },
-                { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: 10, joined: "01/01/2011", awesome: true },
-                { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: 1.5, joined: "01/31/2012", awesome: true },
-                { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: -1, joined: "02/01/2012", awesome: true },
-                { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: 32, joined: "12/01/2010", awesome: true },
-                { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: 2, joined: "11/01/2012", awesome: true },
-                { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: 7, joined: "10/01/2012", awesome: true },
-                { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: 41, joined: "2/29/2012", awesome: true },
-                { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: 14, joined: "2/28/2012", awesome: true },
-                { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: 4, joined: "01/02/2012", awesome: true },
-                { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: .4, joined: "01/04/2012", awesome: false },
-                { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: 2, joined: "01/03/2012", awesome: true },
-                { fullName: "Ellen Cornillon", email: "ecornillon@mac.com", sex: "female", rating: 2, joined: "01/01/2012", awesome: true }
-            ],
-            noDataMessage: 'User not found'
-        };
+        var defaultOptions = {};
         QUnit.testStart(function(){
-            $("#grid").remove();
-            $("#qunit").after("<div id='grid'></div>");
+            defaultOptions = {
+                columns: [
+                    { header: "Name", displayField: "fullName", displayMask: "<a href='#editUser' rel='{1}'>{0}</a>", linkField: "awesome", linkMask: "<span class='demo-awesome-{0}'>{1}</span>" },
+                    { header: "E-Mail Address", displayField: "email", allowFilter: false },
+                    { header: "Sex", displayField: "sex", allowSort: false, allowFilterSelect: false },
+                    { header: "Rating", displayField: "rating", dataType: "int" },
+                    { header: "Joined", displayField: "joined", dataType: "date" },
+                    { header: "Awesome?", displayField: "awesome", displayMask: "Am I awesome? {0}" }
+                ],
+                data: [
+                    { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: 1, joined: "01/01/2012", awesome: true },
+                    { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: 10, joined: "01/01/2011", awesome: true },
+                    { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: 1.5, joined: "01/31/2012", awesome: true },
+                    { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: -1, joined: "02/01/2012", awesome: true },
+                    { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: 32, joined: "12/01/2010", awesome: true },
+                    { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: 2, joined: "11/01/2012", awesome: true },
+                    { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: 7, joined: "10/01/2012", awesome: true },
+                    { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: 41, joined: "2/29/2012", awesome: true },
+                    { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: 14, joined: "2/28/2012", awesome: true },
+                    { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: 4, joined: "01/02/2012", awesome: true },
+                    { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: .4, joined: "01/04/2012", awesome: false },
+                    { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: 2, joined: "01/03/2012", awesome: true },
+                    { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: 1, joined: "01/01/2012", awesome: true },
+                    { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: 10, joined: "01/01/2011", awesome: true },
+                    { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: 1.5, joined: "01/31/2012", awesome: true },
+                    { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: -1, joined: "02/01/2012", awesome: true },
+                    { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: 32, joined: "12/01/2010", awesome: true },
+                    { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: 2, joined: "11/01/2012", awesome: true },
+                    { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: 7, joined: "10/01/2012", awesome: true },
+                    { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: 41, joined: "2/29/2012", awesome: true },
+                    { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: 14, joined: "2/28/2012", awesome: true },
+                    { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: 4, joined: "01/02/2012", awesome: true },
+                    { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: .4, joined: "01/04/2012", awesome: false },
+                    { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: 2, joined: "01/03/2012", awesome: true },
+                    { fullName: "Ellen Cornillon", email: "ecornillon@mac.com", sex: "female", rating: 2, joined: "01/01/2012", awesome: true }
+                ]
+            };
         });
         QUnit.testDone(function(){
-            $("#grid").remove();
         });
         test("Create Grid",2, function() {
             equal($("#grid div.ui-talxGrid").length, 0, "Not Yet Created");
@@ -176,11 +174,81 @@
             var ver = grd.talxGrid("option", "version");
             equal(ver, "0.0.5", "Still correct version");
         });
+        test("Option: dateFormat get - initialized", 1, function(){
+            var grd = $("#grid");
+            defaultOptions.dateFormat = "mm/dd/yyyy hh:mm:ss tt";
+            grd.talxGrid(defaultOptions);
+            var df = grd.talxGrid("option", "dateFormat");
+            equal(df, "mm/dd/yyyy hh:mm:ss tt", "Initialized: Correct");
+        });
+        test("Option: dateFormat get - defaulted", 1, function(){
+            var grd = $("#grid");
+            grd.talxGrid(defaultOptions);
+            var df = grd.talxGrid("option", "dateFormat");
+            equal(df, "m/d/yyyy", "Initialized: Correct");
+        });
+        test("Option: dateFormat set - initialization", 2, function(){
+            var grd = $("#grid");
+            defaultOptions.dateFormat = "mm/dd/yyyy hh:mm:ss tt";
+            grd.talxGrid(defaultOptions);
+            var df = grd.talxGrid("option", "dateFormat");
+            equal(df, "mm/dd/yyyy hh:mm:ss tt", "Format: Correct");
+            var td = $("tr:first-child td.ui-talxGrid-date", grd);
+            var v = td.html();
+            equal(v, "01/01/2012 12:01:00 am", "Render: Correct");
+        });
+        test("Option: dateFormat set - via option", 4, function(){
+            var grd = $("#grid");
+            grd.talxGrid(defaultOptions);
+            var df = grd.talxGrid("option", "dateFormat");
+            equal(df, "m/d/yyyy", "Initial Format");
+            var v = $("tr:first-child td.ui-talxGrid-date", grd).html();
+            equal(v, "1/1/2012", "Initial Render");
+
+            grd.talxGrid("option", "dateFormat", "dddd, mmmm d, yyyy");
+
+            df = grd.talxGrid("option", "dateFormat");
+            equal(df, "dddd, mmmm d, yyyy", "Post-Set Format");
+            v = $("tr:first-child td.ui-talxGrid-date", grd).html();
+            equal(v, "Sunday, January 1, 2012", "Post-Set Render");
+        });
+        test("Option: dateFormat set - via option, doesn't effect second grid", 8, function(){
+            var grd = $("#grid");
+            var grd2 = $("<div id='grid2'></div>");
+            grd.after(grd2);
+            grd.talxGrid(defaultOptions);
+            grd2.talxGrid(defaultOptions);
+            var df = grd.talxGrid("option", "dateFormat");
+            equal(df, "m/d/yyyy", "Initial Format");
+            var v = $("tr:first-child td.ui-talxGrid-date", grd).html();
+            equal(v, "1/1/2012", "Initial Render");
+
+            df = grd2.talxGrid("option", "dateFormat");
+            equal(df, "m/d/yyyy", "Initial Format (grid2)");
+            v = $("tr:first-child td.ui-talxGrid-date", grd2).html();
+            equal(v, "1/1/2012", "Initial Render (grid2)");
+
+            grd.talxGrid("option", "dateFormat", "dddd, mmmm d, yyyy");
+
+            df = grd.talxGrid("option", "dateFormat");
+            equal(df, "dddd, mmmm d, yyyy", "Post-Set Format");
+            v = $("tr:first-child td.ui-talxGrid-date", grd).html();
+            equal(v, "Sunday, January 1, 2012", "Post-Set Render");
+
+            df = grd2.talxGrid("option", "dateFormat");
+            equal(df, "m/d/yyyy", "Initial Format (grid2): Correct");
+            v = $("tr:first-child td.ui-talxGrid-date", grd2).html();
+            equal(v, "1/1/2012", "Initial Render (grid2): Unchanged");
+        });
     </script>
 </head>
 <body>
 
     <div id="qunit"></div>
+    <div id="qunit-fixture">
+        <div id='grid'></div>
+    </div>
+    <div id="gridvis"></div>
 
     <a href="talxGridDocumentation.html">talxGrid documentation</a> 
     | <a href="talxGridPerfTest.html">talxGrid performance tests</a> 

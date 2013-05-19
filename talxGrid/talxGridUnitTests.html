@@ -484,6 +484,45 @@
             equal(rows, 4, "Rendered rows");
 
         });
+        test("Option: noDataMessage get - initialized", 1, function(){
+            var grd = $("#grid");
+            defaultOptions.noDataMessage = "noDataMessage Initialized";
+            grd.talxGrid(defaultOptions);
+            var ps = grd.talxGrid("option", "noDataMessage");
+            deepEqual(ps, "noDataMessage Initialized", "Initialized noDataMessage");
+        });
+        test("Option: noDataMessage get - defaulted", 1, function() {
+            var grd = $("#grid");
+            grd.talxGrid(defaultOptions);
+            var ps = grd.talxGrid("option", "noDataMessage");
+            deepEqual(ps, "", "Initialized noDataMessage");
+        });
+        test("Option: noDataMessage set - initialized", 2, function(){
+            var grd = $("#grid");
+            defaultOptions.data=[];
+            defaultOptions.noDataMessage = "noDataMessage Initialized";
+            grd.talxGrid(defaultOptions);
+            var ps = grd.talxGrid("option", "noDataMessage");
+            var m = $("tbody tr td", grd).html();
+            deepEqual(ps, "noDataMessage Initialized", "Initialized noDataMessage");
+            equal(m, "noDataMessage Initialized", "Rendered noDataMessage");
+        });
+        test("Option: noDataMessage set - via option", 4, function(){
+            var grd = $("#grid");
+            defaultOptions.data=[];
+            defaultOptions.noDataMessage = "noDataMessage Initialized";
+            grd.talxGrid(defaultOptions);
+            var ps = grd.talxGrid("option", "noDataMessage");
+            var m = $("tbody tr td", grd).html();
+            deepEqual(ps, "noDataMessage Initialized", "Initialized noDataMessage");
+            equal(m, "noDataMessage Initialized", "Rendered noDataMessage");
+
+            grd.talxGrid("option", "noDataMessage", "New Message");
+            ps = grd.talxGrid("option", "noDataMessage");
+            m = $("tbody tr td", grd).html();
+            deepEqual(ps, "New Message", "Set noDataMessage");
+            equal(m, "New Message", "Rendered noDataMessage");
+        });
         test("Option: version get", 1, function () {
             $("#grid").talxGrid(defaultOptions);
             var ver = $("#grid").talxGrid("option", "version");

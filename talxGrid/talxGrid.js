@@ -9,9 +9,9 @@ $.widget('namespace.talxGrid', {
         pageSize: 10,
         maxSearchItems: 5,
         pageSizeOptions: [10, 25, 50, 100],
-        data: []
+        data: [],
+        noDataMessage: ""
     },
-    _noDataMessage: "",
     _showPageSizer: true,
     _showRowCounter: true,
     _showFilter: true,
@@ -105,7 +105,6 @@ $.widget('namespace.talxGrid', {
         return this._data().length;
     },
     _init: function () {
-        this._noDataMessage = this.options.noDataMessage || '';
         this._showPageSizer = (this.options.showPageSizer == undefined ? true : this.options.showPageSizer);
         this._showRowCounter = (this.options.showRowCounter == undefined ? true : this.options.showRowCounter);
         this._showFilter = (this.options.showFilter == undefined ? true : this.options.showFilter);
@@ -427,8 +426,8 @@ $.widget('namespace.talxGrid', {
             }
             rr += "</tr>";
         }
-        if (rows == 0 && this._noDataMessage != undefined && this._noDataMessage != '') {
-            rr += "<tr><td class='ui-talxGrid-nodata' colspan='" + cols + "'>" + this._noDataMessage + "</td></tr>";
+        if (rows == 0 && this.options.noDataMessage != undefined && this.options.noDataMessage != '') {
+            rr += "<tr><td class='ui-talxGrid-nodata' colspan='" + cols + "'>" + this.options.noDataMessage + "</td></tr>";
             this._rowCounter.hide();
             this._pager.hide();
         } else {
@@ -539,6 +538,10 @@ $.widget('namespace.talxGrid', {
                     this._onSearch();
                 }
                 break;
+            case 'noDataMessage':
+                this.options.noDataMessage = value;
+                this.refresh();
+                break;
 
             case 'advancedSearchCriteria':
                 this.options.advancedSearchCriteria = value;
@@ -558,11 +561,6 @@ $.widget('namespace.talxGrid', {
                     this._removeAdvSearch();
                     this._addAdvSearch();
                 }
-                break;
-            case 'noDataMessage':
-                this.options.noDataMessage = value;
-                this._noDataMessage = value;
-                this.refresh();
                 break;
         }
     },

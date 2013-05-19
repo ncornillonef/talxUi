@@ -10,9 +10,9 @@ $.widget('namespace.talxGrid', {
         maxSearchItems: 5,
         pageSizeOptions: [10, 25, 50, 100],
         data: [],
-        noDataMessage: ""
+        noDataMessage: "",
+        showPageSizer: true
     },
-    _showPageSizer: true,
     _showRowCounter: true,
     _showFilter: true,
     _firstText: "&lt;&lt;",
@@ -105,7 +105,6 @@ $.widget('namespace.talxGrid', {
         return this._data().length;
     },
     _init: function () {
-        this._showPageSizer = (this.options.showPageSizer == undefined ? true : this.options.showPageSizer);
         this._showRowCounter = (this.options.showRowCounter == undefined ? true : this.options.showRowCounter);
         this._showFilter = (this.options.showFilter == undefined ? true : this.options.showFilter);
         this._showFirstLast = (this.options.showFirstLast == undefined ? false : this.options.showFirstLast);
@@ -195,7 +194,7 @@ $.widget('namespace.talxGrid', {
 
         if (!this._showRowCounter) this._rowCounter.hide();
         if (!this._showFilter) this._filter.hide();
-        if (!this._showPageSizer) this._pageSizer.hide();
+        if (!this.options.showPageSizer) this._pageSizer.hide();
 
         this._updatePager();
         this._getPage();
@@ -538,9 +537,17 @@ $.widget('namespace.talxGrid', {
                     this._onSearch();
                 }
                 break;
-            case 'noDataMessage':
+            case "noDataMessage":
                 this.options.noDataMessage = value;
                 this.refresh();
+                break;
+            case "showPageSizer":
+                this.options.showPageSizer = value;
+                if (!this.options.showPageSizer){
+                    this._pageSizer.hide();
+                }else{
+                    this._pageSizer.show();
+                }
                 break;
 
             case 'advancedSearchCriteria':

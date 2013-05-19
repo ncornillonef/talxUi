@@ -523,6 +523,45 @@
             deepEqual(ps, "New Message", "Set noDataMessage");
             equal(m, "New Message", "Rendered noDataMessage");
         });
+        test("Option: showPageSizer get - initialized", 1, function(){
+            var grd = $("#grid");
+            defaultOptions.showPageSizer = false;
+            grd.talxGrid(defaultOptions);
+            var ps = grd.talxGrid("option", "showPageSizer");
+            equal(ps, false, "Initialized showPageSizer");
+        });
+        test("Option: showPageSizer get - defaulted", 1, function(){
+            var grd = $("#grid");
+            grd.talxGrid(defaultOptions);
+            var ps = grd.talxGrid("option", "showPageSizer");
+            equal(ps, true, "Initialized showPageSizer");
+        });
+        test("Option: showPageSizer set - initialized", function(){
+            var grd = $("#grid");
+            defaultOptions.showPageSizer = false;
+            grd.talxGrid(defaultOptions);
+            var ps = grd.talxGrid("option", "showPageSizer");
+            var isVisible = $("span.ui-talxGrid-pageSize", grid).is(":visible");
+            equal(ps, false, "Initialized showPageSizer");
+            equal(isVisible, false, "Hidden pageSizer");
+        });
+        test("Option: showPageSizer set - via option", function(){
+            var grd = $("#grid");
+            defaultOptions.showPageSizer = false;
+            grd.talxGrid(defaultOptions);
+            var ps = grd.talxGrid("option", "showPageSizer");
+            var isVisible = $("span.ui-talxGrid-pageSizer", grid).is(":visible");
+            equal(ps, false, "Initialized showPageSizer");
+            equal(isVisible, false, "Hidden pageSizer");
+
+            grd.talxGrid("option", "showPageSizer", true);
+            ps = grd.talxGrid("option", "showPageSizer");
+            isVisible = $("span.ui-talxGrid-pageSizer", grid).is(":visible");
+            equal(ps, true, "Initialized showPageSizer");
+            equal(isVisible, true, "Shown pageSizer");
+        });
+        /*
+        */
         test("Option: version get", 1, function () {
             $("#grid").talxGrid(defaultOptions);
             var ver = $("#grid").talxGrid("option", "version");

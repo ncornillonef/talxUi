@@ -411,6 +411,79 @@
             deepEqual(ps, [5, 10, 20], "Set pageSizeOptions");
             deepEqual(optList, ["5", "10", "20"], "Rendered pageSizeOptions");
         });
+        test("Option: data get - initialized", 1, function(){
+            var grd = $("#grid");
+            defaultOptions.data = [
+                    { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: 1, joined: "01/01/2012", awesome: true },
+                    { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: 10, joined: "01/01/2011", awesome: true }
+            ];
+            grd.talxGrid(defaultOptions);
+            var ps = grd.talxGrid("option", "data");
+            deepEqual(ps, [
+                { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: 1, joined: "01/01/2012", awesome: true },
+                { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: 10, joined: "01/01/2011", awesome: true }
+            ], "Initialized data");
+        });
+        test("Option: data get - defaulted", 1, function(){
+            var grd = $("#grid");
+            defaultOptions.data = undefined;
+            grd.talxGrid(defaultOptions);
+            var ps = grd.talxGrid("option", "data");
+            deepEqual(ps, [], "Initialized data");
+        });
+        test("Option: data set - initialized", 2, function(){
+            var grd = $("#grid");
+            defaultOptions.data = [
+                { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: 1, joined: "01/01/2012", awesome: true },
+                { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: 10, joined: "01/01/2011", awesome: true }
+            ];
+            grd.talxGrid(defaultOptions);
+            var ps = grd.talxGrid("option", "data");
+            var rows = $("tbody tr", grd).length;
+            deepEqual(ps, [
+                { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: 1, joined: "01/01/2012", awesome: true },
+                { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: 10, joined: "01/01/2011", awesome: true }
+            ], "Initialized data");
+            equal(rows, 2, "Rendered rows");
+        });
+        test("Option: data set - via option", 6, function(){
+            var grd = $("#grid");
+            defaultOptions.data = [
+                { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: 1, joined: "01/01/2012", awesome: true },
+                { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: 10, joined: "01/01/2011", awesome: true }
+            ];
+            grd.talxGrid(defaultOptions);
+            var ps = grd.talxGrid("option", "data");
+            var rows = $("tbody tr", grd).length;
+            deepEqual(ps, [
+                { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: 1, joined: "01/01/2012", awesome: true },
+                { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: 10, joined: "01/01/2011", awesome: true }
+            ], "Initialized data");
+            equal(rows, 2, "Rendered rows");
+
+            grd.talxGrid("option", "data", []);
+            ps = grd.talxGrid("option", "data");
+            rows = $("tbody tr", grd).length;
+            deepEqual(ps, [], "Set data");
+            equal(rows, 0, "Rendered rows");
+
+            grd.talxGrid("option", "data", [
+                { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: 1, joined: "01/01/2012", awesome: true },
+                { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: 10, joined: "01/01/2011", awesome: true },
+                { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: 1, joined: "01/01/2012", awesome: true },
+                { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: 10, joined: "01/01/2011", awesome: true }
+            ]);
+            ps = grd.talxGrid("option", "data");
+            rows = $("tbody tr", grd).length;
+            deepEqual(ps, [
+                { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: 10, joined: "01/01/2011", awesome: true },
+                { fullName: "Jasmine Cornillon", email: "jasiemin@mac.com", sex: "female", rating: 10, joined: "01/01/2011", awesome: true },
+                { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: 1, joined: "01/01/2012", awesome: true },
+                { fullName: "Nathan Cornillon", email: "ncornillon@mac.com", sex: "male", rating: 1, joined: "01/01/2012", awesome: true }
+            ], "Set data");
+            equal(rows, 4, "Rendered rows");
+
+        });
         test("Option: version get", 1, function () {
             $("#grid").talxGrid(defaultOptions);
             var ver = $("#grid").talxGrid("option", "version");

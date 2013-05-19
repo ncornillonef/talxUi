@@ -8,7 +8,8 @@ $.widget('namespace.talxGrid', {
         dateFormat: "m/d/yyyy",
         pageSize: 10,
         maxSearchItems: 5,
-        pageSizeOptions: [10, 25, 50, 100]
+        pageSizeOptions: [10, 25, 50, 100],
+        data: []
     },
     _noDataMessage: "",
     _showPageSizer: true,
@@ -104,7 +105,6 @@ $.widget('namespace.talxGrid', {
         return this._data().length;
     },
     _init: function () {
-        this.options.data = this.options.data || [];
         this._noDataMessage = this.options.noDataMessage || '';
         this._showPageSizer = (this.options.showPageSizer == undefined ? true : this.options.showPageSizer);
         this._showRowCounter = (this.options.showRowCounter == undefined ? true : this.options.showRowCounter);
@@ -533,6 +533,13 @@ $.widget('namespace.talxGrid', {
                     this._ddlItemsPerPage.val(this.options.pageSize);
                 }
                 break;
+            case "data":
+                if ($.isArray(value)){
+                    this.options.data = value;
+                    this._onSearch();
+                }
+                break;
+
             case 'advancedSearchCriteria':
                 this.options.advancedSearchCriteria = value;
                 this.search();

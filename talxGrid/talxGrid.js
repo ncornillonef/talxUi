@@ -7,9 +7,9 @@ $.widget('namespace.talxGrid', {
         version: "0.0.5",
         dateFormat: "m/d/yyyy",
         pageSize: 10,
-        maxSearchItems: 5
+        maxSearchItems: 5,
+        pageSizeOptions: [10, 25, 50, 100]
     },
-    _pageSizeOptions: [10, 25, 50, 100],
     _noDataMessage: "",
     _showPageSizer: true,
     _showRowCounter: true,
@@ -105,8 +105,6 @@ $.widget('namespace.talxGrid', {
     },
     _init: function () {
         this.options.data = this.options.data || [];
-        var tmp = this.options.pageSizeOptions || [10, 25, 50, 100];
-        this._pageSizeOptions = tmp;
         this._noDataMessage = this.options.noDataMessage || '';
         this._showPageSizer = (this.options.showPageSizer == undefined ? true : this.options.showPageSizer);
         this._showRowCounter = (this.options.showRowCounter == undefined ? true : this.options.showRowCounter);
@@ -134,8 +132,8 @@ $.widget('namespace.talxGrid', {
         colOptions += "<span class='ui-talxGrid-filter'>" + (this._showSearchLabel ? "<label for='colSelect'>Search:</label>" : "");
         colOptions += "<select name='colSelect'><option value=''>Select Column</option>";
         var tbl = "<span class='ui-talxGrid-pageSizer'><label for='itemsPerPage'>View:</label> <select name='itemsPerPage'>";
-        for (var i = 0; i < this._pageSizeOptions.length; i++) {
-            tbl += "<option value='" + this._pageSizeOptions[i] + "'" + (this.options.pageSize == this._pageSizeOptions[i] ? "selected='selected'" : "") + ">" + this._pageSizeOptions[i] + " at a time</option>";
+        for (var i = 0; i < this.options.pageSizeOptions.length; i++) {
+            tbl += "<option value='" + this.options.pageSizeOptions[i] + "'" + (this.options.pageSize == this.options.pageSizeOptions[i] ? "selected='selected'" : "") + ">" + this.options.pageSizeOptions[i] + " at a time</option>";
         }
         tbl += "</select></span>";
         tbl += "<table class='ui-widget-content'><thead><tr>";
@@ -518,6 +516,21 @@ $.widget('namespace.talxGrid', {
                 if (nItems > 0){
                     this.options.maxSearchItems = nItems;
                     this._onColumnSearchChange(this._ddlColSelect);
+                }
+                break;
+            case "pageSizeOptions":
+                if ($.isArray(value)){
+                    var pOptions = [];
+                    value.forEach(function(item, index){
+                        pOptions.push(parseInt(item, 10));
+                    });
+                    this.options.pageSizeOptions = pOptions;
+                    this._ddlItemsPerPage.html("");
+                    var self = this;
+                    this.options.pageSizeOptions.forEach(function(item, index){
+                        self._ddlItemsPerPage.append($("<option value='"+ item +"'>"+ item +" at a time</option>"));
+                    });
+                    this._ddlItemsPerPage.val(this.options.pageSize);
                 }
                 break;
             case 'advancedSearchCriteria':

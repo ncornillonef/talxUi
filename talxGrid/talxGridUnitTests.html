@@ -363,6 +363,54 @@
             equal(inputEnabled, true, "Name search is txtSearch");
             equal(selectEnabled, false, "Name search is ddlSearch");
         });
+        test("Option: pageSizeOptions get - initialized", 1, function(){
+            var grd = $("#grid");
+            defaultOptions.pageSizeOptions = [5, 10, 25, 50, 100];
+            grd.talxGrid(defaultOptions);
+            var ps = grd.talxGrid("option", "pageSizeOptions");
+            deepEqual(ps, [5, 10, 25, 50, 100], "Initialized pageSizeOptions");
+        });
+        test("Option: pageSizeOptions get - defaulted", 1, function(){
+            var grd = $("#grid");
+            grd.talxGrid(defaultOptions);
+            var ps = grd.talxGrid("option", "pageSizeOptions");
+            deepEqual(ps, [10, 25, 50, 100], "Initialized pageSizeOptions");
+        });
+        test("Option: pageSizeOptions set - initialization", 2, function(){
+            var grd = $("#grid");
+            defaultOptions.pageSizeOptions = [5, 10, 25, 50, 100];
+            grd.talxGrid(defaultOptions);
+            var ps = grd.talxGrid("option", "pageSizeOptions");
+            var options = $("[name=itemsPerPage] option");
+            var optList = [];
+            options.each(function(index, element){
+                optList.push($(element).val());
+            });
+            deepEqual(ps, [5, 10, 25, 50, 100], "Initialized pageSizeOptions");
+            deepEqual(optList, ["5", "10", "25", "50", "100"], "Rendered pageSizeOptions");
+        });
+        test("Option: pageSizeOptions set - via option", 4, function(){
+            var grd = $("#grid");
+            grd.talxGrid(defaultOptions);
+            var ps = grd.talxGrid("option", "pageSizeOptions");
+            var options = $("[name=itemsPerPage] option");
+            var optList = [];
+            options.each(function(index, element){
+                optList.push($(element).val());
+            });
+            deepEqual(ps, [10, 25, 50, 100], "Initialized pageSizeOptions");
+            deepEqual(optList, ["10", "25", "50", "100"], "Rendered pageSizeOptions");
+
+            grd.talxGrid("option", "pageSizeOptions", [5, 10, 20]);
+            ps = grd.talxGrid("option", "pageSizeOptions");
+            options = $("[name=itemsPerPage] option");
+            optList = [];
+            options.each(function(index, element){
+                optList.push($(element).val());
+            });
+            deepEqual(ps, [5, 10, 20], "Set pageSizeOptions");
+            deepEqual(optList, ["5", "10", "20"], "Rendered pageSizeOptions");
+        });
         test("Option: version get", 1, function () {
             $("#grid").talxGrid(defaultOptions);
             var ver = $("#grid").talxGrid("option", "version");
@@ -386,7 +434,16 @@
         <div id='grid'></div>
     </div>
     <div id="gridvis"></div>
-
+    <div>To Do?
+        <ul>
+            <li>Setting itemsPerPage to something not on pageSizeOptions - expected?</li>
+            <li>Setting itemsPerPage to non-int - expected?</li>
+            <li>Setting itemsPerPage when on page past new end page - expected?</li>
+            <li>Setting pageSizeOptions to not include the current itemsPerPage - expected?</li>
+            <li>Setting pageSizeOptions to include values less than 1 - expected?</li>
+            <li>Setting pageSizeOptions to non-array - expected?</li>
+        </ul>
+    </div>
     <a href="talxGridDocumentation.html">talxGrid documentation</a> 
     | <a href="talxGridPerfTest.html">talxGrid performance tests</a> 
     <!--| <a href="talxGridDotNetDocs.html">MSDN Style Documentation</a>-->

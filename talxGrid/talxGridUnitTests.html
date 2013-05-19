@@ -318,6 +318,51 @@
             equal(rows, 50, "Displaying pageSize rows");
             equal(pp, "50", "View select at pageSize");
         });
+        test("Option: maxSearchItems get - initialized", 1, function(){
+            var grd = $("#grid");
+            defaultOptions.maxSearchItems = 12;
+            grd.talxGrid(defaultOptions);
+            var ps = grd.talxGrid("option", "maxSearchItems");
+            equal(ps, 12, "Initialized maxSearchItems");
+        });
+        test("Option: maxSearchItems get - defaulted", 1, function(){
+            var grd = $("#grid");
+            grd.talxGrid(defaultOptions);
+            var ps = grd.talxGrid("option", "maxSearchItems");
+            equal(ps, 5, "Initialized maxSearchItems");
+        });
+        test("Option: maxSearchItems set - initialization", 3, function(){
+            var grd = $("#grid");
+            defaultOptions.maxSearchItems = 2;
+            grd.talxGrid(defaultOptions);
+            var ps = grd.talxGrid("option", "maxSearchItems");
+            var sel = $("[name=colSelect]", grd);
+            sel.val("0");
+            sel.trigger("change");
+            var inputEnabled = $("[name=txtSearch]", grd).attr("disabled") == undefined;
+            var selectEnabled = $("[name=ddlSearch]", grd).attr("disabled") == undefined;
+            equal(ps, 2, "Initialized maxSearchItems");
+            equal(inputEnabled, true, "Name search is txtSearch");
+            equal(selectEnabled, false, "Name search is ddlSearch");
+        });
+        test("Option: maxSearchItems set - via option", 6, function(){
+            var grd = $("#grid");
+            grd.talxGrid(defaultOptions);
+            var ps = grd.talxGrid("option", "maxSearchItems");
+            $("[name=colSelect]", grd).val("0").trigger("change");
+            var inputEnabled = $("[name=txtSearch]", grd).attr("disabled") == undefined;
+            var selectEnabled = $("[name=ddlSearch]", grd).attr("disabled") == undefined;
+            equal(ps, 5, "Initialized maxSearchItems");
+            equal(inputEnabled, false, "Name search is txtSearch");
+            equal(selectEnabled, true, "Name search is ddlSearch");
+            grd.talxGrid("option", "maxSearchItems", "2");
+            ps = grd.talxGrid("option", "maxSearchItems");
+            inputEnabled = $("[name=txtSearch]", grd).attr("disabled") == undefined;
+            selectEnabled = $("[name=ddlSearch]", grd).attr("disabled") == undefined;
+            equal(ps, 2, "Initialized maxSearchItems");
+            equal(inputEnabled, true, "Name search is txtSearch");
+            equal(selectEnabled, false, "Name search is ddlSearch");
+        });
         test("Option: version get", 1, function () {
             $("#grid").talxGrid(defaultOptions);
             var ver = $("#grid").talxGrid("option", "version");

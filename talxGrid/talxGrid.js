@@ -6,9 +6,9 @@ $.widget('namespace.talxGrid', {
         advancedSearchCriteria: null,
         version: "0.0.5",
         dateFormat: "m/d/yyyy",
-        pageSize: 10
+        pageSize: 10,
+        maxSearchItems: 5
     },
-    _maxSearchItems: 5,
     _pageSizeOptions: [10, 25, 50, 100],
     _noDataMessage: "",
     _showPageSizer: true,
@@ -105,7 +105,6 @@ $.widget('namespace.talxGrid', {
     },
     _init: function () {
         this.options.data = this.options.data || [];
-        this._maxSearchItems = parseInt(this.options.maxSearchItems || 5, 10);
         var tmp = this.options.pageSizeOptions || [10, 25, 50, 100];
         this._pageSizeOptions = tmp;
         this._noDataMessage = this.options.noDataMessage || '';
@@ -267,7 +266,7 @@ $.widget('namespace.talxGrid', {
 
                 uniqueCount = optionList.length;
             }
-            if (uniqueCount > 0 && uniqueCount <= this._maxSearchItems) {
+            if (uniqueCount > 0 && uniqueCount <= this.options.maxSearchItems) {
                 this._filterOnMatch = true;
                 var ops = "<option>Select One</option>";
                 for (i = 0; i < uniqueCount; i++) {
@@ -502,16 +501,23 @@ $.widget('namespace.talxGrid', {
     _setOption: function (key, value) {
         // TODO: Add support for the other options that you can set, and code for a response    
         switch (key) {
-            case 'dateFormat':
+            case "dateFormat":
                 this.options.dateFormat = value;
                 this.refresh();
                 break;
-            case 'pageSize':
+            case "pageSize":
                 var nSize = parseInt(value, 10);
                 if (nSize > 0){
                     this.options.pageSize = nSize;
                     $("[name=itemsPerPage]", this.element).val(this.options.pageSize);
                     this.refresh();
+                }
+                break;
+            case "maxSearchItems":
+                var nItems = parseInt(value, 10);
+                if (nItems > 0){
+                    this.options.maxSearchItems = nItems;
+                    this._onColumnSearchChange(this._ddlColSelect);
                 }
                 break;
             case 'advancedSearchCriteria':

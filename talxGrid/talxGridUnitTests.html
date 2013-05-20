@@ -597,6 +597,43 @@
             equal(ps, true, "Initialized showRowCounter");
             equal(isVisible, true, "Shown rowCounter");
         });
+        test("Option: showFilter get - initialized", 1, function(){
+            var grd = $("#grid");
+            defaultOptions.showFilter = false;
+            grd.talxGrid(defaultOptions);
+            var ps = grd.talxGrid("option", "showFilter");
+            equal(ps, false, "Initialized showFilter");
+        });
+        test("Option: showFilter get - defaulted", 1, function(){
+            var grd = $("#grid");
+            grd.talxGrid(defaultOptions);
+            var ps = grd.talxGrid("option", "showFilter");
+            equal(ps, true, "Initialized showFilter");
+        });
+        test("Option: showFilter set - initialized", function(){
+            var grd = $("#grid");
+            defaultOptions.showFilter = false;
+            grd.talxGrid(defaultOptions);
+            var ps = grd.talxGrid("option", "showFilter");
+            var isVisible = $("span.ui-talxGrid-filter", grd).is(":visible");
+            equal(ps, false, "Initialized showFilter");
+            equal(isVisible, false, "Hiding filter");
+        });
+        test("Option: showFilter set - via option", function(){
+            var grd = $("#grid");
+            defaultOptions.showFilter = false;
+            grd.talxGrid(defaultOptions);
+            var ps = grd.talxGrid("option", "showFilter");
+            var isVisible = $("span.ui-talxGrid-filter", grd).is(":visible");
+            equal(ps, false, "Initialized showFilter");
+            equal(isVisible, false, "Hiding filter");
+
+            grd.talxGrid("option", "showFilter", true);
+            ps = grd.talxGrid("option", "showFilter");
+            isVisible = $("span.ui-talxGrid-filter", grd).is(":visible");
+            equal(ps, true, "Set showFilter");
+            equal(isVisible, true, "Show filter");
+        });
         /*
         */
         test("Option: version get", 1, function () {

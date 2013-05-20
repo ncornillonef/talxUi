@@ -14,13 +14,13 @@ $.widget('namespace.talxGrid', {
         showPageSizer: true,
         showRowCounter: true,
         showFilter: true,
-        showFirstLast: false
+        showFirstLast: false,
+        showPrevNext: true
     },
     _firstText: "&lt;&lt;",
     _prevText: "&lt;",
     _nextText: "&gt;",
     _lastText: "&gt;&gt;",
-    _showPrevNext: true,
     _showPageNumbers: true,
     _showResetAsButton: false,
     _showPagerAsButtons: false,
@@ -105,7 +105,6 @@ $.widget('namespace.talxGrid', {
         return this._data().length;
     },
     _init: function () {
-        this._showPrevNext = (this.options.showPrevNext == undefined ? true : this.options.showPrevNext);
         this._firstText = this.options.firstText || "&lt;&lt;";
         this._prevText = this.options.prevText || "&lt;";
         this._nextText = this.options.nextText || "&gt;";
@@ -333,7 +332,7 @@ $.widget('namespace.talxGrid', {
             pages += (this._showPagerAsButtons ? "<button value='0'" + (this._currentPage == 0 ? " disabled='disabled'" : "") + ">" + this._firstText + "</button>"
                     : (this._currentPage == 0 ? "<span class='ui-talxGrid-pagerPage-disabled'>" + this._firstText + "</span>&nbsp;" : "<a href='#' rel='0'>" + this._firstText + "</a>&nbsp;"));
         }
-        if (this._showPrevNext && this._currentPage > 0) {
+        if (this.options.showPrevNext && this._currentPage > 0) {
             pages += (this._showPagerAsButtons ? "<button value='" + (this._currentPage - 1) + "'>" + this._prevText + "</button>"
                     : "<a href='#' rel='" + (this._currentPage - 1) + "'>" + this._prevText + "</a>");
         }
@@ -349,7 +348,7 @@ $.widget('namespace.talxGrid', {
         if (this._showPagerEllipsis && (end < maxPages)) {
             pages += "<span class='ui-talxGrid-ellipsis'>&hellip;</span>";
         }
-        if (this._showPrevNext && this._currentPage < end) {
+        if (this.options.showPrevNext && this._currentPage < end) {
             pages += (this._showPagerAsButtons ? "<button value='" + (this._currentPage + 1) + "'>" + this._nextText + "</button>"
                     : "<a href='#' rel='" + (this._currentPage + 1) + "'>" + this._nextText + "</a>");
         }
@@ -564,6 +563,10 @@ $.widget('namespace.talxGrid', {
                 break;
             case "showFirstLast":
                 this.options.showFirstLast = value;
+                this._updatePager();
+                break;
+            case "showPrevNext":
+                this.options.showPrevNext = value;
                 this._updatePager();
                 break;
 

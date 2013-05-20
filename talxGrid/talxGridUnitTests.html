@@ -689,6 +689,50 @@
             equal(isFirstVisible, true, "Shown first");
             equal(isLastVisible, true, "Shown last");
         });
+        test("Option: showPrevNext get - initialized", 1, function(){
+            var grd = $("#grid");
+            defaultOptions.showPrevNext = false;
+            grd.talxGrid(defaultOptions);
+            var ps = grd.talxGrid("option", "showPrevNext");
+            equal(ps, false, "Initialized showPrevNext");
+        });
+        test("Option: showPrevNext get - defaulted", 1, function(){
+            var grd = $("#grid");
+            grd.talxGrid(defaultOptions);
+            var ps = grd.talxGrid("option", "showPrevNext");
+            equal(ps, true, "Initialized showPrevNext");
+        });
+        test("Option: showPrevNext set - initialized", 3, function(){
+            var grd = $("#grid");
+            grd.talxGrid(defaultOptions);
+            var ps = grd.talxGrid("option", "showPrevNext");
+            $("span.ui-talxGrid-pager a:eq(3)", grd).trigger("click");
+            var isFirstVisible = $("span.ui-talxGrid-pager a:nth-child(1)", grd).text();
+            var isLastVisible = $("span.ui-talxGrid-pager a:nth-last-child(1)", grd).text();
+            equal(ps, true, "Initialized showPrevNext");
+            equal(isFirstVisible, "<", "Shown prev");
+            equal(isLastVisible, ">", "Shown next");
+        });
+        test("Option: showPrevNext set - via option", 6, function(){
+            var grd = $("#grid");
+            grd.talxGrid(defaultOptions);
+            var ps = grd.talxGrid("option", "showPrevNext");
+            $("span.ui-talxGrid-pager a:eq(3)", grd).trigger("click");
+            var isFirstVisible = $("span.ui-talxGrid-pager a:nth-child(1)", grd).text();
+            var isLastVisible = $("span.ui-talxGrid-pager a:nth-last-child(1)", grd).text();
+            equal(ps, true, "Initialized showPrevNext");
+            equal(isFirstVisible, "<", "Shown prev");
+            equal(isLastVisible, ">", "Shown next");
+
+            grd.talxGrid("option", "showPrevNext", false);
+            ps = grd.talxGrid("option", "showPrevNext");
+            $("span.ui-talxGrid-pager a:eq(3)", grd).trigger("click");
+            var isFirstVisible = $("span.ui-talxGrid-pager a:nth-child(1)", grd).text();
+            var isLastVisible = $("span.ui-talxGrid-pager a:nth-last-child(1)", grd).text();
+            equal(ps, false, "Initialized showPrevNext");
+            equal(isFirstVisible, "1", "Shown prev");
+            equal(isLastVisible, "8", "Shown next");
+        });
         /*
         */
         test("Option: version get", 1, function () {

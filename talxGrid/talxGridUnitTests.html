@@ -634,6 +634,61 @@
             equal(ps, true, "Set showFilter");
             equal(isVisible, true, "Show filter");
         });
+        test("Option: showFirstLast get - initialized", 1, function(){
+            var grd = $("#grid");
+            defaultOptions.showFirstLast = true;
+            grd.talxGrid(defaultOptions);
+            var ps = grd.talxGrid("option", "showFirstLast");
+            equal(ps, true, "Initialized showFirstLast");
+        });
+        test("Option: showFirstLast get - defaulted", 1, function(){
+            var grd = $("#grid");
+            grd.talxGrid(defaultOptions);
+            var ps = grd.talxGrid("option", "showFirstLast");
+            equal(ps, false, "Initialized showFirstLast");
+        });
+        test("Option: showFirstLast set - initialized", 3, function(){
+            var grd = $("#grid");
+            defaultOptions.showFirstLast = true;
+            grd.talxGrid(defaultOptions);
+            var ps = grd.talxGrid("option", "showFirstLast");
+            $("span.ui-talxGrid-pager a:eq(3)", grd).trigger("click");
+            var isFirstVisible = $("span.ui-talxGrid-pager a:first-child", grd).is(":visible");
+            var isLastVisible = $("span.ui-talxGrid-pager a:last-child", grd).is(":visible");
+            equal(ps, true, "Initialized showFirstLast");
+            equal(isFirstVisible, true, "Shown first");
+            equal(isLastVisible, true, "Shown last");
+        });
+        test("Option: showFirstLast set - via option", 9, function(){
+            var grd = $("#grid");
+            defaultOptions.showFirstLast = true;
+            grd.talxGrid(defaultOptions);
+            var ps = grd.talxGrid("option", "showFirstLast");
+            $("span.ui-talxGrid-pager a:eq(3)", grd).trigger("click");
+            var isFirstVisible = $("span.ui-talxGrid-pager a:first-child", grd).text() == "<<";
+            var isLastVisible = $("span.ui-talxGrid-pager a:last-child", grd).text() == ">>";
+            equal(ps, true, "Initialized showFirstLast");
+            equal(isFirstVisible, true, "Shown first");
+            equal(isLastVisible, true, "Shown last");
+
+            grd.talxGrid("option", "showFirstLast", false);
+            ps = grd.talxGrid("option", "showFirstLast");
+            $("span.ui-talxGrid-pager a:eq(3)", grd).trigger("click");
+            isFirstVisible = $("span.ui-talxGrid-pager a:first-child", grd).text() == "<<";
+            isLastVisible = $("span.ui-talxGrid-pager a:last-child", grd).text() == ">>";
+            equal(ps, false, "Set showFirstLast");
+            equal(isFirstVisible, false, "Shown first");
+            equal(isLastVisible, false, "Shown last");
+
+            grd.talxGrid("option", "showFirstLast", true);
+            ps = grd.talxGrid("option", "showFirstLast");
+            $("span.ui-talxGrid-pager a:eq(3)", grd).trigger("click");
+            isFirstVisible = $("span.ui-talxGrid-pager a:first-child", grd).text() == "<<";
+            isLastVisible = $("span.ui-talxGrid-pager a:last-child", grd).text() == ">>";
+            equal(ps, true, "Set showFirstLast");
+            equal(isFirstVisible, true, "Shown first");
+            equal(isLastVisible, true, "Shown last");
+        });
         /*
         */
         test("Option: version get", 1, function () {

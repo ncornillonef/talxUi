@@ -13,13 +13,13 @@ $.widget('namespace.talxGrid', {
         noDataMessage: "",
         showPageSizer: true,
         showRowCounter: true,
-        showFilter: true
+        showFilter: true,
+        showFirstLast: false
     },
     _firstText: "&lt;&lt;",
     _prevText: "&lt;",
     _nextText: "&gt;",
     _lastText: "&gt;&gt;",
-    _showFirstLast: false,
     _showPrevNext: true,
     _showPageNumbers: true,
     _showResetAsButton: false,
@@ -105,7 +105,6 @@ $.widget('namespace.talxGrid', {
         return this._data().length;
     },
     _init: function () {
-        this._showFirstLast = (this.options.showFirstLast == undefined ? false : this.options.showFirstLast);
         this._showPrevNext = (this.options.showPrevNext == undefined ? true : this.options.showPrevNext);
         this._firstText = this.options.firstText || "&lt;&lt;";
         this._prevText = this.options.prevText || "&lt;";
@@ -330,7 +329,7 @@ $.widget('namespace.talxGrid', {
             }
         }
 
-        if (this._showFirstLast && this._currentPage > 0) {
+        if (this.options.showFirstLast && this._currentPage > 0) {
             pages += (this._showPagerAsButtons ? "<button value='0'" + (this._currentPage == 0 ? " disabled='disabled'" : "") + ">" + this._firstText + "</button>"
                     : (this._currentPage == 0 ? "<span class='ui-talxGrid-pagerPage-disabled'>" + this._firstText + "</span>&nbsp;" : "<a href='#' rel='0'>" + this._firstText + "</a>&nbsp;"));
         }
@@ -354,7 +353,7 @@ $.widget('namespace.talxGrid', {
             pages += (this._showPagerAsButtons ? "<button value='" + (this._currentPage + 1) + "'>" + this._nextText + "</button>"
                     : "<a href='#' rel='" + (this._currentPage + 1) + "'>" + this._nextText + "</a>");
         }
-        if (this._showFirstLast && this._currentPage < end) {
+        if (this.options.showFirstLast && this._currentPage < end) {
             pages += (this._showPagerAsButtons ? "<button value='" + maxPages + "'" + (this._currentPage == end ? " disabled='disabled'" : "") + ">" + this._lastText + "</button>"
                     : (this._currentPage == end ? "&nbsp;<span class='ui-talxGrid-pagerPage-disabled'>" + this._lastText + "</span>" : "&nbsp;<a href='#' rel='" + maxPages + "'>" + this._lastText + "</a>"));
         }
@@ -562,6 +561,10 @@ $.widget('namespace.talxGrid', {
                 }else{
                     this._filter.hide();
                 }
+                break;
+            case "showFirstLast":
+                this.options.showFirstLast = value;
+                this._updatePager();
                 break;
 
             case 'advancedSearchCriteria':

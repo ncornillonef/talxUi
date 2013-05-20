@@ -11,9 +11,9 @@ $.widget('namespace.talxGrid', {
         pageSizeOptions: [10, 25, 50, 100],
         data: [],
         noDataMessage: "",
-        showPageSizer: true
+        showPageSizer: true,
+        showRowCounter: true
     },
-    _showRowCounter: true,
     _showFilter: true,
     _firstText: "&lt;&lt;",
     _prevText: "&lt;",
@@ -105,7 +105,6 @@ $.widget('namespace.talxGrid', {
         return this._data().length;
     },
     _init: function () {
-        this._showRowCounter = (this.options.showRowCounter == undefined ? true : this.options.showRowCounter);
         this._showFilter = (this.options.showFilter == undefined ? true : this.options.showFilter);
         this._showFirstLast = (this.options.showFirstLast == undefined ? false : this.options.showFirstLast);
         this._showPrevNext = (this.options.showPrevNext == undefined ? true : this.options.showPrevNext);
@@ -192,7 +191,7 @@ $.widget('namespace.talxGrid', {
             }
         });
 
-        if (!this._showRowCounter) this._rowCounter.hide();
+        if (!this.options.showRowCounter) this._rowCounter.hide();
         if (!this._showFilter) this._filter.hide();
         if (!this.options.showPageSizer) this._pageSizer.hide();
 
@@ -430,7 +429,7 @@ $.widget('namespace.talxGrid', {
             this._rowCounter.hide();
             this._pager.hide();
         } else {
-            if (this._showRowCounter) this._rowCounter.show();
+            if (this.options.showRowCounter) this._rowCounter.show();
             this._pager.show();
         }
         this._updateRowCounter();
@@ -547,6 +546,14 @@ $.widget('namespace.talxGrid', {
                     this._pageSizer.hide();
                 }else{
                     this._pageSizer.show();
+                }
+                break;
+            case "showRowCounter":
+                this.options.showRowCounter = value;
+                if (this.options.showRowCounter){
+                    this._rowCounter.show();
+                }else{
+                    this._rowCouter.hide();
                 }
                 break;
 

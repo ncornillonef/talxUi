@@ -813,6 +813,44 @@
             equal(ps, "Last", "Initialized lastText");
             equal(text, "Last", "Rendered lastText");
         });
+        test("Option: prevText get - initialized", 1, function(){
+            var grd = $("#grid");
+            defaultOptions.prevText = "Prev";
+            grd.talxGrid(defaultOptions);
+            var ps = grd.talxGrid("option", "prevText");
+            equal(ps, "Prev", "Initialized prevText");
+        });
+        test("Option: prevText get - defaulted", 1, function(){
+            var grd = $("#grid");
+            grd.talxGrid(defaultOptions);
+            var ps = grd.talxGrid("option", "prevText");
+            equal(ps, "&lt;", "Initialized prevText");
+        });
+        test("Option: prevText set - initialized", 2, function(){
+            var grd = $("#grid");
+            defaultOptions.prevText = "Prev";
+            grd.talxGrid(defaultOptions);
+            $("span.ui-talxGrid-pager a:eq(3)", grd).trigger("click");
+            var ps = grd.talxGrid("option", "prevText");
+            var text = $("span.ui-talxGrid-pager a:first-child", grd).text();
+            equal(ps, "Prev", "Initialized prevText");
+            equal(text, "Prev", "Rendered prevText");
+        });
+        test("Option: prevText set - via option", 4, function(){
+            var grd = $("#grid");
+            grd.talxGrid(defaultOptions);
+            $("span.ui-talxGrid-pager a:eq(3)", grd).trigger("click");
+            var ps = grd.talxGrid("option", "prevText");
+            var text = $("span.ui-talxGrid-pager a:first-child", grd).text();
+            equal(ps, "&lt;", "Initialized lastText");
+            equal(text, "<", "Rendered lastText");
+
+            grd.talxGrid("option", "prevText", "Prev");
+            ps = grd.talxGrid("option", "prevText");
+            text = $("span.ui-talxGrid-pager a:first-child", grd).text();
+            equal(ps, "Prev", "Initialized prevText");
+            equal(text, "Prev", "Rendered prevText");
+        });
         /*
         */
         test("Option: version get", 1, function () {

@@ -18,9 +18,9 @@ $.widget('namespace.talxGrid', {
         showPrevNext: true,
         firstText: "&lt;&lt;",
         lastText: "&gt;&gt;",
-        prevText: "&lt;"
+        prevText: "&lt;",
+        nextText: "&gt;"
     },
-    _nextText: "&gt;",
     _showPageNumbers: true,
     _showResetAsButton: false,
     _showPagerAsButtons: false,
@@ -105,7 +105,6 @@ $.widget('namespace.talxGrid', {
         return this._data().length;
     },
     _init: function () {
-        this._nextText = this.options.nextText || "&gt;";
         this._showPageNumbers = (this.options.showPageNumbers == undefined ? true : this.options.showPageNumbers);
         this._showResetAsButton = (this.options.showResetAsButton == undefined ? false : this.options.showResetAsButton);
         this._showPagerAsButtons = (this.options.showPagerAsButtons == undefined ? false : this.options.showPagerAsButtons);
@@ -346,8 +345,8 @@ $.widget('namespace.talxGrid', {
             pages += "<span class='ui-talxGrid-ellipsis'>&hellip;</span>";
         }
         if (this.options.showPrevNext && this._currentPage < end) {
-            pages += (this._showPagerAsButtons ? "<button value='" + (this._currentPage + 1) + "'>" + this._nextText + "</button>"
-                    : "<a href='#' rel='" + (this._currentPage + 1) + "'>" + this._nextText + "</a>");
+            pages += (this._showPagerAsButtons ? "<button value='" + (this._currentPage + 1) + "'>" + this.options.nextText + "</button>"
+                    : "<a href='#' rel='" + (this._currentPage + 1) + "'>" + this.options.nextText + "</a>");
         }
         if (this.options.showFirstLast && this._currentPage < end) {
             pages += (this._showPagerAsButtons ? "<button value='" + maxPages + "'" + (this._currentPage == end ? " disabled='disabled'" : "") + ">" + this.options.lastText + "</button>"
@@ -576,6 +575,10 @@ $.widget('namespace.talxGrid', {
                 break;
             case "prevText":
                 this.options.prevText = value;
+                this._updatePager();
+                break;
+            case "nextText":
+                this.options.nextText = value;
                 this._updatePager();
                 break;
 

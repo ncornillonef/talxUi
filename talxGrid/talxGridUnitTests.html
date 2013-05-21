@@ -889,6 +889,42 @@
             equal(ps, "Next", "Initialized nextText");
             equal(text, "Next", "Rendered nextText");
         });
+        test("Option: showPageNumbers get - initialized", 1, function(){
+            var grd = $("#grid");
+            defaultOptions.showPageNumbers = false;
+            grd.talxGrid(defaultOptions);
+            var ps = grd.talxGrid("option", "showPageNumbers");
+            equal(ps, false, "Initialized showPageNumbers");
+        });
+        test("Option: showPageNumbers get - defaulted", 1, function(){
+            var grd = $("#grid");
+            grd.talxGrid(defaultOptions);
+            var ps = grd.talxGrid("option", "showPageNumbers");
+            equal(ps, true, "Initialized showPageNumbers");
+        });
+        test("Option: showPageNumbers set - initialized", 2, function(){
+            var grd = $("#grid");
+            defaultOptions.showPageNumbers = false;
+            grd.talxGrid(defaultOptions);
+            var ps = grd.talxGrid("option", "showPageNumbers");
+            var as = $("span.ui-talxGrid-pager a", grd);
+            equal(ps, false, "Initialized showPageNumbers");
+            equal(as.length, 1, "Rendered showPageNumbers");
+        });
+        test("Option: showPageNumbers set - via option", 4, function(){
+            var grd = $("#grid");
+            grd.talxGrid(defaultOptions);
+            var ps = grd.talxGrid("option", "showPageNumbers");
+            var as = $("span.ui-talxGrid-pager a", grd);
+            equal(ps, true, "Initialized showPageNumbers");
+            equal(as.length, 8, "Rendered showPageNumbers");
+
+            grd.talxGrid("option", "showPageNumbers", false);
+            ps = grd.talxGrid("option", "showPageNumbers");
+            as = $("span.ui-talxGrid-pager a", grd);
+            equal(ps, false, "Initialized showPageNumbers");
+            equal(as.length, 1, "Rendered showPageNumbers");
+        });
         /*
         */
         test("Option: version get", 1, function () {

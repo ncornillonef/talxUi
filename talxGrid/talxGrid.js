@@ -19,9 +19,9 @@ $.widget('namespace.talxGrid', {
         firstText: "&lt;&lt;",
         lastText: "&gt;&gt;",
         prevText: "&lt;",
-        nextText: "&gt;"
+        nextText: "&gt;",
+        showPageNumbers: true
     },
-    _showPageNumbers: true,
     _showResetAsButton: false,
     _showPagerAsButtons: false,
     _maxPagesOnPager: 10,
@@ -105,7 +105,6 @@ $.widget('namespace.talxGrid', {
         return this._data().length;
     },
     _init: function () {
-        this._showPageNumbers = (this.options.showPageNumbers == undefined ? true : this.options.showPageNumbers);
         this._showResetAsButton = (this.options.showResetAsButton == undefined ? false : this.options.showResetAsButton);
         this._showPagerAsButtons = (this.options.showPagerAsButtons == undefined ? false : this.options.showPagerAsButtons);
         this._maxPagesOnPager = (this.options.maxPagesOnPager == undefined ? 10 : parseInt(this.options.maxPagesOnPager, 10));
@@ -335,7 +334,7 @@ $.widget('namespace.talxGrid', {
         if (this._showPagerEllipsis && (start > 0)) {
             pages += "<span class='ui-talxGrid-ellipsis'>&hellip;</span>";
         }
-        if (this._showPageNumbers) {
+        if (this.options.showPageNumbers) {
             for (var i = start; i <= end; i++) {
                 pages += (this._showPagerAsButtons ? "<button value='" + i + "'" + (i == this._currentPage ? " disabled='disabled'" : "") + ">" + (i + 1) + "</button>"
                     : (i == this._currentPage ? "<span class='ui-talxGrid-pagerPage-disabled'>" + (i + 1) + "</span>" : "<a href='#' rel='" + i + "'>" + (i + 1) + "</a>"));
@@ -579,6 +578,10 @@ $.widget('namespace.talxGrid', {
                 break;
             case "nextText":
                 this.options.nextText = value;
+                this._updatePager();
+                break;
+            case "showPageNumbers":
+                this.options.showPageNumbers = value;
                 this._updatePager();
                 break;
 

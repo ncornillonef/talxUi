@@ -773,6 +773,46 @@
             equal(ps, "First", "Initialized firstText");
             equal(text, "First", "Rendered firstText");
         });
+        test("Option: lastText get - initialized", 1, function(){
+            var grd = $("#grid");
+            defaultOptions.lastText = "Last";
+            grd.talxGrid(defaultOptions);
+            var ps = grd.talxGrid("option", "lastText");
+            equal(ps, "Last", "Initialized lastText");
+        });
+        test("Option: lastText get - defaulted", 1, function(){
+            var grd = $("#grid");
+            grd.talxGrid(defaultOptions);
+            var ps = grd.talxGrid("option", "lastText");
+            equal(ps, "&gt;&gt;", "Initialized lastText");
+        });
+        test("Option: lastText set - initialized", 2, function(){
+            var grd = $("#grid");
+            defaultOptions.lastText = "Last";
+            defaultOptions.showFirstLast = true;
+            grd.talxGrid(defaultOptions);
+            $("span.ui-talxGrid-pager a:eq(3)", grd).trigger("click");
+            var ps = grd.talxGrid("option", "lastText");
+            var text = $("span.ui-talxGrid-pager a:last-child", grd).text();
+            equal(ps, "Last", "Initialized lastText");
+            equal(text, "Last", "Rendered lastText");
+        });
+        test("Option: lastText set - via option", 4, function(){
+            var grd = $("#grid");
+            defaultOptions.showFirstLast = true;
+            grd.talxGrid(defaultOptions);
+            $("span.ui-talxGrid-pager a:eq(3)", grd).trigger("click");
+            var ps = grd.talxGrid("option", "lastText");
+            var text = $("span.ui-talxGrid-pager a:last-child", grd).text();
+            equal(ps, "&gt;&gt;", "Initialized lastText");
+            equal(text, ">>", "Rendered lastText");
+
+            grd.talxGrid("option", "lastText", "Last");
+            ps = grd.talxGrid("option", "lastText");
+            text = $("span.ui-talxGrid-pager a:last-child", grd).text();
+            equal(ps, "Last", "Initialized lastText");
+            equal(text, "Last", "Rendered lastText");
+        });
         /*
         */
         test("Option: version get", 1, function () {

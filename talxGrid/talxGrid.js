@@ -16,11 +16,11 @@ $.widget('namespace.talxGrid', {
         showFilter: true,
         showFirstLast: false,
         showPrevNext: true,
-        firstText: "&lt;&lt;"
+        firstText: "&lt;&lt;",
+        lastText: "&gt;&gt;"
     },
     _prevText: "&lt;",
     _nextText: "&gt;",
-    _lastText: "&gt;&gt;",
     _showPageNumbers: true,
     _showResetAsButton: false,
     _showPagerAsButtons: false,
@@ -107,7 +107,6 @@ $.widget('namespace.talxGrid', {
     _init: function () {
         this._prevText = this.options.prevText || "&lt;";
         this._nextText = this.options.nextText || "&gt;";
-        this._lastText = this.options.lastText || "&gt;&gt;";
         this._showPageNumbers = (this.options.showPageNumbers == undefined ? true : this.options.showPageNumbers);
         this._showResetAsButton = (this.options.showResetAsButton == undefined ? false : this.options.showResetAsButton);
         this._showPagerAsButtons = (this.options.showPagerAsButtons == undefined ? false : this.options.showPagerAsButtons);
@@ -352,8 +351,8 @@ $.widget('namespace.talxGrid', {
                     : "<a href='#' rel='" + (this._currentPage + 1) + "'>" + this._nextText + "</a>");
         }
         if (this.options.showFirstLast && this._currentPage < end) {
-            pages += (this._showPagerAsButtons ? "<button value='" + maxPages + "'" + (this._currentPage == end ? " disabled='disabled'" : "") + ">" + this._lastText + "</button>"
-                    : (this._currentPage == end ? "&nbsp;<span class='ui-talxGrid-pagerPage-disabled'>" + this._lastText + "</span>" : "&nbsp;<a href='#' rel='" + maxPages + "'>" + this._lastText + "</a>"));
+            pages += (this._showPagerAsButtons ? "<button value='" + maxPages + "'" + (this._currentPage == end ? " disabled='disabled'" : "") + ">" + this.options.lastText + "</button>"
+                    : (this._currentPage == end ? "&nbsp;<span class='ui-talxGrid-pagerPage-disabled'>" + this.options.lastText + "</span>" : "&nbsp;<a href='#' rel='" + maxPages + "'>" + this.options.lastText + "</a>"));
         }
         this._pager.html(pages);
         $("button", this._pager).button();
@@ -570,6 +569,10 @@ $.widget('namespace.talxGrid', {
                 break;
             case "firstText":
                 this.options.firstText = value;
+                this._updatePager();
+                break;
+            case "lastText":
+                this.options.lastText = value;
                 this._updatePager();
                 break;
 

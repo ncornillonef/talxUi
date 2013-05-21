@@ -15,9 +15,9 @@ $.widget('namespace.talxGrid', {
         showRowCounter: true,
         showFilter: true,
         showFirstLast: false,
-        showPrevNext: true
+        showPrevNext: true,
+        firstText: "&lt;&lt;"
     },
-    _firstText: "&lt;&lt;",
     _prevText: "&lt;",
     _nextText: "&gt;",
     _lastText: "&gt;&gt;",
@@ -105,7 +105,6 @@ $.widget('namespace.talxGrid', {
         return this._data().length;
     },
     _init: function () {
-        this._firstText = this.options.firstText || "&lt;&lt;";
         this._prevText = this.options.prevText || "&lt;";
         this._nextText = this.options.nextText || "&gt;";
         this._lastText = this.options.lastText || "&gt;&gt;";
@@ -329,8 +328,8 @@ $.widget('namespace.talxGrid', {
         }
 
         if (this.options.showFirstLast && this._currentPage > 0) {
-            pages += (this._showPagerAsButtons ? "<button value='0'" + (this._currentPage == 0 ? " disabled='disabled'" : "") + ">" + this._firstText + "</button>"
-                    : (this._currentPage == 0 ? "<span class='ui-talxGrid-pagerPage-disabled'>" + this._firstText + "</span>&nbsp;" : "<a href='#' rel='0'>" + this._firstText + "</a>&nbsp;"));
+            pages += (this._showPagerAsButtons ? "<button value='0'" + (this._currentPage == 0 ? " disabled='disabled'" : "") + ">" + this.options.firstText + "</button>"
+                    : (this._currentPage == 0 ? "<span class='ui-talxGrid-pagerPage-disabled'>" + this.options.firstText + "</span>&nbsp;" : "<a href='#' rel='0'>" + this.options.firstText + "</a>&nbsp;"));
         }
         if (this.options.showPrevNext && this._currentPage > 0) {
             pages += (this._showPagerAsButtons ? "<button value='" + (this._currentPage - 1) + "'>" + this._prevText + "</button>"
@@ -567,6 +566,10 @@ $.widget('namespace.talxGrid', {
                 break;
             case "showPrevNext":
                 this.options.showPrevNext = value;
+                this._updatePager();
+                break;
+            case "firstText":
+                this.options.firstText = value;
                 this._updatePager();
                 break;
 

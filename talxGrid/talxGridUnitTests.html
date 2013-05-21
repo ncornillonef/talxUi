@@ -174,22 +174,6 @@
             equal(tSearch.attr("disabled"), "disabled", "txtSearch still disabled");
             equal(sSearch.attr("disabled"), undefined, "ddlSearch now enabled");
         });
-        test("UX: searchInput: enter handling", 3, function () {
-            $("#grid").talxGrid(defaultOptions);
-            var tSearch = $("#grid input[name=txtSearch]");
-            $("#grid select[name=colSelect]").val("4");
-            $("#grid select[name=colSelect]").trigger("change");
-            equal(tSearch.attr("disabled"), undefined, "txtSearch now enabled");
-            var currentPages = $("#grid span.ui-talxGrid-pager a").length;
-            equal(currentPages, 8, "all items showing");
-            tSearch.val("2010");
-            // hit enter in the field
-            var event = $.Event("keypress");
-            event.keyCode = 13;
-            tSearch.trigger(event);
-            currentPages = $("#grid span.ui-talxGrid-pager a").length;
-            equal(currentPages, 0, "search successfully triggered");
-        });
         test("UX: _onColumnSearchChange: select column = reset", 4, function () {
             $("#grid").talxGrid(defaultOptions);
             var tSearch = $("#grid input[name=txtSearch]");
@@ -209,6 +193,22 @@
             $("#grid select[name=colSelect]").trigger("change");
             currentPages = $("#grid span.ui-talxGrid-pager a").length;
             equal(currentPages, 8, "all items shown again");
+        });
+        test("UX: searchInput: enter handling", 3, function () {
+            $("#grid").talxGrid(defaultOptions);
+            var tSearch = $("#grid input[name=txtSearch]");
+            $("#grid select[name=colSelect]").val("4");
+            $("#grid select[name=colSelect]").trigger("change");
+            equal(tSearch.attr("disabled"), undefined, "txtSearch now enabled");
+            var currentPages = $("#grid span.ui-talxGrid-pager a").length;
+            equal(currentPages, 8, "all items showing");
+            tSearch.val("2010");
+            // hit enter in the field
+            var event = $.Event("keypress");
+            event.keyCode = 13;
+            tSearch.trigger(event);
+            currentPages = $("#grid span.ui-talxGrid-pager a").length;
+            equal(currentPages, 0, "search successfully triggered");
         });
         test("Option: dateFormat get - initialized", 1, function(){
             var grd = $("#grid");
@@ -732,6 +732,46 @@
             equal(ps, false, "Initialized showPrevNext");
             equal(isFirstVisible, "1", "Shown prev");
             equal(isLastVisible, "8", "Shown next");
+        });
+        test("Option: firstText get - initialized", 1, function(){
+            var grd = $("#grid");
+            defaultOptions.firstText = "First";
+            grd.talxGrid(defaultOptions);
+            var ps = grd.talxGrid("option", "firstText");
+            equal(ps, "First", "Initialized firstText");
+        });
+        test("Option: firstText get - defaulted", 1, function(){
+            var grd = $("#grid");
+            grd.talxGrid(defaultOptions);
+            var ps = grd.talxGrid("option", "firstText");
+            equal(ps, "&lt;&lt;", "Initialized firstText");
+        });
+        test("Option: firstText set - initialized", 2, function(){
+            var grd = $("#grid");
+            defaultOptions.firstText = "First";
+            defaultOptions.showFirstLast = true;
+            grd.talxGrid(defaultOptions);
+            $("span.ui-talxGrid-pager a:eq(3)", grd).trigger("click");
+            var ps = grd.talxGrid("option", "firstText");
+            var text = $("span.ui-talxGrid-pager a:first-child", grd).text();
+            equal(ps, "First", "Initialized firstText");
+            equal(text, "First", "Rendered firstText");
+        });
+        test("Option: firstText set - via option", 4, function(){
+            var grd = $("#grid");
+            defaultOptions.showFirstLast = true;
+            grd.talxGrid(defaultOptions);
+            $("span.ui-talxGrid-pager a:eq(3)", grd).trigger("click");
+            var ps = grd.talxGrid("option", "firstText");
+            var text = $("span.ui-talxGrid-pager a:first-child", grd).text();
+            equal(ps, "&lt;&lt;", "Initialized firstText");
+            equal(text, "<<", "Rendered firstText");
+
+            grd.talxGrid("option", "firstText", "First");
+            ps = grd.talxGrid("option", "firstText");
+            text = $("span.ui-talxGrid-pager a:first-child", grd).text();
+            equal(ps, "First", "Initialized firstText");
+            equal(text, "First", "Rendered firstText");
         });
         /*
         */

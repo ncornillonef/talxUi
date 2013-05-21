@@ -1010,6 +1010,42 @@
             equal(ps, true, "Initialized showPagerAsButtons");
             equal(btnCount, 9, "Rendered showPagerAsButtons");
         });
+        test("Option: maxPagesOnPager get - initialized", 1, function(){
+            var grd = $("#grid");
+            defaultOptions.maxPagesOnPager = 5;
+            grd.talxGrid(defaultOptions);
+            var ps = grd.talxGrid("option", "maxPagesOnPager");
+            equal(ps, 5, "Initialized maxPagesOnPager");
+        });
+        test("Option: maxPagesOnPager get - defaulted", 1, function(){
+            var grd = $("#grid");
+            grd.talxGrid(defaultOptions);
+            var ps = grd.talxGrid("option", "maxPagesOnPager");
+            equal(ps, 10, "Initialized maxPagesOnPager");
+        });
+        test("Option: maxPagesOnPager set - initialized", 2, function(){
+            var grd = $("#grid");
+            defaultOptions.maxPagesOnPager = 5;
+            grd.talxGrid(defaultOptions);
+            var ps = grd.talxGrid("option", "maxPagesOnPager");
+            var pageCount = $("span.ui-talxGrid-pager a").length;
+            equal(ps, 5, "Initialized maxPagesOnPager");
+            equal(pageCount, 5, "Rendered maxPagesOnPager");
+        });
+        test("Option: maxPagesOnPager set - via option", 4, function(){
+            var grd = $("#grid");
+            grd.talxGrid(defaultOptions);
+            var ps = grd.talxGrid("option", "maxPagesOnPager");
+            var pageCount = $("span.ui-talxGrid-pager a").length;
+            equal(ps, 10, "Initialized maxPagesOnPager");
+            equal(pageCount, 8, "Rendered maxPagesOnPager");
+
+            grd.talxGrid("option", "maxPagesOnPager", 5);
+            ps = grd.talxGrid("option", "maxPagesOnPager");
+            pageCount = $("span.ui-talxGrid-pager a").length;
+            equal(ps, 5, "Initialized maxPagesOnPager");
+            equal(pageCount, 5, "Rendered maxPagesOnPager");
+        });
         /*
         */
         test("Option: version get", 1, function () {

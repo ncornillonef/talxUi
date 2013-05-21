@@ -22,9 +22,9 @@ $.widget('namespace.talxGrid', {
         nextText: "&gt;",
         showPageNumbers: true,
         showResetAsButton: false,
-        showPagerAsButtons: false
+        showPagerAsButtons: false,
+        maxPagesOnPager: 10
     },
-    _maxPagesOnPager: 10,
     _showPagerEllipsis: false,
     _showSearchLabel: true, // TODO: Add to options
 
@@ -105,7 +105,6 @@ $.widget('namespace.talxGrid', {
         return this._data().length;
     },
     _init: function () {
-        this._maxPagesOnPager = (this.options.maxPagesOnPager == undefined ? 10 : parseInt(this.options.maxPagesOnPager, 10));
         this._showPagerEllipsis = (this.options.showPagerEllipsis == undefined ? false : this.options.showPagerEllipsis);
         this._showSearchLabel = (this.options.showSearchLabel == undefined ? true : this.options.showSearchLabel);
         var advancedSearchHelper = this.options.advancedSearchHelper || null;
@@ -296,7 +295,7 @@ $.widget('namespace.talxGrid', {
         this._getPage();
     },
     _updatePager: function () {
-        var allowedPages = (this._maxPagesOnPager - 1);
+        var allowedPages = (this.options.maxPagesOnPager - 1);
         var pagesBefore = Math.floor((allowedPages) / 2);
         var pagesAfter = Math.ceil((allowedPages) / 2);
         var pages = "";
@@ -598,6 +597,10 @@ $.widget('namespace.talxGrid', {
                 break;
             case "showPagerAsButtons":
                 this.options.showPagerAsButtons = value;
+                this._updatePager();
+                break;
+            case "maxPagesOnPager":
+                this.options.maxPagesOnPager = value;
                 this._updatePager();
                 break;
 

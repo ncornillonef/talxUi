@@ -1046,6 +1046,51 @@
             equal(ps, 5, "Initialized maxPagesOnPager");
             equal(pageCount, 5, "Rendered maxPagesOnPager");
         });
+        test("Option: showPagerEllipsis get - initialized", 1, function(){
+            var grd = $("#grid");
+            defaultOptions.showPagerEllipsis = true;
+            grd.talxGrid(defaultOptions);
+            var ps = grd.talxGrid("option", "showPagerEllipsis");
+            equal(ps, true, "Initialized showPagerEllipsis");
+        });
+        test("Option: showPagerEllipsis get - defaulted", 1, function(){
+            var grd = $("#grid");
+            grd.talxGrid(defaultOptions);
+            var ps = grd.talxGrid("option", "showPagerEllipsis");
+            equal(ps, false, "Initialized showPagerEllipsis");
+        });
+        test("Option: showPagerEllipsis set - initialized", 2, function(){
+            var grd = $("#grid");
+            defaultOptions.showPagerEllipsis = true;
+            defaultOptions.maxPagesOnPager = 3;
+            grd.talxGrid(defaultOptions);
+            var ps = grd.talxGrid("option", "showPagerEllipsis");
+            var ep = $("span.ui-talxGrid-ellipsis", grd).length;
+            equal(ps, true, "Initialized showPagerEllipsis");
+            equal(ep, 1, "Rendered showPagerEllipsis");
+        });
+        test("Option: showPagerEllipsis set - via option", 6, function(){
+            var grd = $("#grid");
+            defaultOptions.showPagerEllipsis = true;
+            defaultOptions.maxPagesOnPager = 3;
+            grd.talxGrid(defaultOptions);
+            var ps = grd.talxGrid("option", "showPagerEllipsis");
+            var ep = $("span.ui-talxGrid-ellipsis", grd).length;
+            equal(ps, true, "Initialized showPagerEllipsis");
+            equal(ep, 1, "Rendered showPagerEllipsis");
+
+            grd.talxGrid("option", "showPagerEllipsis", false);
+            ps = grd.talxGrid("option", "showPagerEllipsis");
+            ep = $("span.ui-talxGrid-ellipsis", grd).length;
+            equal(ps, false, "Initialized showPagerEllipsis");
+            equal(ep, 0, "Rendered showPagerEllipsis");
+
+            grd.talxGrid("option", "showPagerEllipsis", true);
+            ps = grd.talxGrid("option", "showPagerEllipsis");
+            ep = $("span.ui-talxGrid-ellipsis", grd).length;
+            equal(ps, true, "Initialized showPagerEllipsis");
+            equal(ep, 1, "Rendered showPagerEllipsis");
+        });
         /*
         */
         test("Option: version get", 1, function () {

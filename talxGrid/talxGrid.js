@@ -23,9 +23,9 @@ $.widget('namespace.talxGrid', {
         showPageNumbers: true,
         showResetAsButton: false,
         showPagerAsButtons: false,
-        maxPagesOnPager: 10
+        maxPagesOnPager: 10,
+        showPagerEllipsis: false
     },
-    _showPagerEllipsis: false,
     _showSearchLabel: true, // TODO: Add to options
 
     _self: this,
@@ -105,7 +105,6 @@ $.widget('namespace.talxGrid', {
         return this._data().length;
     },
     _init: function () {
-        this._showPagerEllipsis = (this.options.showPagerEllipsis == undefined ? false : this.options.showPagerEllipsis);
         this._showSearchLabel = (this.options.showSearchLabel == undefined ? true : this.options.showSearchLabel);
         var advancedSearchHelper = this.options.advancedSearchHelper || null;
 
@@ -328,7 +327,7 @@ $.widget('namespace.talxGrid', {
             pages += (this.options.showPagerAsButtons ? "<button value='" + (this._currentPage - 1) + "'>" + this.options.prevText + "</button>"
                     : "<a href='#' rel='" + (this._currentPage - 1) + "'>" + this.options.prevText + "</a>");
         }
-        if (this._showPagerEllipsis && (start > 0)) {
+        if (this.options.showPagerEllipsis && (start > 0)) {
             pages += "<span class='ui-talxGrid-ellipsis'>&hellip;</span>";
         }
         if (this.options.showPageNumbers) {
@@ -337,7 +336,7 @@ $.widget('namespace.talxGrid', {
                     : (i == this._currentPage ? "<span class='ui-talxGrid-pagerPage-disabled'>" + (i + 1) + "</span>" : "<a href='#' rel='" + i + "'>" + (i + 1) + "</a>"));
             }
         }
-        if (this._showPagerEllipsis && (end < maxPages)) {
+        if (this.options.showPagerEllipsis && (end < maxPages)) {
             pages += "<span class='ui-talxGrid-ellipsis'>&hellip;</span>";
         }
         if (this.options.showPrevNext && this._currentPage < end) {
@@ -601,6 +600,10 @@ $.widget('namespace.talxGrid', {
                 break;
             case "maxPagesOnPager":
                 this.options.maxPagesOnPager = value;
+                this._updatePager();
+                break;
+            case "showPagerEllipsis":
+                this.options.showPagerEllipsis = value;
                 this._updatePager();
                 break;
 

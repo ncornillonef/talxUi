@@ -925,6 +925,48 @@
             equal(ps, false, "Initialized showPageNumbers");
             equal(as.length, 1, "Rendered showPageNumbers");
         });
+        test("Option: showResetAsButton get - initialized", 1, function(){
+            var grd = $("#grid");
+            defaultOptions.showResetAsButton = true;
+            grd.talxGrid(defaultOptions);
+            var ps = grd.talxGrid("option", "showResetAsButton");
+            equal(ps, true, "Initialized showResetAsButton");
+        });
+        test("Option: showResetAsButton get - defaulted", 1, function(){
+            var grd = $("#grid");
+            grd.talxGrid(defaultOptions);
+            var ps = grd.talxGrid("option", "showResetAsButton");
+            equal(ps, false, "Initialized showResetAsButton");
+        });
+        test("Option: showResetAsButton set - initialized", 2, function(){
+            var grd = $("#grid");
+            defaultOptions.showResetAsButton = true;
+            grd.talxGrid(defaultOptions);
+            var ps = grd.talxGrid("option", "showResetAsButton");
+            var btnCount = $("button[name=reset]", grd).length;
+            equal(ps, true, "Initialized showResetAsButton");
+            equal(btnCount, 1, "Rendered showResetAsButton");
+        });
+        test("Option: showResetAsButton set - via option", 6, function(){
+            var grd = $("#grid");
+            grd.talxGrid(defaultOptions);
+            var ps = grd.talxGrid("option", "showResetAsButton");
+            var btnCount = $("button[name=reset]", grd).length;
+            equal(ps, false, "Initialized showResetAsButton");
+            equal(btnCount, 0, "Rendered showResetAsButton");
+
+            grd.talxGrid("option", "showResetAsButton", true);
+            ps = grd.talxGrid("option", "showResetAsButton");
+            btnCount = $("button[name=reset]", grd).length;
+            equal(ps, true, "Initialized showResetAsButton");
+            equal(btnCount, 1, "Rendered showResetAsButton");
+
+            grd.talxGrid("option", "showResetAsButton", false);
+            ps = grd.talxGrid("option", "showResetAsButton");
+            btnCount = $("button[name=reset]", grd).length;
+            equal(ps, false, "Initialized showResetAsButton");
+            equal(btnCount, 0, "Rendered showResetAsButton");
+        });
         /*
         */
         test("Option: version get", 1, function () {

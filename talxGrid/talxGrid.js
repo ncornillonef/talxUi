@@ -20,9 +20,9 @@ $.widget('namespace.talxGrid', {
         lastText: "&gt;&gt;",
         prevText: "&lt;",
         nextText: "&gt;",
-        showPageNumbers: true
+        showPageNumbers: true,
+        showResetAsButton: false
     },
-    _showResetAsButton: false,
     _showPagerAsButtons: false,
     _maxPagesOnPager: 10,
     _showPagerEllipsis: false,
@@ -105,7 +105,6 @@ $.widget('namespace.talxGrid', {
         return this._data().length;
     },
     _init: function () {
-        this._showResetAsButton = (this.options.showResetAsButton == undefined ? false : this.options.showResetAsButton);
         this._showPagerAsButtons = (this.options.showPagerAsButtons == undefined ? false : this.options.showPagerAsButtons);
         this._maxPagesOnPager = (this.options.maxPagesOnPager == undefined ? 10 : parseInt(this.options.maxPagesOnPager, 10));
         this._showPagerEllipsis = (this.options.showPagerEllipsis == undefined ? false : this.options.showPagerEllipsis);
@@ -140,7 +139,7 @@ $.widget('namespace.talxGrid', {
         }
         colOptions += "</select> <input type='text' name='txtSearch' class='ui-state-disabled' disabled='disabled' style='display:none;' /><select name='ddlSearch' class='ui-state-disabled' disabled='disabled' style='display: none;'></select> ";
         colOptions += "<button name='btnSearch' >Search</button> ";
-        colOptions += (this._showResetAsButton ? "<button name='reset' class='ui-talxGrid-reset'>Reset</button>" : "<a href='#' name='reset' class='ui-talxGrid-reset'>Reset</a>") + "</span>";
+        colOptions += (this.options.showResetAsButton ? "<button name='reset' class='ui-talxGrid-reset'>Reset</button>" : "<a href='#' name='reset' class='ui-talxGrid-reset'>Reset</a>") + "</span>";
         tbl += "</tr></thead><tbody>";
         var tblBottom = "</tbody></table><div><span class='ui-talxGrid-rowCounter'>Showing #-# of #</span><span class='ui-talxGrid-pager'><button>1</button><button>2</button></span></div><br style='clear: both;'/></div>";
         tbl = colOptions + tbl + tblBottom;
@@ -155,7 +154,7 @@ $.widget('namespace.talxGrid', {
         this._btnSearch.button('disable');
         this._ddlSearch = $('select[name=ddlSearch]', this.element);
         this._txtSearch = $('input[name=txtSearch]', this.element);
-        this._btnReset = $('button[name=reset]', this.element);
+        this._btnReset = $('[name=reset]', this.element);
         this._ddlItemsPerPage = $('select[name=itemsPerPage]', this.element);
         this._ddlColSelect = $('select[name=colSelect]', this.element);
         this._rowCounter = $('span.ui-talxGrid-rowCounter', this.element);
@@ -583,6 +582,20 @@ $.widget('namespace.talxGrid', {
             case "showPageNumbers":
                 this.options.showPageNumbers = value;
                 this._updatePager();
+                break;
+            case "showResetAsButton":
+                this.options.showResetAsButton = value;
+                if (this.options.showResetAsButton){
+                    var btn = $("<button name='reset' class='ui-talxGrid-reset'>Reset</button>");
+                    this._btnReset.before(btn);
+                    this._btnReset.remove();
+                    this._btnReset = btn;
+                }else{
+                    var lnk = $("<a href='#' name='reset' class='ui-talxGrid-reset'>Reset</a>");
+                    this._btnReset.before(lnk);
+                    this._btnReset.remove();
+                    this._btnReset = lnk;
+                }
                 break;
 
             case 'advancedSearchCriteria':

@@ -967,6 +967,49 @@
             equal(ps, false, "Initialized showResetAsButton");
             equal(btnCount, 0, "Rendered showResetAsButton");
         });
+        test("Option: showPagerAsButtons get - initialized", 1, function(){
+            var grd = $("#grid");
+            defaultOptions.showPagerAsButtons = true;
+            grd.talxGrid(defaultOptions);
+            var ps = grd.talxGrid("option", "showPagerAsButtons");
+            equal(ps, true, "Initialized showPagerAsButtons");
+        });
+        test("Option: showPagerAsButtons get - defaulted", 1, function(){
+            var grd = $("#grid");
+            grd.talxGrid(defaultOptions);
+            var ps = grd.talxGrid("option", "showPagerAsButtons");
+            equal(ps, false, "Initialized showPagerAsButtons");
+        });
+        test("Option: showPagerAsButtons set - initialized", 2, function(){
+            var grd = $("#grid");
+            defaultOptions.showPagerAsButtons = true;
+            grd.talxGrid(defaultOptions);
+            var ps = grd.talxGrid("option", "showPagerAsButtons");
+            var btnCount = $("span.ui-talxGrid-pager button", grd).length;
+            equal(ps, true, "Initialized showPagerAsButtons");
+            equal(btnCount, 9, "Rendered showPagerAsButtons");
+        });
+        test("Option: showPagerAsButtons set - via option", 6, function(){
+            var grd = $("#grid");
+            defaultOptions.showPagerAsButtons = true;
+            grd.talxGrid(defaultOptions);
+            var ps = grd.talxGrid("option", "showPagerAsButtons");
+            var btnCount = $("span.ui-talxGrid-pager button", grd).length;
+            equal(ps, true, "Initialized showPagerAsButtons");
+            equal(btnCount, 9, "Rendered showPagerAsButtons");
+
+            grd.talxGrid("option", "showPagerAsButtons", false);
+            ps = grd.talxGrid("option", "showPagerAsButtons");
+            btnCount = $("span.ui-talxGrid-pager button", grd).length;
+            equal(ps, false, "Initialized showPagerAsButtons");
+            equal(btnCount, 0, "Rendered showPagerAsButtons");
+
+            grd.talxGrid("option", "showPagerAsButtons", true);
+            ps = grd.talxGrid("option", "showPagerAsButtons");
+            btnCount = $("span.ui-talxGrid-pager button", grd).length;
+            equal(ps, true, "Initialized showPagerAsButtons");
+            equal(btnCount, 9, "Rendered showPagerAsButtons");
+        });
         /*
         */
         test("Option: version get", 1, function () {

@@ -24,10 +24,9 @@ $.widget('namespace.talxGrid', {
         showResetAsButton: false,
         showPagerAsButtons: false,
         maxPagesOnPager: 10,
-        showPagerEllipsis: false
+        showPagerEllipsis: false,
+        showSearchLabel: true
     },
-    _showSearchLabel: true, // TODO: Add to options
-
     _self: this,
     _sort: 0,
     _sortAsc: true,
@@ -105,7 +104,6 @@ $.widget('namespace.talxGrid', {
         return this._data().length;
     },
     _init: function () {
-        this._showSearchLabel = (this.options.showSearchLabel == undefined ? true : this.options.showSearchLabel);
         var advancedSearchHelper = this.options.advancedSearchHelper || null;
 
         var tmpDate = new Date();
@@ -114,7 +112,7 @@ $.widget('namespace.talxGrid', {
         var headers = this.options.columns;
         var cols = headers.length;
         var colOptions = "<div class='ui-talxGrid ui-widget ui-widget-content'>";
-        colOptions += "<span class='ui-talxGrid-filter'>" + (this._showSearchLabel ? "<label for='colSelect'>Search:</label>" : "");
+        colOptions += "<span class='ui-talxGrid-filter'><label for='colSelect'"+(this.options.showSearchLabel ? "" : " style='display: none;'")+">Search:</label>";
         colOptions += "<select name='colSelect'><option value=''>Select Column</option>";
         var tbl = "<span class='ui-talxGrid-pageSizer'><label for='itemsPerPage'>View:</label> <select name='itemsPerPage'>";
         for (var i = 0; i < this.options.pageSizeOptions.length; i++) {
@@ -605,6 +603,15 @@ $.widget('namespace.talxGrid', {
             case "showPagerEllipsis":
                 this.options.showPagerEllipsis = value;
                 this._updatePager();
+                break;
+            case "showSearchLabel":
+                this.options.showSearchLabel = value;
+                var lbl = $("span.ui-talxGrid-filter>label[for=colSelect]", this.element);
+                if (this.options.showSearchLabel){
+                    lbl.show();
+                }else{
+                    lbl.hide();
+                }
                 break;
 
             case 'advancedSearchCriteria':

@@ -1091,6 +1091,48 @@
             equal(ps, true, "Initialized showPagerEllipsis");
             equal(ep, 1, "Rendered showPagerEllipsis");
         });
+        test("Option: showSearchLabel get - initialized", 1, function(){
+            var grd = $("#grid");
+            defaultOptions.showSearchLabel = false;
+            grd.talxGrid(defaultOptions);
+            var ps = grd.talxGrid("option", "showSearchLabel");
+            equal(ps, false, "Initialized showSearchLabel");
+        });
+        test("Option: showSearchLabel get - defaulted", 1, function(){
+            var grd = $("#grid");
+            grd.talxGrid(defaultOptions);
+            var ps = grd.talxGrid("option", "showSearchLabel");
+            equal(ps, true, "Initialized showSearchLabel");
+        });
+        test("Option: showSearchLabel set - initialized", 2, function(){
+            var grd = $("#grid");
+            defaultOptions.showSearchLabel = false;
+            grd.talxGrid(defaultOptions);
+            var ps = grd.talxGrid("option", "showSearchLabel");
+            var isVisible = $(".ui-talxGrid-filter label[for=colSelect]", grd).is(":visible");
+            equal(ps, false, "Initialized showSearchLabel");
+            equal(isVisible, false, "Rendered showSearchLabel");
+        });
+        test("Option: showSearchLabel set - via option", 6, function(){
+            var grd = $("#grid");
+            grd.talxGrid(defaultOptions);
+            var ps = grd.talxGrid("option", "showSearchLabel");
+            var isVisible = $(".ui-talxGrid-filter label[for=colSelect]", grd).is(":visible");
+            equal(ps, true, "Initialized showSearchLabel = true");
+            equal(isVisible, true, "Rendered showSearchLabel");
+
+            grd.talxGrid("option", "showSearchLabel", false);
+            ps = grd.talxGrid("option", "showSearchLabel");
+            isVisible = $(".ui-talxGrid-filter label[for=colSelect]", grd).is(":visible");
+            equal(ps, false, "Set showSearchLabel = false");
+            equal(isVisible, false, "Rendered showSearchLabel");
+
+            grd.talxGrid("option", "showSearchLabel", true);
+            ps = grd.talxGrid("option", "showSearchLabel");
+            isVisible = $(".ui-talxGrid-filter label[for=colSelect]", grd).is(":visible");
+            equal(ps, true, "Set showSearchLabel = true");
+            equal(isVisible, true, "Rendered showSearchLabel");
+        });
         /*
         */
         test("Option: version get", 1, function () {

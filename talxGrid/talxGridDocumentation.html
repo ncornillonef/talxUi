@@ -1165,6 +1165,39 @@ $( ".selector" ).talxGrid( "option", "showRowCounter", false );</code></pre>
 							</div>
 						</li>
 
+                        <li class="option" id="option-showSearchLabel">
+                            <div class="option-header">
+                                <h3 class="option-name"><a href="#option-showSearchLabel">showSearchLabel</a></h3>
+                                <dl>
+                                    <dt class="option-type-label">Type:</dt>
+                                    <dd class="option-type">string</dd>
+
+                                    <dt class="option-default-label">Read Only</dt>
+                                    <dd class="option-default">&lt;Current Version&gt;</dd>
+                                </dl>
+                            </div>
+                            <div class="option-description">
+                                <p>Shows (true) or hides (false) the search label.  Can be set when initializing
+                                    (first created) the talxGrid or after created.</p>
+                            </div>
+                            <div class="option-examples">
+                                <h4>Code examples</h4>
+                                <dl class="option-examples-list">
+                                    <dt>Get <code>showSearchLabel</code> option, after init.</dt>
+                                    <dd>
+<pre><code>//getter
+var ver = $( ".selector" ).talxGrid( "option", "showSearchLabel" );
+</code></pre>
+                                    </dd>
+                                    <dt>Get or set the <code>showSearchLabel</code> option, after init.</dt>
+                                    <dd>
+<pre><code>//getter
+var showSearchLabel = $( ".selector" ).talxGrid( "option", "showSearchLabel" );
+//setter
+$( ".selector" ).talxGrid( "option", "showSearchLabel", false );</code></pre>
+                                    </dd>                                </dl>
+                            </div>
+                        </li>
                         <li class="option" id="option-version">
   							<div class="option-header">
 	    						<h3 class="option-name"><a href="#option-version">version</a></h3>

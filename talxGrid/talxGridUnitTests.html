@@ -541,7 +541,7 @@
             defaultOptions.showPageSizer = false;
             grd.talxGrid(defaultOptions);
             var ps = grd.talxGrid("option", "showPageSizer");
-            var isVisible = $("span.ui-talxGrid-pageSize", grid).is(":visible");
+            var isVisible = $("span.ui-talxGrid-pageSize", grd).is(":visible");
             equal(ps, false, "Initialized showPageSizer");
             equal(isVisible, false, "Hidden pageSizer");
         });
@@ -550,13 +550,13 @@
             defaultOptions.showPageSizer = false;
             grd.talxGrid(defaultOptions);
             var ps = grd.talxGrid("option", "showPageSizer");
-            var isVisible = $("span.ui-talxGrid-pageSizer", grid).is(":visible");
+            var isVisible = $("span.ui-talxGrid-pageSizer", grd).is(":visible");
             equal(ps, false, "Initialized showPageSizer");
             equal(isVisible, false, "Hidden pageSizer");
 
             grd.talxGrid("option", "showPageSizer", true);
             ps = grd.talxGrid("option", "showPageSizer");
-            isVisible = $("span.ui-talxGrid-pageSizer", grid).is(":visible");
+            isVisible = $("span.ui-talxGrid-pageSizer", grd).is(":visible");
             equal(ps, true, "Initialized showPageSizer");
             equal(isVisible, true, "Shown pageSizer");
         });

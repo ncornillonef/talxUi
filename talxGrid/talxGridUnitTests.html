@@ -1133,6 +1133,57 @@
             equal(ps, true, "Set showSearchLabel = true");
             equal(isVisible, true, "Rendered showSearchLabel");
         });
+        test("Option: advancedSearchHelper get - initialized", 1, function(){
+            var grd = $("#grid");
+            defaultOptions.advancedSearchHelper = function(data, criteria){ return data; };
+            grd.talxGrid(defaultOptions);
+            var ash = grd.talxGrid("option", "advancedSearchHelper");
+            var ps = $.isFunction(ash);
+            equal(ps, true, "Initialized advancedSearchHelper");
+        });
+        test("Option: advancedSearchHelper get - defaulted", 1, function(){
+            var grd = $("#grid");
+            grd.talxGrid(defaultOptions);
+            var ash = grd.talxGrid("option", "advancedSearchHelper");
+            var ps = ash == null;
+            equal(ps, true, "Initialized advancedSearchHelper");
+        });
+        test("Option: advancedSearchHelper set - initialized", 2, function(){
+            var grd = $("#grid");
+            var func = function(data, criteria){ return data; };
+            defaultOptions.advancedSearchHelper = func;
+            grd.talxGrid(defaultOptions);
+            var ash = grd.talxGrid("option", "advancedSearchHelper");
+            var ps = $.isFunction(ash);
+            var asbShow = $(".ui-talxGrid-advSearch", grd).length > 0;
+            equal(ps, true, "Initialized advancedSearchHelper");
+            equal(asbShow, true, "Rendered advancedSearchHelper - Advanced Search Link");
+        });
+        test("Option: advancedSearchHelper set - via option", 6, function(){
+            var grd = $("#grid");
+            var func = function(data, criteria){ return data; };
+            defaultOptions.advancedSearchHelper = func;
+            grd.talxGrid(defaultOptions);
+            var ash = grd.talxGrid("option", "advancedSearchHelper");
+            var ps = $.isFunction(ash);
+            var asbShow = $(".ui-talxGrid-advSearch", grd).length > 0;
+            equal(ps, true, "Initialized advancedSearchHelper = func");
+            equal(asbShow, true, "Rendered advancedSearchHelper - Advanced Search Link");
+
+            grd.talxGrid("option", "advancedSearchHelper", null);
+            ash = grd.talxGrid("option", "advancedSearchHelper");
+            ps = $.isFunction(ash);
+            asbShow = $(".ui-talxGrid-advSearch", grd).length > 0;
+            equal(ps, false, "Set advancedSearchHelper = null");
+            equal(asbShow, false, "Rendered advancedSearchHelper - No Advanced Search Link");
+
+            grd.talxGrid("option", "advancedSearchHelper", func);
+            ash = grd.talxGrid("option", "advancedSearchHelper");
+            ps = $.isFunction(ash);
+            asbShow = $(".ui-talxGrid-advSearch", grd).length > 0;
+            equal(ps, true, "Set advancedSearchHelper = func");
+            equal(asbShow, true, "Rendered advancedSearchHelper - Advanced Search Link");
+        });
         /*
         */
         test("Option: version get", 1, function () {

@@ -4,6 +4,7 @@
 $.widget('namespace.talxGrid', {
     options: {
         advancedSearchCriteria: null,
+        advancedSearchHelper: null,
         version: "0.0.5",
         dateFormat: "m/d/yyyy",
         pageSize: 10,
@@ -63,12 +64,11 @@ $.widget('namespace.talxGrid', {
         var fld = this._filterField;
         var match = this._filterMatch;
         var contains = this._filterContains;
-        var advancedSearchHelper = this.options.advancedSearchHelper || null;
         var advancedSearchCriteria = this.options.advancedSearchCriteria || null;
 
         // filter the data
-        if (advancedSearchHelper != null && advancedSearchCriteria != null) {
-            data = advancedSearchHelper(data, advancedSearchCriteria);
+        if (this.options.advancedSearchHelper != null && advancedSearchCriteria != null) {
+            data = this.options.advancedSearchHelper(data, advancedSearchCriteria);
         } else if (fld != null && (match != null || contains != null)) {
             var x = data.filter(function (item) {
                 var val = '' + item[fld];
@@ -104,8 +104,6 @@ $.widget('namespace.talxGrid', {
         return this._data().length;
     },
     _init: function () {
-        var advancedSearchHelper = this.options.advancedSearchHelper || null;
-
         var tmpDate = new Date();
         this._useDateFormat = (tmpDate.format != undefined);
 
@@ -157,7 +155,7 @@ $.widget('namespace.talxGrid', {
         this._filter = $('span.ui-talxGrid-filter', this.element);
         this._pageSizer = $('span.ui-talxGrid-pageSizer', this.element);
 
-        if (advancedSearchHelper != null) {
+        if (this.options.advancedSearchHelper != null) {
             this._addAdvSearch();
         }
 
@@ -613,17 +611,17 @@ $.widget('namespace.talxGrid', {
                     lbl.hide();
                 }
                 break;
-
-            case 'advancedSearchCriteria':
-                this.options.advancedSearchCriteria = value;
-                this.search();
-                break;
             case 'advancedSearchHelper':
                 this.options.advancedSearchHelper = value;
                 if (value != null)
                     this._addAdvSearch();
                 else
                     this._removeAdvSearch();
+                break;
+
+            case 'advancedSearchCriteria':
+                this.options.advancedSearchCriteria = value;
+                this.search();
                 break;
             case 'advancedSearchAsButton':
                 var resetControl = value != this.options.advancedSearchAsButton;

@@ -26,7 +26,8 @@ $.widget('namespace.talxGrid', {
         showPagerAsButtons: false,
         maxPagesOnPager: 10,
         showPagerEllipsis: false,
-        showSearchLabel: true
+        showSearchLabel: true,
+        advancedSearchAsButton: false
     },
     _self: this,
     _sort: 0,
@@ -64,11 +65,10 @@ $.widget('namespace.talxGrid', {
         var fld = this._filterField;
         var match = this._filterMatch;
         var contains = this._filterContains;
-        var advancedSearchCriteria = this.options.advancedSearchCriteria || null;
 
         // filter the data
-        if (this.options.advancedSearchHelper != null && advancedSearchCriteria != null) {
-            data = this.options.advancedSearchHelper(data, advancedSearchCriteria);
+        if (this.options.advancedSearchHelper != null && this.options.advancedSearchCriteria != null) {
+            data = this.options.advancedSearchHelper(data, this.options.advancedSearchCriteria);
         } else if (fld != null && (match != null || contains != null)) {
             var x = data.filter(function (item) {
                 var val = '' + item[fld];
@@ -179,12 +179,15 @@ $.widget('namespace.talxGrid', {
         if (!this.options.showFilter) this._filter.hide();
         if (!this.options.showPageSizer) this._pageSizer.hide();
 
-        this._updatePager();
-        this._getPage();
+        if (this.options.advancedSearchCriteria != null && $.isFunction(this.options.advancedSearchHelper)){
+            this._onSearch();
+        }else{
+            this._updatePager();
+            this._getPage();
+        }
     },
     _addAdvSearch: function () {
-        var advSearchAsButton = this.options.advancedSearchAsButton || false;
-        var ctrlText = (advSearchAsButton ? "<button name='btnAdvancedSearch' class='ui-talxGrid-advSearch'>Advanced Search</button> " : "<a href='#' name='btnAdvancedSearch' class='ui-talxGrid-advSearch'>Advanced Search</a> ")
+        var ctrlText = (this.options.advancedSearchAsButton ? "<button name='btnAdvancedSearch' class='ui-talxGrid-advSearch'>Advanced Search</button> " : "<a href='#' name='btnAdvancedSearch' class='ui-talxGrid-advSearch'>Advanced Search</a> ")
         this._advSearch = (this._advSearch != null ? this._advSearch
             : $(ctrlText));
         this._btnSearch.after(this._advSearch);
@@ -478,7 +481,6 @@ $.widget('namespace.talxGrid', {
         return txt;
     },
     _setOption: function (key, value) {
-        // TODO: Add support for the other options that you can set, and code for a response    
         switch (key) {
             case "dateFormat":
                 this.options.dateFormat = value;
@@ -618,7 +620,6 @@ $.widget('namespace.talxGrid', {
                 else
                     this._removeAdvSearch();
                 break;
-
             case 'advancedSearchCriteria':
                 this.options.advancedSearchCriteria = value;
                 this.search();

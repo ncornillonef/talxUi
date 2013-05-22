@@ -1184,8 +1184,124 @@
             equal(ps, true, "Set advancedSearchHelper = func");
             equal(asbShow, true, "Rendered advancedSearchHelper - Advanced Search Link");
         });
-        /*
-        */
+        test("Option: advancedSearchAsButton get - initialized", 1, function(){
+            var grd = $("#grid");
+            defaultOptions.advancedSearchAsButton = true;
+            grd.talxGrid(defaultOptions);
+            var ps = grd.talxGrid("option", "advancedSearchAsButton");
+            equal(ps, true, "Initialized advancedSearchAsButton = true");
+        });
+        test("Option: advancedSearchAsButton get - defaulted", 1, function(){
+            var grd = $("#grid");
+            grd.talxGrid(defaultOptions);
+            var ps = grd.talxGrid("option", "advancedSearchAsButton");
+            equal(ps, false, "Initialized advancedSearchAsButton = False");
+        });
+        test("Option: advancedSearchAsButton set - initialized", 2, function(){
+            var grd = $("#grid");
+            defaultOptions.advancedSearchAsButton = true;
+            defaultOptions.advancedSearchHelper = function(data, criteria){ return data; };
+            grd.talxGrid(defaultOptions);
+            var ps = grd.talxGrid("option", "advancedSearchAsButton");
+            var isVisible = $("button.ui-talxGrid-advSearch", grd).is(":visible");
+            equal(ps, true, "Initialized advancedSearchAsButton = true");
+            equal(isVisible, true, "Rendered advancedSearchAsButton");
+        });
+        test("Option: advancedSearchAsButton set - via option", 6, function(){
+            var grd = $("#grid");
+            defaultOptions.advancedSearchAsButton = true;
+            defaultOptions.advancedSearchHelper = function(data, criteria){ return data; };
+            grd.talxGrid(defaultOptions);
+            var ps = grd.talxGrid("option", "advancedSearchAsButton");
+            var isVisible = $("button.ui-talxGrid-advSearch", grd).is(":visible");
+            equal(ps, true, "Initialized advancedSearchAsButton = true");
+            equal(isVisible, true, "Rendered advancedSearchAsButton");
+
+            grd.talxGrid("option", "advancedSearchAsButton", false);
+            ps = grd.talxGrid("option", "advancedSearchAsButton");
+            isVisible = $("a.ui-talxGrid-advSearch", grd).is(":visible");
+            equal(ps, false, "Set advancedSearchAsButton = false");
+            equal(isVisible, true, "Rendered advancedSearchAsButton as a link");
+
+            grd.talxGrid("option", "advancedSearchAsButton", true);
+            ps = grd.talxGrid("option", "advancedSearchAsButton");
+            isVisible = $("button.ui-talxGrid-advSearch", grd).is(":visible");
+            equal(ps, true, "Set advancedSearchAsButton = true");
+            equal(isVisible, true, "Rendered advancedSearchAsButton");
+        });
+/* Comment out these tests, can commented out the documentation on this.  I'm not sure
+   what the UX for this should be yet, so feature cut until I know it better.
+        test("Option: disabled get - initialized", 1, function(){
+            var grd = $("#grid");
+            defaultOptions.disabled = true;
+            grd.talxGrid(defaultOptions);
+            var ps = grd.talxGrid("option", "disabled");
+            equal(ps, true, "Initialized disabled = true");
+        });
+        test("Option: disabled get - defaulted", 1, function(){
+            var grd = $("#grid");
+            grd.talxGrid(defaultOptions);
+            var ps = grd.talxGrid("option", "disabled");
+            equal(ps, false, "Initialized disabled = true");
+        });
+        test("Option: disabled set - initialized", 2, function(){
+            var grd = $("#grid");
+            defaultOptions.disabled = true;
+            defaultOptions.advancedSearchHelper = function(data, criteria){ return data; };
+            grd.talxGrid(defaultOptions);
+            var ps = grd.talxGrid("option", "disabled");
+            equal(ps, true, "Initialized disabled = true");
+        });
+        test("Option: disabled set - via option", 6, function(){
+
+        });
+*/
+        test("Option: advancedSearchCriteria get - initialized", 1, function(){
+            var grd = $("#grid");
+            var criteria = {awesome: true, sex: "male"};
+            defaultOptions.advancedSearchCriteria = criteria;
+            grd.talxGrid(defaultOptions);
+            var ps = grd.talxGrid("option", "advancedSearchCriteria");
+            deepEqual(ps, criteria, "Initialized advancedSearchCriteria");
+        });
+        test("Option: advancedSearchCriteria get - defaulted", 1, function(){
+            var grd = $("#grid");
+            var criteria = {awesome: true, sex: "male"};
+            grd.talxGrid(defaultOptions);
+            var ps = grd.talxGrid("option", "advancedSearchCriteria");
+            deepEqual(ps, null, "Initialized advancedSearchCriteria");
+        });
+        test("Option: advancedSearchCriteria set - initialized", 2, function(){
+            var grd = $("#grid");
+            var criteria = {awesome: true, sex: "male"};
+            var searchCalled = 0;
+            defaultOptions.advancedSearchCriteria = criteria;
+            defaultOptions.advancedSearchHelper = function(data, crit){
+                searchCalled++;
+                return data;
+            };
+            grd.talxGrid(defaultOptions);
+            var ps = grd.talxGrid("option", "advancedSearchCriteria");
+            deepEqual(ps, criteria, "Initialized advancedSearchCriteria");
+            equal(searchCalled, 1, "advancedSearchHelper called once")
+        });
+        test("Option: advancedSearchCriteria set - via option", 3, function(){
+            var grd = $("#grid");
+            var criteria = {awesome: true, sex: "male"};
+            var searchCalledWithCriteria = 0;
+            var searchCalled = 0;
+            defaultOptions.advancedSearchHelper = function(data, crit){
+                if (crit == criteria) searchCalledWithCriteria++;
+                searchCalled++;
+                return data;
+            };
+            grd.talxGrid(defaultOptions);
+            grd.talxGrid("option", "advancedSearchCriteria", criteria);
+            var ps = grd.talxGrid("option", "advancedSearchCriteria");
+            deepEqual(ps, criteria, "Set advancedSearchCriteria");
+            equal(searchCalled, 1, "advancedSearchHelper called once ");
+            equal(searchCalledWithCriteria, 1, "When advancedSearchHelper was called with correct criteria");
+        });
         test("Option: version get", 1, function () {
             $("#grid").talxGrid(defaultOptions);
             var ver = $("#grid").talxGrid("option", "version");

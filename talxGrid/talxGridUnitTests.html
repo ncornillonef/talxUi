@@ -1028,7 +1028,7 @@
             defaultOptions.maxPagesOnPager = 5;
             grd.talxGrid(defaultOptions);
             var ps = grd.talxGrid("option", "maxPagesOnPager");
-            var pageCount = $("span.ui-talxGrid-pager a").length;
+            var pageCount = $("span.ui-talxGrid-pager a", grd).length;
             equal(ps, 5, "Initialized maxPagesOnPager");
             equal(pageCount, 5, "Rendered maxPagesOnPager");
         });
@@ -1036,13 +1036,13 @@
             var grd = $("#grid");
             grd.talxGrid(defaultOptions);
             var ps = grd.talxGrid("option", "maxPagesOnPager");
-            var pageCount = $("span.ui-talxGrid-pager a").length;
+            var pageCount = $("span.ui-talxGrid-pager a", grd).length;
             equal(ps, 10, "Initialized maxPagesOnPager");
             equal(pageCount, 8, "Rendered maxPagesOnPager");
 
             grd.talxGrid("option", "maxPagesOnPager", 5);
             ps = grd.talxGrid("option", "maxPagesOnPager");
-            pageCount = $("span.ui-talxGrid-pager a").length;
+            pageCount = $("span.ui-talxGrid-pager a", grd).length;
             equal(ps, 5, "Initialized maxPagesOnPager");
             equal(pageCount, 5, "Rendered maxPagesOnPager");
         });
